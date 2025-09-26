@@ -5,20 +5,24 @@ subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro + login.json", "utf-8"));
   let objeto = {email: data.email, password: data.password};
   
-  if (data.email & data.password !== leer) {
-    leer.push (objeto);
-  }
-  else if (data.email & data.password === leer) {
-    data.mensaje = 'Usuario ya está';
-  }
+  leer.push (objeto);
 
+  let UsuarioYaExiste = leer.find (leer => data.email === leer.email & data.password === leer.password);
+
+  if (UsuarioYaExiste) {
+    return {ok: false};
+  };
 
   fs.writeFileSync ("data/registro + login.json", JSON.stringify (leer, null, "\n"), {encoding: "utf-8"});
-})
+});
 
 subscribePOSTEvent ("login", (data) => {
+
   let leer = JSON.parse (fs.readFileSync ("data/registro + login.json", "utf-8"));
-  let encontrar = leer.find (leer => data.email === leer.email & data.password === leer.password);
+
+  for (let i = 0; i < leer.length; i++ ) {
+    
+  let encontrar = leer.find (leer => data.email === leer [i].email & data.password === leer [i].password);
   
   if (encontrar) {
     return {ok: true};
@@ -27,5 +31,7 @@ subscribePOSTEvent ("login", (data) => {
     return {ok: false};
   }
 
+}
 });
+
 startServer ();
