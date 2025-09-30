@@ -1,75 +1,103 @@
+
+
 body {
-    background: #9574ca; /* marrón oscuro como la maqueta */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: white;
-  }
-  
-  .tabs {
-    display: flex;
-    border-bottom: 3px solid var(--primary-color);
-    margin: 20px;
-    border-radius: 12px 12px 0 0;
-    overflow: hidden;
-  }
+  background-color: lightcoral;
+  color: #2c2c2c;
+  min-height: 100vh;
+}
 
-  .tab {
-    flex: 1;
-    padding: 12px 20px;
-    text-align: center;
-    cursor: pointer;
-    background-color: var(--tab-inactive);
-    transition: background-color 0.3s;
-    user-select: none;
-  }
+/* Barra superior con pestañas */
+header {
+  display: flex;
+  align-items: center;
+  background: #6a4028; /* marrón */
+  padding: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
 
-  .tab.active {
-    background-color: var(--tab-active);
-    font-weight: bold;
-    border-bottom: 3px solid var(--primary-color);
-  }
+.tabs {
+  display: flex;
+  justify-content: space-between; /* se distribuyen en todo el ancho */
+  margin-top: 30px;
+  border-bottom: 2px solid #ccc; /* línea para simular separación con el contenido */
+  background: none; /* quita color de fondo */
+}
 
-  .tab-content {
-    display: none;
-    padding: 20px;
-    background-color: var(--tab-active);
-    border-radius: 0 0 12px 12px;
-    margin: 0 20px 20px 20px;
-    box-shadow: 0 2px 8px rgba(146, 45, 45, 0.884);
-  }
+.tab {
+  flex: 1; /* todas ocupan el mismo espacio */
+  text-align: center;
+  padding: 10px 0;
+  background: #ffffff;
+  border: 2px solid #ccc;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 5px; /* inactivas bajadas */
+}
 
-  .tab-content.active {
-    display: block;
-  }
+.tab.active {
+  top: 0; /* activa subida */
+  background: #ffb6c1;
+  border-color: #ff7f9f;
+  font-weight: bold;
+}
 
-  
-  /* Contenedor principal */
-  .contenedor {
-    padding: 40px;
-    text-align: center;
-  }
-  
-  /* Bienvenida */
-  .contenedor h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  
-  .noticias {
-    background: var(--noticias);
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    font-size: 22px;
-    margin: 20px auto;
-    width: 80%;
-    font-weight: bold;
-  }
-  
-  .reloj {
-    font-size: 18px;
-    text-align: right;
-    margin-top: 40px;
-    font-weight: bold;
-  }
+.settings {
+  margin-left: auto;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+/* Contenido */
+.tab-content {
+  display: none;
+  padding: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* Panel grande con noticias y reloj */
+.panel {
+  background: #fff3e6; /* color claro */
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.noticias {
+  flex: 1;
+  min-height: 150px;
+  background: #f8d7da; /* rojo claro */
+  color: #721c24; /* rojo texto */
+  border-radius: 12px;
+  padding: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reloj {
+  font-size: 18px;
+  color: #6a4028;
+  font-weight: bold;
+  margin-left: 20px;
+}

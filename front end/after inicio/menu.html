@@ -14,17 +14,22 @@
     <div class="tab" data-tab="tab2">STOPMOTION</div>
     <div class="tab" data-tab="tab3">CONTROL DE ELECTRODOMESTICOS</div>
 
-    <button id="settings" aria-label="Configuración">
+    <button id="settings" class="settings" aria-label="Configuración">
       ⚙️
     </button>
 
   </header>
-  
-  <!-- CONTENIDO DE LAS TABS -->
+
   <div id="tab1" class="tab-content active">
     <main class="contenedor">
       <h2>¡Hola!</h2>
       <section class="panel">
+      <section id="perfil" class="caja">
+       <h2>Perfil</h2>
+        <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+        <p><strong>Fecha de nacimiento:</strong> <span id="nacimiento"></span></p>
+        <p><strong>Sobre mí:</strong> <span id="sobre"></span></p>
+      </section>
         <div class="noticias">noticias !!!</div>
         <div class="reloj" id="reloj"></div>
       </section>
