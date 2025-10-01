@@ -6,11 +6,10 @@ body {
   min-height: 100vh;
 }
 
-/* Barra superior con pestañas */
 header {
   display: flex;
   align-items: center;
-  background: #6a4028; /* marrón */
+  background: #6a4028;
   padding: 10px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -18,14 +17,14 @@ header {
 
 .tabs {
   display: flex;
-  justify-content: space-between; /* se distribuyen en todo el ancho */
+  justify-content: space-between; 
   margin-top: 30px;
-  border-bottom: 2px solid #ccc; /* línea para simular separación con el contenido */
-  background: none; /* quita color de fondo */
+  border-bottom: 2px solid #ccc; 
+  background: none; 
 }
 
 .tab {
-  flex: 1; /* todas ocupan el mismo espacio */
+  flex: 1;
   text-align: center;
   padding: 10px 0;
   background: #ffffff;
@@ -35,11 +34,11 @@ header {
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  top: 5px; /* inactivas bajadas */
+  top: 5px;
 }
 
 .tab.active {
-  top: 0; /* activa subida */
+  top: 0;
   background: #ffb6c1;
   border-color: #ff7f9f;
   font-weight: bold;
@@ -54,7 +53,6 @@ header {
   color: white;
 }
 
-/* Contenido */
 .tab-content {
   display: none;
   padding: 20px;
@@ -71,9 +69,8 @@ header {
   margin-top: 10px;
 }
 
-/* Panel grande con noticias y reloj */
 .panel {
-  background: #fff3e6; /* color claro */
+  background: #fff3e6;
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -82,11 +79,11 @@ header {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-.noticias {
+.funciones {
   flex: 1;
   min-height: 150px;
-  background: #f8d7da; /* rojo claro */
-  color: #721c24; /* rojo texto */
+  background: #f8d7da;
+  color: #721c24; 
   border-radius: 12px;
   padding: 15px;
   font-weight: bold;

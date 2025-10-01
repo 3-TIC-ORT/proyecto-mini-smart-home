@@ -23,15 +23,23 @@
   <div id="tab1" class="tab-content active">
     <main class="contenedor">
       <h2>¡Hola!</h2>
+      <div class="reloj" id="reloj"></div>
       <section class="panel">
-      <section id="perfil" class="caja">
+      <article id="perfil" class="caja">
        <h2>Perfil</h2>
         <p><strong>Nombre:</strong> <span id="nombre"></span></p>
         <p><strong>Fecha de nacimiento:</strong> <span id="nacimiento"></span></p>
         <p><strong>Sobre mí:</strong> <span id="sobre"></span></p>
-      </section>
-        <div class="noticias">noticias !!!</div>
-        <div class="reloj" id="reloj"></div>
+      </article>
+      <div id="modos"></div>
+      <button> Crear nuevo modo</button>
+      
+      <div id="formulario">
+        <input id="nombre" placeholder="Nombre del modo">
+        <input id="emoji" placeholder="Emoji (ej: 🌙)">
+        <input id="color" type="color" value="#f5d6eb">
+        <button onclick="crearModo()">Guardar</button>
+      </div>
       </section>
     </main>
   

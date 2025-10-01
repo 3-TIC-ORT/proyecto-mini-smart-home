@@ -18,7 +18,7 @@ tabs.forEach(tab => {
 
 function actualizarReloj() {
     const ahora = new Date();
-    const opciones = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    const opciones = { hour: '2-digit', minute: '2-digit', hour12: true };
     const opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric' };
   
     const hora = ahora.toLocaleTimeString('es-AR', opciones);
@@ -27,5 +27,7 @@ function actualizarReloj() {
     document.getElementById("reloj").innerText = `${fecha} - ${hora}`;
   }
   
-  setInterval(actualizarReloj, 1000);
+  setInterval(actualizarReloj, 10000);
   actualizarReloj();
+
+  
