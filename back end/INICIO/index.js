@@ -14,6 +14,7 @@ subscribePOSTEvent ("register", (data) => {
   };
 
   fs.writeFileSync ("data/registro + login.json", JSON.stringify (leer, null, "\n"), {encoding: "utf-8"});
+  return {ok:true};
 });
 
 subscribePOSTEvent ("login", (data) => {
