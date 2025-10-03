@@ -18,7 +18,7 @@ function registrar(){
     return;
   }
 
-  postEvent("register", { email: mail, password: contra }, function (data){ 
+  postEvent("register", { email: mail, password: contra}, function (data){ 
 
   if (data.exists) {
     mensaje.textContent = "Este usuario ya existe";
