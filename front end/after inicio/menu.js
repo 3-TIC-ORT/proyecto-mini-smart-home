@@ -78,6 +78,8 @@ function actualizarReloj() {
     const tipo = condicion.value;
     
     let condiciones = {};
+
+    function crearModo(){
       if (tipo === "hora") {
         condiciones = {
           tipo: "hora",
@@ -96,21 +98,21 @@ function actualizarReloj() {
         };
       }
     
-      postEvent("nuevoModo", { nombre, emoji, color, condiciones }, (respuesta) => {
+      postEvent("nuevoModo", { nombre, condiciones }, (respuesta) => {
         console.log("Modo guardado:", respuesta);
         cargarModos();
       });
     
       form.reset();
       condicionesExtra.innerHTML = "";
-    });
-    
+    }});
+  
     function cargarModos() {
       getEvent("obtenerModos", (data) => {
         lista.innerHTML = "";
         data.forEach(modo => {
           const li = document.createElement("li");
-          li.textContent = `${modo.emoji} ${modo.nombre} (condición: ${JSON.stringify(modo.condicion)})`;
+          li.textContent = `${modo.nombre} (condición: ${JSON.stringify(modo.condicion)})`;
           lista.appendChild(li);
         });
       });
@@ -118,7 +120,7 @@ function actualizarReloj() {
     
     // =================== Eventos en tiempo real ===================
     subscribeRealTimeEvent("modoActivado", (data) => {
-      alert(`Se activó el modo: ${data.nombre} ${data.emoji}`);
+      alert(`Se activó el modo: ${data.nombre}`);
       document.body.style.backgroundColor = data.color;
     });
     
