@@ -1,12 +1,30 @@
-const int MotorDC=3;
+const int relayPin1=3;
+const int H1=9;
+const int H2=10;
+const int H3=11;
 
 void setup() {
-  pinMode(MotorDC, OUTPUT);
+  pinMode(relayPin1, OUTPUT);
+  pinMode(H1,OUTPUT);
+  pinMode(H2,OUTPUT);
+  pinMode(H3,OUTPUT);
 }
 
 void loop() {
-  digitalWrite(MotorDC, LOW);
+  //Relé
+  digitalWrite(relayPin1, HIGH);
+  //Puente h
+  digitalWrite(H1,HIGH);
+  digitalWrite(H2,LOW);
+  analogWrite(H3,150);
+  //Ambos
   delay(3000);
-  digitalWrite(MotorDC, HIGH);
-  delay(1000);
+  //rele
+  digitalWrite(relayPin1, LOW);
+  //Puente h
+  digitalWrite(H1,LOW);
+  digitalWrite(H2,LOW);
+  analogWrite(H3,0);
+  //Ambos
+  delay(3000);
 }
