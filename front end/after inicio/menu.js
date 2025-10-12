@@ -79,7 +79,7 @@ function actualizarReloj() {
     
     let condiciones = {};
 
-    function crearModo(){
+    function crearModo() {
       if (tipo === "hora") {
         condiciones = {
           tipo: "hora",
@@ -102,26 +102,23 @@ function actualizarReloj() {
         console.log("Modo guardado:", respuesta);
         cargarModos();
       });
-    
+
+      // Resetea el formulario y limpia los campos extra
       form.reset();
       condicionesExtra.innerHTML = "";
-    }});
-  
-    function cargarModos() {
-      getEvent("obtenerModos", (data) => {
-        lista.innerHTML = "";
-        data.forEach(modo => {
-          const li = document.createElement("li");
-          li.textContent = `${modo.nombre} (condición: ${JSON.stringify(modo.condicion)})`;
-          lista.appendChild(li);
-        });
-      });
+
+      // Opcional: Retorna un mensaje o el objeto creado
+      return { nombre, condiciones };
     }
-    
-    // =================== Eventos en tiempo real ===================
-    subscribeRealTimeEvent("modoActivado", (data) => {
-      alert(`Se activó el modo: ${data.nombre}`);
-      document.body.style.backgroundColor = data.color;
+
+    // Llama a la función crearModo
+    crearModo();
     });
-    
-    cargarModos();
+
+    function botonApretado(status){
+      if(status.on){
+        estado.innerText = "prendido";
+      }else{
+        receive("boton",botonApretado)
+      }
+    }
