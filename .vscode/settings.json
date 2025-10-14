@@ -1,3 +1,7 @@
 {
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "terminal.integrated.env.osx": {
+        "NVM_DIR": "/Users/Mickey/.nvm",
+        "PATH": "/Users/Mickey/.nvm/versions/node/v22.20.0/bin:${env:PATH}"
+    }
 }
