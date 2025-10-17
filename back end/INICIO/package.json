@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/3-TIC-ORT/proyecto-mini-smart-home/issues"
   },
-  "homepage": "https://github.com/3-TIC-ORT/proyecto-mini-smart-home#readme"
+  "homepage": "https://github.com/3-TIC-ORT/proyecto-mini-smart-home#readme",
+  "dependencies": {
+    "serialport": "^13.0.0"
   }
+}
