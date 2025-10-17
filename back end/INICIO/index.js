@@ -37,27 +37,16 @@ subscribePOSTEvent ("login", (data) => {
 
 //Para los modos:
 
-subscribeGETEvent ("obtenerModos", (data) => {
-  let modos = JSON.parse(fs.readFileSync("data/modos.json", "utf-8"));
-
-  if (data && typeof data.nombre === "string" && modos.find(modo => modo.nombre === data.nombre)) {
-    return { ok: false, message: "El modo ya existe" };
+subscribePOSTEvent ("crearModo", (data, respuesta) => {
+  let modos = JSON.parse (fs.readFileSync ("data/modos.json", "utf-8"));
+  let objeto = {
+    nombre: data.nombre,
+    condiciones: data.condiciones
   }
+  modos.push (objeto);
 
-  modos.push({ nombre: data.nombre, configuracion: data.configuracion });
-
-    fs.writeFileSync("data/modos.json", JSON.stringify(modos, null, 2), { encoding: "utf-8" });
-    return { ok: true, message: "Modo creado exitosamente" };
-  }
-  else {
-    return { ok: false, message: "Datos inválidos o incompletos" };
-  }
-});
-
-
-subscribeGETEvent("nuevoModo", () => {
-  let modos = JSON.parse(fs.readFileSync("data/modos.json", "utf-8"));
-  return { ok: true, modos };
+  fs.writeFileSync ("data/modos.json", JSON.stringify (modos, null, 2), {encoding: "utf-8"});
+  return (respuesta, {ok: true});
 });
 
 startServer ();
