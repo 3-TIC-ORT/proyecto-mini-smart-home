@@ -37,9 +37,9 @@ condiciones.addEventListener("change", () => {
   condicionesExtra.innerHTML = "";
   if (condiciones.value === "hora") {
     const desde = document.createElement("label");
-    desde.innerHTML = `Desde: <input type="time" id="horaDesde">`;
+    desde.innerHTML = `Desde: <input type="time" id="desdeHora">`;
     const hasta = document.createElement("label");
-    hasta.innerHTML = `Hasta: <input type="time" id="horaHasta">`;
+    hasta.innerHTML = `Hasta: <input type="time" id="hastaHora">`;
     condicionesExtra.appendChild(desde);
     condicionesExtra.appendChild(hasta);
   } else if (condiciones.value === "dia") {
@@ -73,10 +73,13 @@ function crearModo(nombre, tipo) {
   let condiciones = {};
 
   if (tipo === "hora") {
+    
+    const desdeHora = document.getElementById("desdeHora").value;
+    const hastaHora = document.getElementById("hastaHora").value
     condiciones = {
       tipo: "hora",
-      desde: document.getElementById("horaDesde").value,
-      hasta: document.getElementById("horaHasta").value
+      desde: desdeHora,
+      hasta: hastaHora
     };
   } else if (tipo === "dia") {
     condiciones = {

@@ -15,12 +15,13 @@
     <div class="tab active" data-tab="tab1">MENU</div>
     <div class="tab" data-tab="tab2">STOPMOTION</div>
     <div class="tab" data-tab="tab3">CONTROL DE ELECTRODOMESTICOS</div>
+  </header>
 
+  <aside>
     <button id="settings" class="settings" aria-label="Configuración">
       ⚙️
     </button>
-
-  </header>
+  </aside>
 
   <div id="tab1" class="tab-content active">
     <main class="contenedor">
@@ -58,14 +59,14 @@
   
   <div id="tab3" class="tab-content">
     <section class="greeting">
-      <h1>Hola, Zoe!</h1>
+      <h1 class="textotab2">Hola, Zoe!</h1>
       <button class="ready">← ¿Listo/a para jugar? →</button>
     </section>
 
     <section class="controls">
       <!-- Persiana -->
       <div class="control">
-        <h2>Persiana</h2>
+        <h2 class="textotab2">Persiana</h2>
         <div class="buttons">
           <button id="cerrar" class="cerrar">Cerrar</button>
           <button id="abrir" class="abrir">Abrir</button>
@@ -75,7 +76,7 @@
 
       <!-- Ventilador -->
       <div class="control">
-        <h2>Ventilador</h2>
+        <h2 class="textotab2">Ventilador</h2>
         <div class="slider-container">
           <input type="range" id="velocidad" min="0" max="5" value="0">
           <div class="niveles">
@@ -86,26 +87,28 @@
       </div>
 
       <!-- Luces -->
-      <div class="control luces">
-        <h2>Luces</h2>
+      <div class="controlluces">
+        <h2 class="textotab2">Luces</h2>
         <div class="columnas">
           <div class="columna">
             <label class="switch">
               <input type="checkbox" class="light">
               <span class="slider"></span>
             </label>
-            <div class="bombillo encendido"></div>
-            <div class="bombillo encendido"></div>
-            <div class="bombillo encendido"></div>
+            <div class="luces"></div>
+            <div class="luces"></div>
+            <div class="luces"></div>
+            <div class="luces"></div>
           </div>
           <div class="columna">
             <label class="switch">
               <input type="checkbox" class="light">
               <span class="slider"></span>
             </label>
-            <div class="bombillo encendido"></div>
-            <div class="bombillo encendido"></div>
-            <div class="bombillo encendido"></div>
+            <div class="luces"></div>
+            <div class="luces"></div>
+            <div class="luces"></div>
+            <div class="luces"></div>
           </div>
         </div>
       </div>

@@ -1,10 +1,8 @@
-
-
-body {
-  background-image: url(fondo.jpg);
-  background-color: #000000A3;
-  min-height: 100vh;
-}
+body{
+  background-image: 
+  linear-gradient(#000000A3), 
+  url("fondo.jpg");
+  }
 
 header {
   display: flex;
@@ -124,6 +122,10 @@ header {
   margin-bottom: 10px;
 }
 
+.textotab2 {
+  color: white;
+}
+
 /* Persiana */
 .buttons button {
   border: none;
@@ -180,7 +182,7 @@ header {
   justify-content: center;
 }
 
-.bombillo {
+.luces {
   width: 50px;
   height: 50px;
   background: gold;
