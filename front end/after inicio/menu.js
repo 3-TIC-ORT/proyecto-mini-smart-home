@@ -113,6 +113,7 @@ form.addEventListener("submit", (e) => {
   crearModo(nombre, tipo);
 });
 
+
 function botonApretado(status) {
   if (status.on) {
     estado.innerText = "prendido";
