@@ -98,3 +98,128 @@ header {
   font-weight: bold;
   margin-left: 20px;
 }
+
+.ready {
+  margin-top: 10px;
+  background: #e6cfcf;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Controls layout */
+.controls {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px;
+  text-align: center;
+}
+
+.control h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+/* Persiana */
+.buttons button {
+  border: none;
+  color: black;
+  font-size: 20px;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.cerrar { background: red; }
+.abrir { background: limegreen; }
+
+.persiana {
+  width: 150px;
+  height: 150px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #80384c,
+    #80384c 10px,
+    #5e2d3c 10px,
+    #5e2d3c 20px
+  );
+  margin: 20px auto;
+  transition: height 0.5s ease;
+}
+
+/* Ventilador */
+.slider-container input {
+  width: 200px;
+}
+
+.ventilador {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(#70474b, #2c1b1d);
+  margin: 20px auto;
+  mask: url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Fan_icon.svg') center/contain no-repeat;
+  -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Fan_icon.svg') center/contain no-repeat;
+  animation: none;
+}
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Luces */
+.columnas {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+
+.bombillo {
+  width: 50px;
+  height: 50px;
+  background: gold;
+  border-radius: 50%;
+  margin: 10px auto;
+  box-shadow: 0 0 20px gold;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.switch input { display: none; }
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px; width: 20px;
+  left: 4px; bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .3s;
+}
+
+input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
