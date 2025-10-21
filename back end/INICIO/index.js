@@ -1,5 +1,7 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
+import { SerialPort } from "serialport";
+import { ReadlineParser } from "@serialport/parser-readline";
 
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro + login.json", "utf-8"));
@@ -46,4 +48,11 @@ subscribePOSTEvent ("crearModo", (data, respuesta) => {
 startServer ();
 
 //Comunicación con hardware: usando Node SerialPort
+
+let port = new SerialPort ({
+  path: "COM6",
+  baudRate: 9600
+});
+
+
 
