@@ -45,14 +45,21 @@ subscribePOSTEvent ("crearModo", (data, respuesta) => {
   return (respuesta, {ok: true}); 
 });
 
+subscribeGETEvent ("obtenerModos", () => {
+  let modos = fs.readFileSync ("data/modos.json", "utf-8");
+  return modos;
+})
+
 startServer ();
 
 //Comunicación con hardware: usando Node SerialPort
 
 let port = new SerialPort ({
-  path: "COM6",
+  path: "COM5",
   baudRate: 9600
 });
+
+port.pipe (new ReadlineParser ({delimter: "\n"}));
 
 
 

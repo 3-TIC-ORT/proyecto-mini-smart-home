@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/3-TIC-ORT/proyecto-mini-smart-home#readme",
   "dependencies": {
+    "@serialport/parser-readline": "^13.0.0",
     "serialport": "^13.0.0"
   }
 }
