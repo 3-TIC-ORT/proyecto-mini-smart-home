@@ -9,8 +9,9 @@ void setup() {
 void loop() {
   //Relé
 if (Serial.available()>0){
-  hola=Serial.read();
-  if (hola="r"){
+  HB=Serial.read();
+  if (HB="r"){
+    Serial.printl("Ventilador prendido");
     digitalWrite(relayPin1, HIGH);
     delay(3000);
     digitalWrite(relayPin1, LOW);

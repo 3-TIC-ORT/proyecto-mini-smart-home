@@ -12,8 +12,9 @@ void setup() {
 
 void loop() {
 if (Serial.available()>0){
-  hola=Serial.read();
-    if (hola="d"){
+  HB=Serial.read();
+    if (HB="d"){
+      Serial.printl("Persiana prendida");
       digitalWrite(H1,HIGH);
       digitalWrite(H2,LOW);
       analogWrite(H3,150);
@@ -21,7 +22,6 @@ if (Serial.available()>0){
       digitalWrite(H1,LOW);
       digitalWrite(H2,LOW);
       analogWrite(H3,0);
-      delay(3000);
     }
   }
 }
