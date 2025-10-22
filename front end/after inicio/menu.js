@@ -77,12 +77,6 @@ function crearModo(nombre, tipo) {
     
     const desdeHora = document.getElementById("desdeHora").value;
     const hastaHora = document.getElementById("hastaHora").value;
-
-    tipo = document.getElementById("condicion").value;
-    if (tipo === "") {
-      alert("Tenés que seleccionar una condición válida.");
-      return;
-    }
     
     condiciones = {
       tipo: "hora",
