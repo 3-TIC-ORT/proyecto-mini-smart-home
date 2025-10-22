@@ -1,4 +1,5 @@
 connect2Server();
+cargarModos();
 
 const tabs = document.querySelectorAll('.tab');
 const contents = document.querySelectorAll('.tab-content');
@@ -75,7 +76,14 @@ function crearModo(nombre, tipo) {
   if (tipo === "hora") {
     
     const desdeHora = document.getElementById("desdeHora").value;
-    const hastaHora = document.getElementById("hastaHora").value
+    const hastaHora = document.getElementById("hastaHora").value;
+
+    tipo = document.getElementById("condicion").value;
+    if (tipo === "") {
+      alert("Tenés que seleccionar una condición válida.");
+      return;
+    }
+    
     condiciones = {
       tipo: "hora",
       desde: desdeHora,
@@ -116,6 +124,23 @@ form.addEventListener("submit", (e) => {
   crearModo(nombre, tipo);
 });
 
+function cargarModos() {
+  getEvent("obtenerModos", (data) => {
+    console.log("Modos recibidos:", data);
+    lista.innerHTML = ""; // limpia la lista antes de volver a cargar
+
+    if (!data || data.length === 0) {
+      lista.innerHTML = "<p>No hay modos guardados.</p>";
+      return;
+    }
+
+    data.forEach((modo) => {
+      const li = document.createElement("li");
+      li.textContent = `${modo.nombre} (${modo.condiciones.tipo})`;
+      lista.appendChild(li);
+    });
+  });
+}
 
 function botonApretado(status) {
   if (status.on) {

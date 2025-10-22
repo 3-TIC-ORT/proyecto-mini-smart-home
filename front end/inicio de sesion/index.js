@@ -23,7 +23,7 @@ function iniciosesion(event) {
  
     postEvent("login", { email: mail, password: contra }, function (data) {
 
-      if (!data.exists) { 
+      if (!data.ok) { 
         mensaje.textContent = "El usuario no existe";
         mensaje.style.color = "red";
         return;
