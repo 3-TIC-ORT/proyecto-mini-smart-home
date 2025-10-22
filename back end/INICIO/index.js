@@ -42,14 +42,13 @@ subscribePOSTEvent ("crearModo", (data, respuesta) => {
   modos.push (objeto);
 
   fs.writeFileSync ("data/modos.json", JSON.stringify (modos, null, 2), {encoding: "utf-8"});
-  return (respuesta, {ok: true}); 
+  return (respuesta, {ok: true});
 });
 
 subscribeGETEvent ("obtenerModos", () => {
   let modos = fs.readFileSync ("data/modos.json", "utf-8");
   return modos;
-})
-
+});
 startServer ();
 
 //Comunicación con hardware: usando Node SerialPort
