@@ -35,7 +35,7 @@ function iniciosesion(event) {
      return;
    }
  
-   else if(data.exists && data.contraseñacorrecta){
+   else{
     mensaje.textContent = "¡Inicio de sesión exitoso!";
     mensaje.style.color = "green";
     localStorage.setItem("usuarioLogueado", mail);
