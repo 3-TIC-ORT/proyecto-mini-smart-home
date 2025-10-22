@@ -59,7 +59,7 @@ let port = new SerialPort ({
   baudRate: 9600
 });
 
-port.pipe (new ReadlineParser ({delimter: "\n"}));
+let parser = port.pipe (new ReadlineParser ({delimter: "\n"}));
 
 
 
