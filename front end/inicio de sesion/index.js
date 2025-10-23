@@ -15,32 +15,27 @@ function iniciosesion(event) {
   let mail = usuario.value.trim();
   let contra = contraseña.value.trim();
 
-   if (mail === "" || contra === "") {
-     mensaje.textContent = "Completá ambos campos";
-     mensaje.style.color = "red";
-     return;
-   }
+  if (mail === "" || contra === "") {
+    mensaje.textContent = "Completá ambos campos";
+    mensaje.style.color = "red";
+    return;
+  }
  
     postEvent("login", { email: mail, password: contra }, function (data) {
 
       if (!data.ok) { 
-        mensaje.textContent = "El usuario no existe";
+        mensaje.textContent = "El usuario no existe o la contraseña es incorrecta";
         mensaje.style.color = "red";
         return;
       }
- 
-    if (!data.contraseñacorrecta) {
-     mensaje.textContent = "Contraseña incorrecta";
-     mensaje.style.color = "red";
-     return;
-   }
- 
-   else{
-    mensaje.textContent = "¡Inicio de sesión exitoso!";
-    mensaje.style.color = "green";
-    localStorage.setItem("usuarioLogueado", mail);
-   } 
-  });
+      
+      else if(data.ok){
+        mensaje.textContent = "¡Inicio de sesión exitoso!";
+        mensaje.style.color = "green";
+        localStorage.setItem("usuarioLogueado", mail);
+      } 
+    });
 }
+
 form.addEventListener("submit",iniciosesion);
 
