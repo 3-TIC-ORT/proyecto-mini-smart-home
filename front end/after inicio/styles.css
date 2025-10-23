@@ -1,7 +1,7 @@
 body{
   background-image: 
   linear-gradient(#000000A3), 
-  url("fondo.png");
+  url("../imagenes/fondo.png");
   }
 
 header {

@@ -1,32 +1,53 @@
+body{
+    background: linear-gradient(180deg, #377186 0%, #63BED1 16.83%, #68B7E0 36.54%, #B6DEF8 61.54%, #E2F2EF 78.85%, #B1CFCE 93.27%);
+    margin: 0;
+    overflow-x: hidden;
+}
+
 .nube{
- position: absolute;
- background: white;
- border-radius: 50px;
- width: 160px;
- height: 60px;
- box-shadow:
-    30px 0 0 0 white,
-    60px 0 0 0 white,
-    20px -20px 0 0 white,
-    40px -20px 0 0 white;
+    position: absolute;
+    width: 150px;
+    height: auto;
 }
 
 .nubecita1{
- top: 100px; left: 200px;
+ top: 0; left: 265px;
 }
 
 .nubecita2{
- top: 180px; right: 150px;
+ top: 66px; left: 844px;
 }
 
 .nubecita3 { 
- top: 300px; left: 80px; }
+ top: 177px; left: -11px; 
+}
+
+.nubecita4 { 
+ top: 330px; right: -37px; 
+}
+
+.nubecita5 { 
+ top: 435px; left: 135px; 
+}
+.nubecita6 { 
+ top: 520px; left: 954px; 
+}
+
+.solcito{
+  position: absolute;
+  top: 50px;
+  left: 924px;
+  width: 80px;
+  height: 80px;
+  background-color: #F6D864;
+  border-radius: 50%;
+}
 
 header{
- background-color: pink;
+ background-color: white;
  width: 560px;
  border-radius: 40px;
- margin: 96px auto 0;
+ margin: 56px auto 0;
  font-family: "Just Me Again Down Here",cursive;
  font-size: 25px;
  text-align: center;
@@ -35,11 +56,12 @@ header{
 main{
  display: flex;
  flex-direction: column;
- width: 954px;
- height: 478px;
- background-color: pink;
- border-radius: 182px;
- margin: auto;             
+ width: 814px;
+ height: 468px;
+ background-color: #D2C9C9;
+ border-radius: 132px;
+ margin: auto;
+ margin-bottom: 20px;
  justify-content: center;   
  align-items: center;
 }
@@ -47,18 +69,36 @@ main{
 input{
  display: flex;
  flex-direction: column;
- width: 750px;
- height: 40px;
- margin-bottom: 5px;
+ width: 700px;
+ height: 60px;
+ margin-top: 15px;
+ margin-bottom: 15px;
+ border-bottom-left-radius: 20px;
+ border-bottom-right-radius: 20px;
+ border: none;
 }
 
 .boton{
- background-color: crimson;
+ background-color: white;
  display: block;
  width: 550px;
- height: 40px;
- margin: auto;
+ height: 65px;
+ margin: 15px auto;
  border-radius: 20px;
  font-size: 20px;
+ border: none;
 }
 
+.cosito{
+ width: 700px;
+ height: 20px;
+}
+
+a{
+ color: #4A4646;
+ font-size: 25px;
+}
+
+.pastito{
+ height: 60px;
+}

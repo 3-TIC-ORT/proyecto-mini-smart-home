@@ -1,13 +1,12 @@
 connect2Server();
-cargarModos();
 
-const tabs = document.querySelectorAll('.tab');
-const contents = document.querySelectorAll('.tab-content');
-const form = document.getElementById("modoform");
-const lista = document.getElementById("modos");
-const condiciones = document.getElementById("condicion");
-const condicionesExtra = document.getElementById("extrastuff");
-const estado = document.getElementById("estado"); // Asegúrate de que este elemento exista
+let tabs = document.querySelectorAll('.tab');
+let contents = document.querySelectorAll('.tab-content');
+let form = document.getElementById("modoform");
+let lista = document.getElementById("modos");
+let condicion = document.getElementById("condicion");
+let condicionesExtra = document.getElementById("extrastuff");
+let estado = document.getElementById("estado"); // Asegúrate de que este elemento exista
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -15,18 +14,18 @@ tabs.forEach(tab => {
     tab.classList.add('active');
 
     contents.forEach(c => c.classList.remove('active'));
-    const tabId = tab.getAttribute('data-tab');
+    let tabId = tab.getAttribute('data-tab');
     document.getElementById(tabId).classList.add('active');
   });
 });
 
 function actualizarReloj() {
-  const ahora = new Date();
-  const opciones = { hour: '2-digit', minute: '2-digit', hour12: true };
-  const opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  let ahora = new Date();
+  let opciones = { hour: '2-digit', minute: '2-digit', hour12: true };
+  let opcionesFecha = { day: '2-digit', month: '2-digit', year: 'numeric' };
 
-  const hora = ahora.toLocaleTimeString('es-AR', opciones);
-  const fecha = ahora.toLocaleDateString('es-AR', opcionesFecha);
+  let hora = ahora.toLocaleTimeString('es-AR', opciones);
+  let fecha = ahora.toLocaleDateString('es-AR', opcionesFecha);
 
   document.getElementById("reloj").innerText = `${fecha} - ${hora}`;
 }
@@ -34,16 +33,16 @@ function actualizarReloj() {
 setInterval(actualizarReloj, 10000);
 actualizarReloj();
 
-condiciones.addEventListener("change", () => {
+condicion.addEventListener("change", () => {
   condicionesExtra.innerHTML = "";
-  if (condiciones.value === "hora") {
-    const desde = document.createElement("label");
+  if (condicion.value === "hora") {
+    let desde = document.createElement("label");
     desde.innerHTML = `Desde: <input type="time" id="desdeHora">`;
-    const hasta = document.createElement("label");
+    let hasta = document.createElement("label");
     hasta.innerHTML = `Hasta: <input type="time" id="hastaHora">`;
     condicionesExtra.appendChild(desde);
     condicionesExtra.appendChild(hasta);
-  } else if (condiciones.value === "dia") {
+  } else if (condicion.value === "dia") {
     condicionesExtra.innerHTML = `
       <label>Día:
         <select id="diaSemana">
@@ -57,7 +56,7 @@ condiciones.addEventListener("change", () => {
         </select>
       </label>
     `;
-  } else if (condiciones.value === "luz") {
+  } else if (condicion.value === "luz") {
     condicionesExtra.innerHTML = `
       <label>
         Nivel de luz:
@@ -75,8 +74,8 @@ function crearModo(nombre, tipo) {
 
   if (tipo === "hora") {
     
-    const desdeHora = document.getElementById("desdeHora").value;
-    const hastaHora = document.getElementById("hastaHora").value;
+    let desdeHora = document.getElementById("desdeHora").value;
+    let hastaHora = document.getElementById("hastaHora").value;
     
     condiciones = {
       tipo: "hora",
@@ -99,16 +98,13 @@ function crearModo(nombre, tipo) {
     console.log("Modo guardado:", respuesta);
     cargarModos();
   });
-
-  form.reset();
-  condicionesExtra.innerHTML = "";
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const nombre = document.getElementById("nombreModo").value;
-  const tipo = condiciones.value;
+  let nombre = document.getElementById("nombre").value;
+  let tipo = condicion.value;
 
   if (!nombre || !tipo) {
     alert("Por favor, completa todos los campos.");
@@ -119,22 +115,38 @@ form.addEventListener("submit", (e) => {
 });
 
 function cargarModos() {
-  getEvent("obtenerModos", (data) => {
-    console.log("Modos recibidos:", data);
-    lista.innerHTML = ""; // limpia la lista antes de volver a cargar
-
-    if (!data || data.length === 0) {
-      lista.innerHTML = "<p>No hay modos guardados.</p>";
-      return;
-    }
-
-    data.forEach((modo) => {
-      const li = document.createElement("li");
-      li.textContent = `${modo.nombre} (${modo.condiciones.tipo})`;
-      lista.appendChild(li);
+    getEvent("obtenerModos", (data) => {
+      console.log("Modos recibidos:", data);
+  
+      if (!lista) return;
+  
+      lista.innerHTML = "";
+  
+      // parsear si viene como string
+      let modosArray = data;
+      if (typeof data === "string") {
+        try {
+          modosArray = JSON.parse(data);
+        } catch (err) {
+          console.error("Error parseando data de obtenerModos:", err);
+          modosArray = [];
+        }
+      }
+  
+      if (!Array.isArray(modosArray) || modosArray.length === 0) {
+        lista.innerHTML = "<li>No hay modos guardados.</li>";
+        return;
+      }
+  
+      modosArray.forEach((modo) => {
+        const li = document.createElement("li");
+        const tipoCond = modo.condiciones ? modo.condiciones.tipo : "sin condiciones";
+        li.textContent = `${modo.nombre || "sin nombre"} (${tipoCond})`;
+        lista.appendChild(li);
+      });
     });
-  });
-}
+  }
+cargarModos();
 
 function botonApretado(status) {
   if (status.on) {
