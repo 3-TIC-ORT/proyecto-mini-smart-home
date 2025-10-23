@@ -1,9 +1,9 @@
-//leds potenciometro y boton
+//Leds potenciometro y boton
 int L1a4 = 4; 
 int L5a8 = 5;    
 int BT = 6;  
-int ultBT=1;
-int elr=0;
+int ultBT = 1;   
+int elr = 0; 
 int PT = A1;      
 int VPT;          
 char HB = 0;
@@ -16,12 +16,13 @@ void setup() {
 }
 
 void loop() {
-  //leds rojos, boton y consola
- int bt = digitalRead(BT);
- if (Serial.available() > 0) {
+  //leds rojos
+  int bt = digitalRead(BT);
+
+  if (Serial.available() > 0) {
     HB = Serial.read();
   }
-  
+
   if (bt == LOW && ultBT == HIGH) {
     if (elr == 0) {
       elr = 1;
@@ -31,20 +32,21 @@ void loop() {
       Serial.println("Leds rojos apagados");
     }
   }
+  ultBT=bt;
+  
   if (elr == 1 || HB == 'j') {
     digitalWrite(L1a4, HIGH);
-  } else{
-   digitalWrite(L1a4, LOW); 
+  } else {
+    digitalWrite(L1a4, LOW);
   }
-    
-   
-//leds azules, potenciometro y consola
+  
+  //leds azules
   VPT = analogRead(PT);
   int br = VPT / 4;
-  analogWrite(L5a8,br);
+  analogWrite(L5a8, br);
 
   if (HB == 'o') {
-    Serial.print("Leds azules prendidos");
-    digitalWrite(L5a8, br);
+    Serial.println("Leds azules prendidos");
+    analogWrite(L5a8, br);
   }
 }

@@ -13,12 +13,22 @@ void setup() {
 void loop() {
 if (Serial.available()>0){
   HB=Serial.read();
-    if (HB="d"){
+    if (HB='d'){
       Serial.printl("Persiana prendida");
       digitalWrite(H1,HIGH);
       digitalWrite(H2,LOW);
       analogWrite(H3,150);
-      delay(3000);
+      delay(30000); //30 segundos
+      digitalWrite(H1,LOW);
+      digitalWrite(H2,LOW);
+      analogWrite(H3,0);
+    }
+    if(HB=='a'){
+      Serial.printl("Persiana prendida (nc si arriba o abajo)");
+      digitalWrite(H1,LOW);
+      digitalWrite(H2,HIGH);
+      analogWrite(H3,150);
+      delay(30000); //30 segundos
       digitalWrite(H1,LOW);
       digitalWrite(H2,LOW);
       analogWrite(H3,0);

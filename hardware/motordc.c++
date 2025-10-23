@@ -10,12 +10,13 @@ void loop() {
   //Relé
 if (Serial.available()>0){
   HB=Serial.read();
-  if (HB="r"){
-    Serial.printl("ventilador prendida");
+  if (HB=='r'){
+    Serial.println("ventilador prendida");
     digitalWrite(relayPin1, HIGH);
-    delay(3000);
-    digitalWrite(relayPin1, LOW);
-    delay(3000);
         }
+  if (HB=='m'){
+    Serial.println("ventilador apagado");
+    digitalWrite(relayPin1,LOW);
+      }
     }
 }
