@@ -14,6 +14,13 @@ int ultBT = 1;
 int elr = 0; 
 int PT = A1;      
 int VPT; 
+//sensor
+#include "DHT.h"
+#define DHTPIN 8
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
+int humedad = 0;
+int temperatura = 0;
 
 void setup() {
   //Leds potenciometro y boton
@@ -25,9 +32,11 @@ void setup() {
   //Motor DC
   pinMode(relayPin1, OUTPUT);
   //Motorreductor
-  const int H1=9;
-  const int H2=10;
-  const int H3=11;
+  pinMode(H1,OUTPUT);
+  pinMode(H2,OUTPUT);
+  pinMode(H3,OUTPUT);
+  //sensor
+  dht.begin(); 
 }
 
 void loop() {
@@ -75,13 +84,13 @@ if (Serial.available()>0){
     digitalWrite(relayPin1,LOW);
       }
     }
-}
+
 
 //Motorreductor
 if (Serial.available()>0){
   HB=Serial.read();
-    if (HB='d'){
-      Serial.printl("Persiana prendida");
+    if (HB=='d'){
+      Serial.println("Persiana prendida");
       digitalWrite(H1,HIGH);
       digitalWrite(H2,LOW);
       analogWrite(H3,150);
@@ -91,7 +100,7 @@ if (Serial.available()>0){
       analogWrite(H3,0);
     }
     if(HB=='a'){
-      Serial.printl("Persiana prendida (nc si arriba o abajo)");
+      Serial.println("Persiana prendida (nc si arriba o abajo)");
       digitalWrite(H1,LOW);
       digitalWrite(H2,HIGH);
       analogWrite(H3,150);
@@ -101,5 +110,17 @@ if (Serial.available()>0){
       analogWrite(H3,0);
     }
   }
-}
+
+//sensor
+humedad = (int)dht.readHumidity();
+  temperatura = (int)dht.readTemperature();
+
+  Serial.print("Humedad: ");
+  Serial.print(humedad);
+  Serial.println(" %");
+
+  Serial.print("Temperatura: ");
+  Serial.print(temperatura);
+  Serial.println(" °C");
+ delay(900000); //15 minutos= 900.000 segundos
 }

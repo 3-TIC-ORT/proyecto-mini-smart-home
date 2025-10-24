@@ -1,16 +1,13 @@
 #include "DHT.h"
-
 #define DHTPIN 8
 #define DHTTYPE DHT11
-
 DHT dht(DHTPIN, DHTTYPE);
-
 int humedad = 0;
 int temperatura = 0;
 
 void setup() {
   Serial.begin(9600);
-  dht.begin(); // Inicia el sensor
+  dht.begin(); 
 }
 
 void loop() {
