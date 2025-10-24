@@ -139,8 +139,8 @@ function cargarModos() {
       }
   
       modosArray.forEach((modo) => {
-        const li = document.createElement("li");
-        const tipoCond = modo.condiciones ? modo.condiciones.tipo : "sin condiciones";
+        let li = document.createElement("li");
+        let tipoCond = modo.condiciones ? modo.condiciones.tipo : "sin condiciones";
         li.textContent = `${modo.nombre || "sin nombre"} (${tipoCond})`;
         lista.appendChild(li);
       });
@@ -148,47 +148,74 @@ function cargarModos() {
   }
 cargarModos();
 
+function canciones(index){
+  let song = songs[index];
+  titulo.textContent = song.titulo;
+  genero.textContent = song.genero;
+  audio.src = song.file;
+};
+
+function updateplay(){
+  if (audio.pausado) {
+    playicono.src= "playicono.png";
+  } else {
+    playicono.src = "pausa.png"
+  }
+}
+
+botonplay.addEventListener("click",() => {
+  if (audio.pausado){
+    audio.play();
+  } else {
+   audio.pausado();
+  }
+  updateplay();
+});
+
+document.getElementById("anterior").addEventListener("click", () => {
+  actual = (current -1 + songs.length) % songs.length;
+  canciones(actual);
+  audio.play();
+  updateplay();
+});
+
+audio.addEventListener("updatetiempo", () => {
+  let porcentaje =   (audio.tiempoactual / audio.duracion) * 100;
+  progreso.style.width = porcentaje + "%";
+  progresoThumb.style.left = porcentajee + "%";
+});
+
+
 //  luces
 // fila 1
-let slider1 = document.querySelectorAll('.fila1 .luz');
-let index1 = 0;
-
-setInterval(() => {
-  slider1.forEach((luz, i) => {
-    luz.style.opacity = i === index1 ? '1' : '0.3';
-  });
-  index1 = (index1 + 1) % slider1.length;
-}, 300);
-
-
-// fila 2
-let slider2 = document.querySelectorAll('.fila2 .luz');
-let index2 = 0;
+let potter1 = document.getElementById('intensidad1');
+let potter2 = document.getElementById('intensidad2');
 
 function actualizarLuces(fila, valor) {
-  const luces = document.querySelectorAll(`.fila${fila} .luces`);
+  let luces = document.querySelectorAll(`.fila${fila} .luces`);
   luces.forEach((luz, index) => {
     luz.style.opacity = (index < valor ? 1 : 0.2);
   });
 }
 
-// Slider 1
-slider1.addEventListener('input', () => {
-  let valor = parseInt(slider1.value);
+potter1.addEventListener('input', () => {
+  let valor = parseInt(potter1.value);
   actualizarLuces(1, valor);
   postEvent('controlLuces', { fila: 1, intensidad: valor }, (res) => {
     console.log('Backend respondió fila1:', res);
   });
 });
 
-// Slider 2
-slider2.addEventListener('input', () => {
-  let valor = parseInt(slider2.value);
+potter2.addEventListener('input', () => {
+  let valor = parseInt(potter2.value);
   actualizarLuces(2, valor);
   postEvent('controlLuces', { fila: 2, intensidad: valor }, (res) => {
     console.log('Backend respondió fila2:', res);
   });
 });
+
+actualizarLuces(1, parseInt(potter1.value));
+actualizarLuces(2, parseInt(potter2.value));
 
 function botonApretado(status) {
   if (status.on) {
