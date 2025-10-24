@@ -148,6 +148,48 @@ function cargarModos() {
   }
 cargarModos();
 
+//  luces
+// fila 1
+let slider1 = document.querySelectorAll('.fila1 .luz');
+let index1 = 0;
+
+setInterval(() => {
+  slider1.forEach((luz, i) => {
+    luz.style.opacity = i === index1 ? '1' : '0.3';
+  });
+  index1 = (index1 + 1) % slider1.length;
+}, 300);
+
+
+// fila 2
+let slider2 = document.querySelectorAll('.fila2 .luz');
+let index2 = 0;
+
+function actualizarLuces(fila, valor) {
+  const luces = document.querySelectorAll(`.fila${fila} .luces`);
+  luces.forEach((luz, index) => {
+    luz.style.opacity = (index < valor ? 1 : 0.2);
+  });
+}
+
+// Slider 1
+slider1.addEventListener('input', () => {
+  let valor = parseInt(slider1.value);
+  actualizarLuces(1, valor);
+  postEvent('controlLuces', { fila: 1, intensidad: valor }, (res) => {
+    console.log('Backend respondió fila1:', res);
+  });
+});
+
+// Slider 2
+slider2.addEventListener('input', () => {
+  let valor = parseInt(slider2.value);
+  actualizarLuces(2, valor);
+  postEvent('controlLuces', { fila: 2, intensidad: valor }, (res) => {
+    console.log('Backend respondió fila2:', res);
+  });
+});
+
 function botonApretado(status) {
   if (status.on) {
     estado.innerText = "prendido";
