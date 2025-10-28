@@ -52,12 +52,26 @@ subscribeGETEvent ("obtenerModos", () => {
 
 //Comunicación con hardware: usando Node SerialPort
 
+//Crea un nuevo puerto (vía por la que se envían los datos):
 let port = new SerialPort ({
   path: "COM5",
   baudRate: 9600
 });
 
+//Crea un nuevo ReadlineParser, que es 
 let parser = port.pipe (new ReadlineParser ({delimeter: "\n"}));
+
+parser.on ('data', console.log);
+
+subscribePOSTEvent ("controlLuces", (data) => {
+  let caracter = 'j';
+  port.write (caracter, (err) => {
+    if (err) {
+      return console.error ('Error al escribir por el puerto', err.message);
+    }
+  return ('Se escribió en el puerto: ', caracter);
+  });
+});
 
 
 startServer ();
