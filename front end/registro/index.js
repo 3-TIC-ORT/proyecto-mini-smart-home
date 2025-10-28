@@ -1,9 +1,7 @@
 let form = document.getElementById("formregistro")
 let usuario = document.getElementById("dondevaelmail");
 let contraseña = document.getElementById("dondevalacontra");
-let diacumple = document.getElementById("dia");
-let mescumple = document.getElementById("mes");
-let añocumple = document.getElementById("año");
+let cumpleaños = document.getElementById("cumple");
 let genero = document.getElementById("genero");
 let boton = document.getElementById("registrate");
 let mensaje = document.getElementById("mensaje");
@@ -15,6 +13,7 @@ function registrar(){
 
   let mail = usuario.value.trim();
   let contra = contraseña.value.trim();
+  let cumple = cumpleaños.value;
 
   if(mail==="" || contra === ""){
     mensaje.textContent = "Completar ambos campos";
@@ -32,9 +31,15 @@ function registrar(){
 
   else{ 
 
-    let fecha = new Date().toLocaleDateString;
+    let fecha = new Date().toLocaleDateString();
 
-    usuarios.push({mail,contra, fecha});
+    usuarios.push({
+      mail,
+      contra, 
+      cumple, 
+      fecha
+    });
+
     mensaje.textContent = "¡Registro existoso!"
     mensaje.style.color = "green"
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
@@ -45,4 +50,10 @@ function registrar(){
 form.addEventListener("submit", function(e) {
   e.preventDefault();
   registrar();
+});
+
+let inicio = document.getElementById("inicio");
+
+inicio.addEventListener("click", () => {
+  window.location.href = "../inicio de sesion/main.html";
 });
