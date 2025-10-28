@@ -1,25 +1,6 @@
 {
-  "name": "proyecto-mini-smart-home",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/3-TIC-ORT/proyecto-mini-smart-home.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/3-TIC-ORT/proyecto-mini-smart-home/issues"
-  },
-  "homepage": "https://github.com/3-TIC-ORT/proyecto-mini-smart-home#readme",
   "dependencies": {
-    "@serialport/parser-readline": "^13.0.0",
-    "serialport": "^13.0.0"
+    "serialport": "^13.0.0",
+    "soquetic": "^1.4.2"
   }
 }
