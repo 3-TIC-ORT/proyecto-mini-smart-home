@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Smart-Home</title>
-    <link rel="styles" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script defer src="index.js"></script>
@@ -12,8 +12,19 @@
 <body>
     <h1>Registrate</h1>
     <form id="formregistro">
-    <input type="text" id="dondevaelmail" placeholder="Usuario o mail">
-    <input type="texto" id="dondevalacontra" placeholder="Contraseña">
+    <input type = "text" id = "dondevaelmail" placeholder="Usuario o mail">
+    <input type = "texto" id = "dondevalacontra" placeholder="Contraseña">
+    <div class = generotypeshi>
+    <label class="opcion-genero">
+        <input type="radio" name="genero" value="chico">
+        <img src="../imagenes/boy.png" alt="Chico">
+        <span>Chico</span>
+      <label class="opcion-genero">
+        <input type="radio" name="genero" value="chico">
+        <img src="../imagenes/girl.png" alt="Chico">
+        <span>Chica</span>
+      </label>
+    </div>
     <button class="boton" type="submit" id="registrate">Registrate</button>
 </form>
     <p id="mensaje"></p>
