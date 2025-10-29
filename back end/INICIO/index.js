@@ -67,7 +67,7 @@ subscribePOSTEvent ("controlLuces", (data) => {
   let caracter = 'j';
   port.write (caracter, (err) => {
     if (err) {
-      return console.error ('Error al escribir por el puerto', err.message);
+      return console.error ('Error al escribir por el puerto: ', err.message);
     }
   return ('Se escribió en el puerto: ', caracter);
   });
@@ -75,7 +75,3 @@ subscribePOSTEvent ("controlLuces", (data) => {
 
 
 startServer ();
-
-
-
-
