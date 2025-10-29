@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background: url('fondo-espacial.png') no-repeat center center fixed;
+  background: url("fondoregistro.png") no-repeat center center fixed;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -10,81 +10,84 @@ body {
   height: 100vh;
 }
 
-header{
-  background-color: white;
-  width: 560px;
-  border-radius: 40px;
-  margin: 56px auto 0;
-  font-family: "Just Me Again Down Here",cursive;
-  font-size: 25px;
-  text-align: center;
- }
- 
- main{
+h1 {
+  font-size: 30px;
+  color: #f6e6ff;
+  text-shadow: 0 0 10px #e0b3ff;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+main{
   display: flex;
   flex-direction: column;
   width: 814px;
-  height: 468px;
+  height: 568px;
   background-color: #D2C9C9;
   border-radius: 132px;
   margin: auto;
   margin-bottom: 20px;
   justify-content: center;   
   align-items: center;
- }
+}
  
- input{
-  display: flex;
-  flex-direction: column;
-  width: 700px;
-  height: 60px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border: none;
- }
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 15px;
+  text-align: left;
+}
 
-.gendertypeshi {
+input{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 5px;
+  background-color: #b493c9;
+  color: white;
+  outline: none;
+  font-size: 14px;
+}
+
+.generotypeshi {
   display: flex;
-  gap: 20px;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #b493c9;
+  border-radius: 10px;
+  padding: 10px;
   margin-top: 15px;
-  }
-  
+}
+
 .opcion-genero {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  border: 2px solid transparent;
-  padding: 10px;
-  border-radius: 10px;
-  transition: 0.2s ease;
-}
-  
-.opcion-genero img {
-  width: 80px;
-  height: 80px;
-}
-  
-.opcion-genero:hover {
-  border-color: #c71b2f;
-}
-  
-input[type="radio"] {
-  display: none;
-}
-  
-input[type="radio"]:checked + label {
-  border-color: #c71b2f;
-  background-color: #ffe5ea;
+  justify-content: center;
 }
 
-.boton{
-  background-color: white;
+.opcion-genero input {
+  display: none;
+}
+
+.opcion-genero img {
+  width: 35px;
+  height: 35px;
+  opacity: 0.6;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+/* Si está seleccionado el radio, resalta la imagen */
+.opcion-genero input:checked + img {
+  opacity: 1;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px #f3e6ff);
+}
+button {
+  background-color: #E4D5E4;
   display: block;
-  width: 550px;
+  width: 350px;
   height: 65px;
   margin: 15px auto;
   border-radius: 20px;
