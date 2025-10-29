@@ -201,7 +201,7 @@ function actualizarLuces(fila, valor) {
 potter1.addEventListener('input', () => {
   let valor = parseInt(potter1.value);
   actualizarLuces(1, valor);
-  postEvent('controlLuces', { fila: 1, intensidad: valor }, (res) => {
+  postEvent('controlLucesLEDr', { fila: 1, intensidad: valor }, (res) => {
     console.log('Backend respondió fila1:', res);
   });
 });
@@ -209,7 +209,7 @@ potter1.addEventListener('input', () => {
 potter2.addEventListener('input', () => {
   let valor = parseInt(potter2.value);
   actualizarLuces(2, valor);
-  postEvent('controlLuces', { fila: 2, intensidad: valor }, (res) => {
+  postEvent('controlLucesLEDa', { fila: 2, intensidad: valor }, (res) => {
     console.log('Backend respondió fila2:', res);
   });
 });
