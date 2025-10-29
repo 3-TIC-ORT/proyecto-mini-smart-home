@@ -14,7 +14,16 @@ function registrar(){
   let nombre = usuario.value.trim();
   let contra = contraseña.value.trim();
   let cumple = cumpleaños.value;
-  let genre = genero.value;
+  let fecha = new Date().toLocaleDateString();
+
+ let generoInputs = document.getElementsByClassName("genero");
+  let genre = "";
+  for (let i = 0; i < generoInputs.length; i++) {
+    if (generoInputs[i].checked) {
+      genre = generoInputs[i].value;
+      break;
+    }
+  }
 
   if(nombre==="" || contra === ""){
     mensaje.textContent = "Completar ambos campos";
@@ -22,18 +31,15 @@ function registrar(){
     return;
   }
 
-  postEvent("register", { email: nombre, password: contra, fecha: cumple, genero: genre}, function (data){ 
+  postEvent("register", { nombre: nombre, password: contra, cumple: cumple, genero: genre, registro: fecha }, function (data){ 
 
-  if (data.exists) {
+  if (data.ok) {
     mensaje.textContent = "Este usuario ya existe";
     mensaje.style.color = "red";
     return;
   }
 
-  else{ 
-
-    let fecha = new Date().toLocaleDateString();s
-
+  else{
     mensaje.textContent = "¡Registro existoso!"
     mensaje.style.color = "green"
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
