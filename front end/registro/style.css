@@ -31,23 +31,34 @@ main{
   align-items: center;
 }
  
-label {
-  display: block;
+.cosos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #C3ABC3;
+  border-radius: 15px;
+  width: 650px;
   margin-top: 12px;
-  font-size: 15px;
+  height: 60px;
+}
+
+label {
+  flex: 1;
   text-align: left;
+  font-size: 15px;
+  margin-right: 10px;
 }
 
 input{
-  width: 100%;
+  flex: 2;
   padding: 10px;
   border: none;
   border-radius: 8px;
-  margin-top: 5px;
-  background-color: #b493c9;
+  background-color: #775777;
   color: white;
   outline: none;
   font-size: 14px;
+  width: 200px;
 }
 
 .generotypeshi {
@@ -78,7 +89,6 @@ input{
   cursor: pointer;
 }
 
-/* Si está seleccionado el radio, resalta la imagen */
 .opcion-genero input:checked + img {
   opacity: 1;
   transform: scale(1.1);
