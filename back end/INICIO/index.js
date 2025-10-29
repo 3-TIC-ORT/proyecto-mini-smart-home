@@ -5,7 +5,13 @@ import { ReadlineParser } from "@serialport/parser-readline";
 
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro + login.json", "utf-8"));
-  let objeto = {email: data.email, password: data.password};
+  let objeto = {nombre: data.email, password: data.password, fecha: data.fecha, genero: data.genero};
+  let encontrar = leer.find (leer => data.nombre === leer.nombre || data.password === leer.password || data.fecha === leer.fecha || data.genero === leer.genero);
+  
+  //Si el usuario ya existe, el retorno de la función es un objeto {ok:false}:
+  if (encontrar) {
+    return {ok: false};
+  }
 
   leer.push (objeto);
 
@@ -20,7 +26,7 @@ subscribePOSTEvent ("login", (data) => {
 
   for (let i = 0; i < leer.length; i++ ) {
     
-  let encontrar = leer.find (leer => data.email === leer.email && data.password === leer.password);
+  let encontrar = leer.find (leer => data.nombre === leer.nombre && data.password === leer.password);
   
   if (encontrar) {
     return {ok: true};
@@ -61,7 +67,7 @@ let port = new SerialPort ({
 //Crea un nuevo ReadlineParser, que es 
 let parser = port.pipe (new ReadlineParser ({delimeter: "\n"}));
 
-parser.on ('data', console.log);
+parser.on ('data');
 
 subscribePOSTEvent ("controlLuces", (data) => {
   let caracter = 'j';

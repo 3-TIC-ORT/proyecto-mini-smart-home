@@ -2,7 +2,7 @@ let form = document.getElementById("formregistro")
 let usuario = document.getElementById("dondevaelmail");
 let contraseña = document.getElementById("dondevalacontra");
 let cumpleaños = document.getElementById("cumple");
-let genero = document.getElementById("genero");
+let genero = document.getElementsByClassName("genero");
 let boton = document.getElementById("registrate");
 let mensaje = document.getElementById("mensaje");
 let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -11,17 +11,18 @@ connect2Server();
 
 function registrar(){
 
-  let mail = usuario.value.trim();
+  let nombre = usuario.value.trim();
   let contra = contraseña.value.trim();
   let cumple = cumpleaños.value;
+  let genre = genero.value;
 
-  if(mail==="" || contra === ""){
+  if(nombre==="" || contra === ""){
     mensaje.textContent = "Completar ambos campos";
     mensaje.style.color = "red";
     return;
   }
 
-  postEvent("register", { email: nombre, password: contra, fecha: cumple, genero: genero}, function (data){ 
+  postEvent("register", { email: nombre, password: contra, fecha: cumple, genero: genre}, function (data){ 
 
   if (data.exists) {
     mensaje.textContent = "Este usuario ya existe";
@@ -31,14 +32,7 @@ function registrar(){
 
   else{ 
 
-    let fecha = new Date().toLocaleDateString();
-
-    usuarios.push({
-      mail,
-      contra, 
-      cumple, 
-      fecha
-    });
+    let fecha = new Date().toLocaleDateString();s
 
     mensaje.textContent = "¡Registro existoso!"
     mensaje.style.color = "green"
