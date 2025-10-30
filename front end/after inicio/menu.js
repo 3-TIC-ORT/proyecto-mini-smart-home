@@ -191,12 +191,13 @@ audio.addEventListener("updatetiempo", () => {
 let potter1 = document.getElementById('intensidad1');
 let potter2 = document.getElementById('intensidad2');
 
-function actualizarLuces(fila, valor) {
-  let luces = document.querySelectorAll(`.fila${fila} .luces`);
-  luces.forEach((luz, index) => {
-    luz.style.opacity = (index < valor ? 1 : 0.2);
-  });
-}
+luces.forEach((luz) => {
+  if (encendidas === true) {
+    luz.src = "luz-prendida.png";
+  } else {
+    luz.src = "luz-apagada.png";
+  }
+});
 
 potter1.addEventListener('input', () => {
   let valor = parseInt(potter1.value);

@@ -137,8 +137,14 @@ header {
   cursor: pointer;
 }
 
-.cerrar { background: red; }
-.abrir { background: limegreen; }
+.cerraryapagar { 
+  background: white;
+  color:black;}
+  
+.abriryprender { 
+  background: black;
+  color: white;
+ }
 
 .persiana {
   width: 150px;
