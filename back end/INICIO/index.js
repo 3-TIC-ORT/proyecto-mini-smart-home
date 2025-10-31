@@ -1,5 +1,7 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
+import { SerialPort } from "serialport";
+import { ReadlineParser } from "@serialport/parser-readline";
 
 
 subscribePOSTEvent ("register", (data) => {
@@ -85,21 +87,21 @@ subscribePOSTEvent ("controlLucesLEDr", (data, res) => {
       return console.error ('Error al escribir en el puerto ', err.message);
     }
   });
-  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   });
+  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
 
 
 subscribePOSTEvent ("controlLucesLEDa", (data, res) => {
-  parser.on (data, () => {
+  parser.on ('data', () => {
   let caracter = 'o';
   port.write (caracter, (err) => {
     if (err) {
       return console.error ('Error al escribir por el puerto: ', err.message);
     }
   });
-  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   });
+  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
 
 startServer ();
