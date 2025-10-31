@@ -1,6 +1,7 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
-
+import { SerialPort } from "serialport";
+import { ReadlineParser } from "@serialport/parser-readline";
 
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
@@ -67,5 +68,43 @@ subscribeGETEvent ("obtenerModos", () => {
 
 
 //Comunicación front-back-hardware: usando Node SerialPort
+
+let port = new SerialPort ({
+  path: 'COM5',
+  baudRate: 9600
+});
+
+
+let parser = port.pipe (new ReadlineParser ({delimiter: "\n"}));
+
+//Función para que el parser no console logee infinitamente
+
+
+
+
+subscribePOSTEvent ("controlLucesLEDr", (data, res) => {
+  parser.on ('data', () => {
+  let caracter = 'j';
+  port.write (caracter, (err) => {
+    if (err) {
+      return console.error ('Error al escribir en el puerto ', err.message);
+    }
+  });
+  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  });
+});
+
+
+subscribePOSTEvent ("controlLucesLEDa", (data, res) => {
+  parser.on (data, () => {
+  let caracter = 'o';
+  port.write (caracter, (err) => {
+    if (err) {
+      return console.error ('Error al escribir por el puerto: ', err.message);
+    }
+  });
+  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  });
+});
 
 startServer ();

@@ -68,5 +68,12 @@
     "cumple": "2010-03-03",
     "genero": "chica",
     "registro": "31/10/2025"
+  },
+  {
+    "nombre": "juli",
+    "password": "Wagner",
+    "cumple": "2000-03-10",
+    "genero": "chica",
+    "registro": "31/10/2025"
   }
 ]

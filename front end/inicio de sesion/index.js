@@ -33,6 +33,7 @@ function iniciosesion(event) {
         mensaje.textContent = "¡Inicio de sesión exitoso!";
         mensaje.style.color = "green";
         localStorage.setItem("usuarioLogueado", mail);
+        location.href = "../after_inicio/menu.html";
       } 
     });
 }
