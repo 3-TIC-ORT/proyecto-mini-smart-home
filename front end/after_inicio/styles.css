@@ -139,11 +139,20 @@ header {
 
 .cerraryapagar { 
   background: white;
-  color:black;}
+  color:black;
+  height: 50px;
+  width: 100px;
+  border-radius: 15px;
+  border: none;
+}
   
 .abriryprender { 
   background: black;
   color: white;
+  height: 50px;
+  width: 100px;
+  border-radius: 15px;
+  border: none;
  }
 
 .persiana {
