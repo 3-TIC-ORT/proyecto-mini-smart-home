@@ -35,14 +35,16 @@ function registrar(){
     { nombre: nombre, password: contra, cumple: cumple, genero: genre, registro: fecha }, 
     function (data){ 
 
-      if (data.ok) {
+      if (!data.ok) {
         mensaje.textContent = "Este usuario ya existe";
         mensaje.style.color = "red";
+
         return;
       }else{
         mensaje.textContent = "¡Registro existoso!"
         mensaje.style.color = "green"
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        location.href = "../after_inicio//menu.html"
       }
     }
   );

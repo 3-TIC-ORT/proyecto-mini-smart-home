@@ -1,23 +1,72 @@
 [
   {
-    "nombre": "Fran",
-    "password": "Panchi",
-    "cumple": "2010-04-09",
-    "genero": "chico",
-    "registro": "31/10/2025"
-  },
-  {
-    "nombre": "Fran",
-    "password": "Panchi",
-    "cumple": "2010-04-09",
+    "nombre": "tumama",
+    "password": "jegulus",
+    "cumple": "2010-05-15",
     "genero": "chica",
     "registro": "31/10/2025"
   },
   {
-    "nombre": "Francisco",
-    "password": "Panchi",
-    "cumple": "2010-04-09",
-    "genero": "chico",
+    "nombre": "tumama",
+    "password": "watajai",
+    "cumple": "2010-05-15",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "tumama",
+    "password": "wolfstar",
+    "cumple": "",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "tumama",
+    "password": "wolfstar",
+    "cumple": "2010-05-15",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "tumama",
+    "password": "wolfstar",
+    "cumple": "0010-02-10",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "jdsajdajs",
+    "password": "asdasjdajs",
+    "cumple": "2010-03-03",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "dsadsa",
+    "password": "dsadas",
+    "cumple": "2010-03-03",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "dsadsaf",
+    "password": "dsadas",
+    "cumple": "2010-03-03",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "dsadsaff",
+    "password": "dsadas",
+    "cumple": "2010-03-03",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "dsadsaffa",
+    "password": "dsadas",
+    "cumple": "2010-03-03",
+    "genero": "chica",
     "registro": "31/10/2025"
   }
 ]

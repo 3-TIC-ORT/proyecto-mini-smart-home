@@ -1,7 +1,5 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
-import { SerialPort } from "serialport";
-import { ReadlineParser } from "@serialport/parser-readline";
 
 
 subscribePOSTEvent ("register", (data) => {
