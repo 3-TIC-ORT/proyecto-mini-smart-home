@@ -14,7 +14,6 @@ subscribePOSTEvent ("register", (data) => {
     return {ok: false};
   }
 
-
   leer.push (objeto);
 
 
@@ -33,7 +32,7 @@ subscribePOSTEvent ("login", (data) => {
 
   for (let i = 0; i < leer.length; i++ ) {
    
-  let encontrar = leer.find (leer => data.nombre === leer.nombre && data.password === leer.password);
+  let encontrar = leer.find (leer => data.email === leer.nombre && data.password === leer.password);
  
   if (encontrar) {
     return {ok: true};
@@ -78,10 +77,6 @@ let port = new SerialPort ({
 
 
 let parser = port.pipe (new ReadlineParser ({delimiter: "\n"}));
-
-//Función para que el parser no console logee infinitamente
-
-
 
 
 subscribePOSTEvent ("controlLucesLEDr", (data, res) => {

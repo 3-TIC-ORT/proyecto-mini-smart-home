@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "nombre": "Fran",
+    "password": "Panchi",
+    "cumple": "2010-04-09",
+    "genero": "chico",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "Fran",
+    "password": "Panchi",
+    "cumple": "2010-04-09",
+    "genero": "chica",
+    "registro": "31/10/2025"
+  },
+  {
+    "nombre": "Francisco",
+    "password": "Panchi",
+    "cumple": "2010-04-09",
+    "genero": "chico",
+    "registro": "31/10/2025"
+  }
+]
