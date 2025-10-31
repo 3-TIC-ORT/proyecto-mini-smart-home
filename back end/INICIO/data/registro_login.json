@@ -75,5 +75,12 @@
     "cumple": "2000-03-10",
     "genero": "chica",
     "registro": "31/10/2025"
+  },
+  {
+    "nombre": "kirix",
+    "password": "lolololol",
+    "cumple": "2010-05-15",
+    "genero": "chica",
+    "registro": "31/10/2025"
   }
 ]

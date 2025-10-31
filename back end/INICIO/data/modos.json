@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "nombre": "watajai",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "06:30",
+      "hasta": "09:40"
+    }
+  }
+]

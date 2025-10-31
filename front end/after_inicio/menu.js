@@ -188,35 +188,55 @@ audio.addEventListener("updatetiempo", () => {
 
 //  luces
 // fila 1
-let potter1 = document.getElementById('intensidad1');
-let potter2 = document.getElementById('intensidad2');
+let botonPrender = document.getElementById("prender");
+let botonApagar = document.getElementById("apagar");
+let potter = document.getElementById("intensidad2");
+let luces = document.querySelectorAll(".luces");
 
-luces.forEach((luz) => {
-  if (encendidas === true) {
-    luz.src = "luz-prendida.png";
-  } else {
-    luz.src = "luz-apagada.png";
-  }
-});
 
-potter1.addEventListener('input', () => {
-  let valor = parseInt(potter1.value);
-  actualizarLuces(1, valor);
-  postEvent('controlLucesLEDr', { fila: 1, intensidad: valor }, (res) => {
-    console.log('Backend respondió fila1:', res);
+function actualizarLuces(fila, intensidad) {
+  luces.forEach((luz, i) => {
+    if (fila === 1 && i < 4) {
+      if (intensidad > 0) {
+        luz.src = "luz-prendida.png";
+      } else {
+        luz.src = "luz-apagada.png";
+      }
+    }
+    if (fila === 2 && i >= 4) {
+      if (intensidad > 0) {
+        luz.src = "luz-prendida.png";
+      } else {
+        luz.src = "luz-apagada.png";
+      }
+    }
+  });
+}
+
+botonPrender.addEventListener('click', () => {
+  actualizarLuces(1, 1); // mostrar como encendidas
+  postEvent('controlLucesLEDr', { fila: 1, intensidad: 1 }, (res) => {
+    console.log('Backend respondió fila1 (prender):', res);
   });
 });
 
-potter2.addEventListener('input', () => {
-  let valor = parseInt(potter2.value);
+botonApagar.addEventListener('click', () => {
+  actualizarLuces(1, 0); // mostrar como apagadas
+  postEvent('controlLucesLEDr', { fila: 1, intensidad: 0 }, (res) => {
+    console.log('Backend respondió fila1 (apagar):', res);
+  });
+});
+
+potter.addEventListener('input', () => {
+  let valor = parseInt(potter.value);
   actualizarLuces(2, valor);
   postEvent('controlLucesLEDa', { fila: 2, intensidad: valor }, (res) => {
     console.log('Backend respondió fila2:', res);
   });
 });
 
-actualizarLuces(1, parseInt(potter1.value));
-actualizarLuces(2, parseInt(potter2.value));
+actualizarLuces(1, 0);
+actualizarLuces(2, parseInt(potter.value));
 
 function botonApretado(status) {
   if (status.on) {

@@ -1,9 +1,7 @@
 body{
-  background-image: 
-  linear-gradient(#000000A3), 
-  url("../imagenes/fondo.png");
-  }
-
+  background-image: url("../imagenes/fondo.jpg");
+}
+  
 header {
   display: flex;
   align-items: center;
@@ -180,9 +178,6 @@ header {
   border-radius: 50%;
   background: radial-gradient(#70474b, #2c1b1d);
   margin: 20px auto;
-  mask: url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Fan_icon.svg') center/contain no-repeat;
-  -webkit-mask: url('https://upload.wikimedia.org/wikipedia/commons/2/2f/Fan_icon.svg') center/contain no-repeat;
-  animation: none;
 }
 
 @keyframes girar {
