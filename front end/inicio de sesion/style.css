@@ -1,5 +1,5 @@
 body{
-    background: linear-gradient(180deg, #377186 0%, #63BED1 16.83%, #68B7E0 36.54%, #B6DEF8 61.54%, #E2F2EF 78.85%, #B1CFCE 93.27%);
+    background: linear-gradient(180deg, #18FDF6 0%, #17DFF3 8.65%, #15C1F0 46.63%, #1285EA 72.6%, #0C0DDE 100%);
     margin: 0;
     overflow-x: hidden;
 }
@@ -35,12 +35,20 @@ body{
 
 .solcito{
   position: absolute;
+  background-color: #F6D864;
+  top: 45px;
+  left: 920px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.logo{
+  position: fixed;
   top: 50px;
   left: 924px;
   width: 80px;
   height: 80px;
-  background-color: #F6D864;
-  border-radius: 50%;
 }
 
 header{
@@ -58,7 +66,7 @@ main{
  flex-direction: column;
  width: 814px;
  height: 468px;
- background-color: #D2C9C9;
+ background-color: #A5A4A9;
  border-radius: 132px;
  margin: auto;
  margin-bottom: 20px;

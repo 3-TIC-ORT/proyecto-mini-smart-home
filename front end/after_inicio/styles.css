@@ -97,14 +97,12 @@ header {
 
 .ready {
   margin-top: 10px;
-  background: #e6cfcf;
+  background: #ffffff;
   color: black;
   font-weight: bold;
   font-size: 18px;
   border: none;
   padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 /* Controls layout */
@@ -125,32 +123,35 @@ header {
 }
 
 /* Persiana */
-.buttons button {
-  border: none;
-  color: black;
-  font-size: 20px;
-  padding: 10px 20px;
-  margin: 5px;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
 .cerraryapagar { 
-  background: white;
-  color:black;
-  height: 50px;
-  width: 100px;
+  background: black;
+  color: white;
+  height: 60px;
+  width: 110px;
   border-radius: 15px;
-  border: none;
+  border: solid 3px white;
+  font-family: Itim;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0%;
 }
   
 .abriryprender { 
-  background: black;
-  color: white;
-  height: 50px;
-  width: 100px;
+  background: white;
+  color: black;
+  height: 60px;
+  width: 110px;
   border-radius: 15px;
-  border: none;
+  border: solid 3px black;
+  font-family: Itim;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0%;
  }
 
 .persiana {
@@ -199,39 +200,4 @@ header {
   border-radius: 50%;
   margin: 10px auto;
   box-shadow: 0 0 20px gold;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 28px;
-}
-
-.switch input { display: none; }
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px; width: 20px;
-  left: 4px; bottom: 4px;
-  background-color: white;
-  border-radius: 50%;
-  transition: .3s;
-}
-
-input:checked + .slider {
-  background-color: #4CAF50;
-}
-
-input:checked + .slider:before {
-  transform: translateX(22px);
 }

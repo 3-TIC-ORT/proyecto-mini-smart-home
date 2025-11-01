@@ -5,39 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Smart-Home</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Just+Me+Again+Down+Here&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Just+Me+Again+Down+Here&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script defer src="index.js"></script>
 </head>
 <body>
   <main>
-    <h1>Registrate</h1>
+    <h1>Registrate!</h1>
     <form id = "formregistro">
       <div class = "cosos">
         <label for = "">Fecha de nacimiento</label>
+        <div class="linimini"></div>
         <input type = "date" id = "cumple">
       </div>
       <div class = "cosos">
         <label for = "">Nombre de usuario </label>
+        <div class="linimini"></div>
         <input type = "text" id = "dondevaelmail" placeholder = "Usuario">
       </div>
       <div class = "cosos">
         <label for = "">Contraseña </label>
+        <div class="linimini"></div>
         <input type = "texto" id = "dondevalacontra" placeholder = "Contraseña">
       </div>
         <div class = generotypeshi>
-        <label class = "opcion-genero"> 
-          <input type = "radio" class = "genero" value = "chico">
-          <img src = "../imagenes/boy.png">
-        </label>
-        <label class = "opcion-genero">
-          <input type = "radio" class = "genero" value = "chica">
-          <img src = "../imagenes/girl.png" class = "girlypop">
-        </label>
+          <label for="">Género (opcional)</label>
+            <section class = "opcion-genero"> 
+              <div class="linimini"></div>
+              <input type = "radio" class = "genero" value = "chico">
+              <img src = "../imagenes/boy.png">
+              <div class="linimini"></div>
+            </section>
+            <section class = "opcion-genero">
+              <input type = "radio" class = "genero" value = "chica">
+              <img src = "../imagenes/girl.png" class = "girlypop">
+              <div class="linimini"></div>
+            </section>
       </div>
       <div class = "botones">
-        <button class = "boton" type = "submit" id = "registrate">Registrate</button>
-        <button class = "inicio" id = inicio> Ya tengo cuenta </button>
+        <button class = "boton" type = "submit" id = "registrate">Crear cuenta</button>
+        <button class = "inicio" id = "inicio" type = "button"> Ya tengo cuenta </button>
       </div>
     </form>
     <p id="mensaje"></p>

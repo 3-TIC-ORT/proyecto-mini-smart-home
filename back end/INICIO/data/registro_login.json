@@ -82,5 +82,19 @@
     "cumple": "2010-05-15",
     "genero": "chica",
     "registro": "31/10/2025"
+  },
+  {
+    "nombre": "tumama",
+    "password": "jegulus",
+    "cumple": "2010-05-15",
+    "genero": "chica",
+    "registro": "10/31/2025"
+  },
+  {
+    "nombre": "tuvieja",
+    "password": "tumama",
+    "cumple": "2010-05-15",
+    "genero": "chica",
+    "registro": "10/31/2025"
   }
 ]

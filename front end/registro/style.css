@@ -1,24 +1,26 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
-  background-image: 
-  url("../imagenes/fondoregistro.png"),
-  linear-gradient(#6610F261);
-
+  font-family: "Inter", "Arial", sans-serif;
+  background-image: linear-gradient(rgba(102, 16, 242, 0.38)),
+  url("../imagenes/fondoregistro.png");
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: "Open Sans", sans-serif;
 }
 
 h1 {
-  font-size: 30px;
-  color: #f6e6ff;
-  text-shadow: 0 0 10px #e0b3ff;
+  font-size: 50px;
+  font-weight: 400;
+  color: #F9FC0D;
   margin-bottom: 25px;
   letter-spacing: 2px;
+  font-family: "Courier Prime", "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 main{
@@ -26,30 +28,38 @@ main{
   flex-direction: column;
   width: 814px;
   height: 568px;
-  background-color: #D2C9C9;
-  border-radius: 132px;
-  margin: auto;
-  margin-bottom: 20px;
+  background-color: #2D0163;
+  margin: 0 auto;
   justify-content: center;   
   align-items: center;
 }
- 
+
 .cosos {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #C3ABC3;
-  border-radius: 15px;
+  border-radius: 10px;
   width: 650px;
   margin-top: 12px;
-  height: 60px;
+  height: 40px;
+  padding: 10px;
+  gap: 10px;
 }
 
 label {
   flex: 1;
   text-align: left;
-  font-size: 15px;
+  font-size: 19px;
   margin-right: 10px;
+  padding-left: 10px;
+}
+
+.linimini{
+  height: 35px;
+  width: 2px;
+  background-color: black;
+  margin: 15px
 }
 
 input{
@@ -57,7 +67,7 @@ input{
   padding: 10px;
   border: none;
   border-radius: 8px;
-  background-color: #775777;
+  background-color: #2D0163;
   color: white;
   outline: none;
   font-size: 14px;
@@ -66,12 +76,14 @@ input{
 
 .generotypeshi {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between; /* igual que los otros */
   align-items: center;
-  background-color: #b493c9;
+  background-color: #C3ABC3; /* mismo color que los otros */
   border-radius: 10px;
   padding: 10px;
-  margin-top: 15px;
+  margin-top: 12px; /* igual que .cosos */
+  width: 650px; /* mismo ancho que .cosos */
+  height: 40px; /* misma altura */
 }
 
 .opcion-genero {
@@ -99,11 +111,19 @@ input{
 }
 button {
   background-color: #E4D5E4;
-  display: block;
-  width: 350px;
+  color: #2D0163;
+  width: fit-content;
   height: 65px;
-  margin: 15px auto;
-  border-radius: 20px;
-  font-size: 20px;
+  margin: 15px 0;
+  border-radius: 15px;
+  font-size: 30px;
   border: none;
+  padding: 15px;
  }
+
+.botones{
+  display: flex;
+  gap: 13px;
+  width: fit-content;
+  margin: auto;
+}
