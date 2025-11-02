@@ -78,7 +78,7 @@ input{
   display: flex;
   justify-content: space-between; /* igual que los otros */
   align-items: center;
-  background-color: #C3ABC3; /* mismo color que los otros */
+  background-color: #C3ABC3;
   border-radius: 10px;
   padding: 10px;
   margin-top: 12px; /* igual que .cosos */
@@ -90,10 +90,15 @@ input{
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 610px;
 }
 
 .opcion-genero input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 80px; /* mismo tamaño que la imagen, ajustalo */
+  height: 80px;
+  cursor: pointer;
 }
 
 .opcion-genero img {

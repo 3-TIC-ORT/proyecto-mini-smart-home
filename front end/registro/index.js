@@ -25,8 +25,8 @@ function registrar(){
     }
   }
 
-  if(nombre==="" || contra === ""){
-    mensaje.textContent = "Completar ambos campos";
+  if(nombre==="" || contra === "" || cumple === ""){
+    mensaje.textContent = "Completar todos los campos";
     mensaje.style.color = "red";
     return;
   }

@@ -18,9 +18,7 @@
   </header>
 
   <aside>
-    <button id="settings" class="settings" aria-label="Configuración">
-      ⚙️
-    </button>
+    <button id="settings" class="settings" aria-label="Configuración">⚙️</button>
   </aside>
 
   <div id="tab1" class="tab-content active">
@@ -89,45 +87,45 @@
       <!-- Persiana -->
       <div class="control">
         <h2 class="textotab2">Persiana</h2>
+        <div id="persiana" class="persiana"></div>
         <div class="buttons">
           <button id="cerrar" class="cerraryapagar">Cerrar</button>
           <button id="abrir" class="abriryprender">Abrir</button>
         </div>
-        <div id="persiana" class="persiana"></div>
       </div>
 
       <!-- Ventilador -->
       <div class="control">
         <h2 class="textotab2">Ventilador</h2>
-        <div class="slider-container">
-          <input type="range" id="velocidad" min="0" max="5" value="0">
-          <div class="niveles">
-            
-          </div>
-        </div>
         <div id="ventilador" class="ventilador"></div>
+        <button id="apagar" class="cerraryapagar">Apagar</button>
+        <button id="prender" class="abriryprender">Prender</button>
       </div>
 
       <!-- Luces -->
       <div class="controlluces">
         <h2 class="textotab2">Luces</h2>
-        <div class="filasplural">
+        <section class="filasplural">
           <div class="fila1">
-            <button id="prender" class="abriryprender">Prender</button>
             <button id="apagar" class="cerraryapagar">Apagar</button>
-            <div class="luces"></div>
-            <div class="luces"></div>
-            <div class="luces"></div>
-            <div class="luces"></div>
+            <button id="prender" class="abriryprender">Prender</button>
+              <div class = "sololuces">
+                <div class="luces"></div>
+                <div class="luces"></div>
+                <div class="luces"></div>
+                <div class="luces"></div>
+                <
           </div>
           <div class="fila2">
             <input class= "potter" type="range" id="intensidad2" min="0" value="0">
-            <div class="luces"></div>
-            <div class="luces"></div>
-            <div class="luces"></div>
-            <div class="luces"></div>
+              <div class = "sololuces">
+                <div class="luces"></div>
+                <div class="luces"></div>
+                <div class="luces"></div>
+                <div class="luces"></div>
+              </div>
           </div>
-        </div>
+        </section>
       </div>
     </section>
   </div>

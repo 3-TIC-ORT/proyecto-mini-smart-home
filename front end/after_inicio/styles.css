@@ -1,7 +1,12 @@
 body{
   background-image: url("../imagenes/fondo.jpg");
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-repeat: no-repeat; /* que no se repita */
+  height: 100vh;
 }
-  
+
 header {
   display: flex;
   align-items: center;
@@ -9,6 +14,7 @@ header {
   padding: 10px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  width: 95%;
 }
 
 .tabs {
@@ -105,7 +111,7 @@ header {
   padding: 10px 20px;
 }
 
-/* Controls layout */
+/* Control */
 .controls {
   display: flex;
   justify-content: space-around;
@@ -119,7 +125,7 @@ header {
 }
 
 .textotab2 {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 /* Persiana */
@@ -187,9 +193,9 @@ header {
 }
 
 /* Luces */
-.columnas {
+.sololuces {
   display: flex;
-  gap: 40px;
+  gap: 10px;
   justify-content: center;
 }
 
@@ -200,4 +206,5 @@ header {
   border-radius: 50%;
   margin: 10px auto;
   box-shadow: 0 0 20px gold;
+  display: flex;
 }

@@ -96,5 +96,12 @@
     "cumple": "2010-05-15",
     "genero": "chica",
     "registro": "10/31/2025"
+  },
+  {
+    "nombre": "tumama",
+    "password": "jegulus",
+    "cumple": "2010-05-15",
+    "genero": "",
+    "registro": "11/2/2025"
   }
-]
+  ]
