@@ -12,14 +12,25 @@ let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 if (!usuarioLogueado) {
   window.location.href = "../inicio/inicio.html"; 
-
 } else {
   console.log("Sesión activa para:", usuarioLogueado);
-  // Mostrar el nombre en el menú si querés
-  let nombreUsuario = document.getElementById("nombreusuario");
-  if (nombreUsuario) {
-    nombreUsuario.textContent = usuarioLogueado;
-  }
+
+  getEvent("obtenerUsuario", { nombre: usuarioLogueado }, (data) => {
+    console.log("Datos del usuario:", data);
+
+    if (!data || !data.nombre) {
+      console.warn("No se encontró el usuario en el backend");
+      return;
+    }
+
+    let nombreUsuario = document.getElementById("nombreusuario");
+    let nacimiento = document.getElementById("nacimiento");
+    let sobre = document.getElementById("sobre");
+
+    if (nombreUsuario) nombreUsuario.textContent = data.nombre;
+    if (nacimiento) nacimiento.textContent = data.cumple || "No disponible";
+    if (sobre) sobre.textContent = data.sobre || "Sin descripción";
+  });
 }
 
 tabs.forEach(tab => {

@@ -59,5 +59,5 @@ form.addEventListener("submit", function(e) {
 let inicio = document.getElementById("inicio");
 
 inicio.addEventListener("click", () => {
-  window.location.href = "../inicio de sesion/main.html";
+  window.location.href = "../inicio_de_sesion/main.html";
 });
