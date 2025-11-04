@@ -8,6 +8,20 @@ let condicion = document.getElementById("condicion");
 let condicionesExtra = document.getElementById("extrastuff");
 let estado = document.getElementById("estado"); // Asegúrate de que este elemento exista
 
+let usuarioLogueado = localStorage.getItem("usuarioLogueado");
+
+if (!usuarioLogueado) {
+  window.location.href = "../inicio/inicio.html"; 
+
+} else {
+  console.log("Sesión activa para:", usuarioLogueado);
+  // Mostrar el nombre en el menú si querés
+  let nombreUsuario = document.getElementById("nombreusuario");
+  if (nombreUsuario) {
+    nombreUsuario.textContent = usuarioLogueado;
+  }
+}
+
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     tabs.forEach(t => t.classList.remove('active'));
@@ -219,7 +233,7 @@ actualizarPersiana(0);
 
 let botonPrenderVentilador = document.getElementById("helicopterhelicopter");
 let botonApagarVentilador = document.getElementById("nogira");
-let ventilador = document.getElementById("ventiladorImg");
+let ventilador = document.getElementById("ventilador");
 
 function actualizarVentilador(estado) {
   if (estado > 0) {
