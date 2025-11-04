@@ -103,5 +103,12 @@
     "cumple": "2010-05-15",
     "genero": "",
     "registro": "11/2/2025"
+  },
+  {
+    "nombre": "Fran",
+    "password": "Panchi",
+    "cumple": "2010-02-04",
+    "genero": "",
+    "registro": "4/11/2025"
   }
-  ]
+]
