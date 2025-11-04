@@ -185,6 +185,65 @@ audio.addEventListener("updatetiempo", () => {
   progresoThumb.style.left = porcentajee + "%";
 });
 
+// persiana
+
+let botonAbrirPersiana = document.getElementById("abrir");
+let botonCerrarPersiana = document.getElementById("cerrar");
+let persiana = document.getElementById("persiana");
+
+function actualizarPersiana(estado) {
+  if (estado > 0) {
+    persiana.style.backgroundImage = "url('persiana-abierta.png')";
+  } else {
+    persiana.style.backgroundImage = "url('persiana-cerrada.png')";
+  }
+}
+
+botonAbrirPersiana.addEventListener("click", () => {
+  actualizarPersiana(1);
+  postEvent("controlPersiana", { estado: 1 }, function (res) {
+    console.log("Backend respondió (persiana abrir):", res);
+  });
+});
+
+botonCerrarPersiana.addEventListener("click", () => {
+  actualizarPersiana(0);
+  postEvent("controlPersiana", { estado: 0 }, function (res) {
+    console.log("Backend respondió (persiana cerrar):", res);
+  });
+});
+
+actualizarPersiana(0);
+
+// ventilador
+
+let botonPrenderVentilador = document.getElementById("helicopterhelicopter");
+let botonApagarVentilador = document.getElementById("nogira");
+let ventilador = document.getElementById("ventiladorImg");
+
+function actualizarVentilador(estado) {
+  if (estado > 0) {
+    ventilador.style.backgroundImage = "url('ventilador-prendido.png')";
+  } else {
+    ventilador.style.backgroundImage = "url('ventilador-apagado.png')";
+  }
+}
+
+botonPrenderVentilador.addEventListener("click", () => {
+  actualizarVentilador(1);
+  postEvent("controlVentilador", { estado: 1 }, function (res) {
+    console.log("Backend respondió (ventilador prender):", res);
+  });
+});
+
+botonApagarVentilador.addEventListener("click", () => {
+  actualizarVentilador(0);
+  postEvent("controlVentilador", { estado: 0 }, function (res) {
+    console.log("Backend respondió (ventilador apagar):", res);
+  });
+});
+
+actualizarVentilador(0);
 
 //  luces
 // fila 1
@@ -237,11 +296,3 @@ potter.addEventListener('input', () => {
 
 actualizarLuces(1, 0);
 actualizarLuces(2, parseInt(potter.value));
-
-function botonApretado(status) {
-  if (status.on) {
-    estado.innerText = "prendido";
-  } else {
-    receive("boton", botonApretado);
-  }
-}
