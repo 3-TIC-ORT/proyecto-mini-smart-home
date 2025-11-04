@@ -44,7 +44,7 @@ function registrar(){
         mensaje.textContent = "¡Registro existoso!"
         mensaje.style.color = "green"
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        location.href = "../after_inicio//menu.html"
+        location.href = "../after_inicio/menu.html"
       }
     }
   );
