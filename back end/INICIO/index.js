@@ -3,6 +3,7 @@ import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } fro
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 
+
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
   let objeto = {nombre: data.nombre, password: data.password, cumple: data.cumple, genero: data.genero, registro: data.registro};
@@ -13,20 +14,31 @@ subscribePOSTEvent ("register", (data) => {
     return {ok: false};
   }
 
+
   leer.push (objeto);
 
 
+
+
   fs.writeFileSync ("data/registro_login.json", JSON.stringify (leer, null, 2), {encoding: "utf-8"});
+
+
 
 
   return {ok: true};
 });
 
 
+
+
 subscribePOSTEvent ("login", (data) => {
 
 
+
+
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
+
+
 
 
   for (let i = 0; i < leer.length; i++ ) {
@@ -43,7 +55,11 @@ subscribePOSTEvent ("login", (data) => {
 });
 
 
+
+
 //Para los modos:
+
+
 
 
 subscribePOSTEvent ("crearModo", (data, respuesta) => {
@@ -55,9 +71,13 @@ subscribePOSTEvent ("crearModo", (data, respuesta) => {
   modos.push (objeto);
 
 
+
+
   fs.writeFileSync ("data/modos.json", JSON.stringify (modos, null, 2), {encoding: "utf-8"});
   return (respuesta, {ok: true});
 });
+
+
 
 
 subscribeGETEvent ("obtenerModos", () => {
@@ -66,7 +86,10 @@ subscribeGETEvent ("obtenerModos", () => {
 });
 
 
+
+
 //Comunicación front-back-hardware: usando Node SerialPort
+
 
 let port = new SerialPort ({
   path: 'COM5',
@@ -74,32 +97,44 @@ let port = new SerialPort ({
 });
 
 
+
+
 let parser = port.pipe (new ReadlineParser ({delimiter: "\n"}));
 
 
-subscribePOSTEvent ("controlLucesLEDr", (data, res) => {
-  parser.on ('data', () => {
+//Código que hace que reciba los datos que manda el arduino, y hace que no se muestre un loop infinito de mensajes:
+parser.on('data', (line) => {
+  if (line.trim() !== "Distancia detectada: 0 cm") {
+    console.log('Arduino respondió con:', line);
+  }
+});
+
+
+
+
+subscribePOSTEvent ("controlLucesLEDr", (data) => {
   let caracter = 'j';
   port.write (caracter, (err) => {
     if (err) {
-      return console.error ('Error al escribir en el puerto ', err.message);
+      console.error ('Error al escribir en el puerto ', err.message);
+      return ('Error al escribir en el puerto');
     }
-  });
   });
   return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
 
 
-subscribePOSTEvent ("controlLucesLEDa", (data, res) => {
-  parser.on ('data', () => {
+
+
+subscribePOSTEvent ("controlLucesLEDa", (data) => {
   let caracter = 'o';
   port.write (caracter, (err) => {
     if (err) {
       return console.error ('Error al escribir por el puerto: ', err.message);
     }
   });
-  });
   return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
+
 
 startServer ();
