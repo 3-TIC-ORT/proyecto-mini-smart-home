@@ -90,8 +90,7 @@ subscribePOSTEvent ("controlLucesLEDr", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
   
   if (objeto.fila === 1 && objeto.intensidad >= 1) {
-    let caracter = 'j';
-    port.write (caracter, (err) => {
+    port.write ('j', (err) => {
       if (err) {
       console.error ('Error al escribir en el puerto ', err.message);
       return ('Error al escribir en el puerto');
@@ -101,23 +100,24 @@ subscribePOSTEvent ("controlLucesLEDr", (data) => {
   else {
     return (`LEDr apagado`);
   }
+  let caracter = 'j';
   return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
 
 subscribePOSTEvent ("controlLucesLEDa", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
   if (objeto.fila === 2 && objeto.intensidad >= 1) {
-    let caracter = 'o';
-    port.write (caracter, (err) => {
+    port.write ('o', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
     });
+    let caracter = 'o';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
   else {
     return (`LEDa apagado`);
   }
-  return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
 
 
