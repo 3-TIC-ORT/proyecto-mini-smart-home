@@ -12,7 +12,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #5f7ec7;
+  background-color: white;
   background-size: cover;
   padding: 10px 20px;
   height: 100px;
@@ -47,10 +47,22 @@ header {
   font-weight: bold;
 }
 
+/* Colores fijos para cada tab */
+.tab[data-tab="tab1"] {
+  background-color: #706D74; /* rosado */
+}
+
+.tab[data-tab="tab2"] {
+  background-color: #98979D; /* celeste */
+}
+
+.tab[data-tab="tab3"] {
+  background-color: #D7D5DE; /* verde */
+}
+
 .tab.active {
-  height: 43px;
+  height: 42px;
   top: 20px;
-  background: #ffb6c1;
 }
 
 .settings {
@@ -60,6 +72,7 @@ header {
   border: none;
   cursor: pointer;
   color: white;
+  border-color: solid 2px black;
 }
 
 .tab-content {
@@ -232,28 +245,15 @@ aside {
 .persiana {
   width: 150px;
   height: 150px;
-  background: repeating-linear-gradient(
-    to bottom,
-    #80384c,
-    #80384c 10px,
-    #5e2d3c 10px,
-    #5e2d3c 20px
-  );
   margin: 20px auto;
   transition: height 0.5s ease;
 }
 
 /* Ventilador */
-.slider-container input {
-  width: 200px;
-}
 
-.ventilador {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(#70474b, #2c1b1d);
-  margin: 20px auto;
+.ventilador{
+height: 160px;
+width: 160px;
 }
 
 @keyframes girar {
