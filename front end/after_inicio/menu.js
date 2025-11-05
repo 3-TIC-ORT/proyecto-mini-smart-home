@@ -10,10 +10,8 @@ let estado = document.getElementById("estado"); // Asegúrate de que este elemen
 
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
-if (!usuarioLogueado) {
-  window.location.href = "../inicio/inicio.html"; 
-} else {
-  console.log("Sesión activa para:", usuarioLogueado);
+if (usuarioLogueado) {
+ console.log("Sesión activa para:", usuarioLogueado);
 
   // Pedir los datos al backend
   postEvent("obtenerUsuario", { nombre: usuarioLogueado }, (data) => {

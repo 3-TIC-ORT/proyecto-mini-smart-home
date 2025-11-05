@@ -12,50 +12,45 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff; /* color del fondo */
+  background-color: #5f7ec7;
+  background-size: cover;
   padding: 10px 20px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  height: 50px;
+  height: 100px;
   width: 95%;
   margin-left: 70px; /* espacio para aside */
   box-sizing: border-box; /* que padding no rompa el ancho */
+  margin-top: 0;
+  border-bottom: 2px solid #ccc;
 }
 
 .logo{
-  width: 65px;
-  height: 65px;
+  width: 70px;
+  height: 70px;
   top: 0px;
-  right: 0px;
+  left: 100vh;
 }
 
-.tabs {
-  display: flex;
-  justify-content: space-between; 
-  margin-top: 30px;
-  border-bottom: 2px solid #ccc; 
-  background: none; 
-}
 
 .tab {
   flex: 1;
   text-align: center;
+  align-items: center;
   padding: 10px 0;
   background: #ffffff;
-  border: 2px solid #ccc;
   border-bottom: none;
   border-radius: 8px 8px 0 0;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  top: 5px;
+  top: 30px;
+  height: 21px;
+  font-weight: bold;
 }
 
 .tab.active {
-  top: 0;
+  height: 43px;
+  top: 20px;
   background: #ffb6c1;
-  border-color: #ff7f9f;
-  font-weight: bold;
 }
 
 .settings {
@@ -86,6 +81,7 @@ aside {
   align-items: center;
   gap: 35px;
   width: 70px;
+  height: 80px;
   padding: 10px;
 }
 
@@ -93,7 +89,9 @@ aside {
   display: none;
   flex-direction: column;
   gap: 35px;
+  width: 70px;
   margin-top: 5px;
+  background-color: white;
 }
 
 .icon-menu.active {
