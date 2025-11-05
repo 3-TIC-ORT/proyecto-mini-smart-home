@@ -55,11 +55,18 @@ tabs.forEach(tab => {
 
 let conf = document.querySelector(".settings");
 let iconMenu = document.querySelector(".icon-menu");
+let casita = document.getElementById("casita");
+let modooscuro = document.getElementById("modooscuro");
+let logout = document.getElementById("logout");
 
 // Toggle desplegable
 conf.addEventListener("click", () => {
   iconMenu.classList.toggle("active");
 });
+
+casita.addEventListener("click", () => {
+  location.href = "../pantalla_principal/princi.html"
+})
 
 function actualizarReloj() {
   let ahora = new Date();
@@ -267,7 +274,7 @@ function actualizarVentilador(estado) {
   if (estado > 0) {
     ventilador.style.backgroundImage = "url('ventilador-prendido.png')";
   } else {
-    ventilador.style.backgroundImage = "url('ventilador-apagado.png')";
+    ventilador.style.backgroundImage = "url('ventilador.png')";
   }
 }
 

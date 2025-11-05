@@ -6,6 +6,7 @@ body{
   font-family: 'Arial', sans-serif;
   background-repeat: no-repeat; /* que no se repita */
   height: 100vh;
+  overflow: hidden;
 }
 
 header {
@@ -15,12 +16,11 @@ header {
   background-color: white;
   background-size: cover;
   padding: 10px 20px;
-  height: 100px;
+  height: 84px;
   width: 95%;
   margin-left: 70px; /* espacio para aside */
   box-sizing: border-box; /* que padding no rompa el ancho */
   margin-top: 0;
-  border-bottom: 2px solid #ccc;
 }
 
 .logo{
@@ -42,7 +42,7 @@ header {
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  top: 30px;
+  top: 21px;
   height: 21px;
   font-weight: bold;
 }
@@ -62,7 +62,7 @@ header {
 
 .tab.active {
   height: 42px;
-  top: 20px;
+  top: 11px;
 }
 
 .settings {
@@ -85,7 +85,7 @@ header {
 }
 
 aside {
-  position: fixed;
+  position:fixed;
   background-color: white;
   top: 0px;
   left: 0px;
@@ -94,7 +94,7 @@ aside {
   align-items: center;
   gap: 35px;
   width: 70px;
-  height: 80px;
+  height: 64px;
   padding: 10px;
 }
 
@@ -191,6 +191,7 @@ aside {
   font-size: 18px;
   border: none;
   padding: 10px 20px;
+  width: fit-content;
 }
 
 /* Control */
@@ -253,7 +254,7 @@ aside {
 
 .ventilador{
 height: 160px;
-width: 160px;
+width: 170px;
 }
 
 @keyframes girar {
@@ -269,11 +270,13 @@ width: 160px;
 }
 
 .luces {
-  width: 50px;
-  height: 50px;
-  background: gold;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin: 10px auto;
-  box-shadow: 0 0 20px gold;
   display: flex;
+}
+
+.potter{
+  width: 100%;
 }
