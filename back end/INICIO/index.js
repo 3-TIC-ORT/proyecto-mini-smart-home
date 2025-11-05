@@ -3,7 +3,6 @@ import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } fro
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 
-
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
   let objeto = {nombre: data.nombre, password: data.password, cumple: data.cumple, genero: data.genero, registro: data.registro};
@@ -70,7 +69,6 @@ subscribeGETEvent ("obtenerModos", () => {
 
 
 //Comunicación front-back-hardware: usando Node SerialPort
-
 
 let port = new SerialPort ({
   path: 'COM5',

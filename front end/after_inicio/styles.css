@@ -11,11 +11,22 @@ body{
 header {
   display: flex;
   align-items: center;
-  background: #6a4028;
-  padding: 10px;
+  justify-content: space-between;
+  background-color: #ffffff; /* color del fondo */
+  padding: 10px 20px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  height: 50px;
   width: 95%;
+  margin-left: 70px; /* espacio para aside */
+  box-sizing: border-box; /* que padding no rompa el ancho */
+}
+
+.logo{
+  width: 65px;
+  height: 65px;
+  top: 0px;
+  right: 0px;
 }
 
 .tabs {
@@ -65,21 +76,80 @@ header {
   display: block;
 }
 
-.contenedor {
+aside {
+  position: fixed;
+  background-color: white;
+  top: 0px;
+  left: 0px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  width: 70px;
+  padding: 10px;
+}
+
+.icon-menu {
+  display: none;
+  flex-direction: column;
+  gap: 35px;
+  margin-top: 5px;
+}
+
+.icon-menu.active {
+  display: flex;
+}
+
+.icon-menu button {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s;
+  background-color: white;
+}
+
+.fotomenu{
+  height: 55px;
+  height: 55px;
+}
+
+.contenedor {
+  display: flex;
   gap: 20px;
   margin-top: 10px;
 }
 
-.panel {
-  background: #fff3e6;
+.perfil {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+}
+
+.modos {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+}
+
+.musiquita {
+  background: white;
   border-radius: 12px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: fit-content;
 }
 
 .funciones {

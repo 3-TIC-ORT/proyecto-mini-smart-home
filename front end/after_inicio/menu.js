@@ -15,21 +15,32 @@ if (!usuarioLogueado) {
 } else {
   console.log("Sesión activa para:", usuarioLogueado);
 
-  getEvent("obtenerUsuario", { nombre: usuarioLogueado }, (data) => {
-    console.log("Datos del usuario:", data);
+  // Pedir los datos al backend
+  postEvent("obtenerUsuario", { nombre: usuarioLogueado }, (data) => {
+    console.log("Datos recibidos del backend:", data);
 
-    if (!data || !data.nombre) {
-      console.warn("No se encontró el usuario en el backend");
-      return;
-    }
-
+    let saludo = document.getElementById("saludo");
     let nombreUsuario = document.getElementById("nombreusuario");
     let nacimiento = document.getElementById("nacimiento");
     let sobre = document.getElementById("sobre");
 
-    if (nombreUsuario) nombreUsuario.textContent = data.nombre;
-    if (nacimiento) nacimiento.textContent = data.cumple || "No disponible";
-    if (sobre) sobre.textContent = data.sobre || "Sin descripción";
+    if (!data || !data.ok) {
+      console.warn("No se encontró usuario en backend, usando datos locales");
+
+      if (saludo) saludo.textContent = `¡Hola, ${usuarioLogueado}!`;
+      if (nombreUsuario) nombreUsuario.textContent = usuarioLogueado;
+      if (nacimiento) nacimiento.textContent = "No disponible";
+      if (sobre) sobre.textContent = "Sin descripción";
+      return;
+    }
+
+    // Si el backend sí devolvió los datos del usuario:
+    let usuario = data.usuario || data; // depende cómo lo devuelva el back
+
+    if (saludo) saludo.textContent = `¡Hola, ${usuario.nombre || usuarioLogueado}!`;
+    if (nombreUsuario) nombreUsuario.textContent = usuario.nombre || usuarioLogueado;
+    if (nacimiento) nacimiento.textContent = usuario.cumple || "No disponible";
+    if (sobre) sobre.textContent = usuario.sobre || usuario.genero || "Sin descripción";
   });
 }
 
@@ -42,6 +53,14 @@ tabs.forEach(tab => {
     let tabId = tab.getAttribute('data-tab');
     document.getElementById(tabId).classList.add('active');
   });
+});
+
+let conf = document.querySelector(".settings");
+let iconMenu = document.querySelector(".icon-menu");
+
+// Toggle desplegable
+conf.addEventListener("click", () => {
+  iconMenu.classList.toggle("active");
 });
 
 function actualizarReloj() {

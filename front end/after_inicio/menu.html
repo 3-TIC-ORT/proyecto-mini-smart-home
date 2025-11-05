@@ -15,26 +15,34 @@
     <div class="tab active" data-tab="tab1">MENU</div>
     <div class="tab" data-tab="tab2">STOPMOTION</div>
     <div class="tab" data-tab="tab3">CONTROL DE ELECTRODOMESTICOS</div>
+    <img src="../imagenes/logo.png" alt="" class="logo">
   </header>
 
   <aside>
-    <button id="settings" class="settings" aria-label="Configuración">⚙️</button>
+    <button id="settings" class="settings" aria-label="Configuración"><img src="../imagenes/settings.png" alt="" class="fotomenu"></button>
+
+  <!-- desplegables -->
+  <div class="icon-menu">
+    <button title="Inicio"><img src="../imagenes/casita.png" alt="" class="fotomenu"></button>
+    <button title="Luz"><img src="../imagenes/modooscuro.png" alt="" class="fotomenu"></button>
+    <button title="Salir"><img src="../imagenes/getout.png" alt="" class="fotomenu"></button>
+  </div>
   </aside>
 
   <div id="tab1" class="tab-content active">
-    <main class="contenedor">
       <h2 id="saludo">¡Hola!</h2>
       <div class="reloj" id="reloj"></div>
-      <section class="panel">
+   <main class="contenedor">
+      <section class="perfil">
       <article id="perfil" class="caja">
        <h2>Perfil</h2>
         <p><strong>Nombre:</strong> <span id="nombreusuario"></span></p>
         <p><strong>Fecha de nacimiento:</strong> <span id="nacimiento"></span></p>
         <p><strong>Sobre mí:</strong> <span id="sobre"></span></p>
       </article>
-      
+      </section>
+      <section class="modos">
       <h2>Modos</h2>
-      <h3>Modos guardados</h3>
       <ul id="modos"></ul>
       
       <form id="modoform">
@@ -48,7 +56,8 @@
         <div id="extrastuff"></div>
         <button>Guardar</button>
       </form>
-
+    </section>
+    <section class="musiquita">
       <div id="reproductor">
         <h2 id="titulo">Título de la canción</h2>
         <p id="genero">Género</p>
@@ -66,9 +75,8 @@
         
         <audio id="audio"></audio>
       </div>
-
-      </section>
-    </main>
+    </section>
+   </main>
   
   </div>
   

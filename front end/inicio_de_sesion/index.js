@@ -32,7 +32,9 @@ function iniciosesion(event) {
       else if(data.ok){
         mensaje.textContent = "¡Inicio de sesión exitoso!";
         mensaje.style.color = "green";
-        localStorage.setItem("usuarioLogueado", mail);
+        localStorage.setItem("usuarioLogueado", JSON.stringify({
+          nombre: mail,
+        }));        
         location.href = "../after_inicio/menu.html";
       } 
     });
