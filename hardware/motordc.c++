@@ -12,11 +12,11 @@ if (Serial.available()>0){
   HB=Serial.read();
   if (HB=='r'){
     Serial.println("ventilador prendida");
-    digitalWrite(relayPin1, HIGH);
+    digitalWrite(relayPin1, LOW);
         }
   if (HB=='m'){
     Serial.println("ventilador apagado");
-    digitalWrite(relayPin1,LOW);
+    digitalWrite(relayPin1,HIGH);
       }
     }
 }
