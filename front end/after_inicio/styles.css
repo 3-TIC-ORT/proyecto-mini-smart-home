@@ -1,5 +1,8 @@
 body{
-  background-image: url("../imagenes/fondo.jpg");
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  ), url("../imagenes/fondo.jpg");
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -17,17 +20,18 @@ header {
   background-size: cover;
   padding: 10px 20px;
   height: 84px;
-  width: 95%;
-  margin-left: 70px; /* espacio para aside */
+  width: calc(100% - 74px); /* ocupa todo menos el ancho del aside */
+  margin-left: 74px; /* pegado al aside */
   box-sizing: border-box; /* que padding no rompa el ancho */
   margin-top: 0;
 }
 
 .logo{
+  position: relative;
   width: 70px;
   height: 70px;
-  top: 0px;
-  left: 100vh;
+  top: 2px;
+  margin-left: 5px
 }
 
 
@@ -84,41 +88,75 @@ header {
   display: block;
 }
 
+/* Aside */
 aside {
-  position:fixed;
+  position: fixed;
+  top: 0; /* empieza desde el borde superior de la pantalla */
+  left: 0;
+  width: 70px;
   background-color: white;
-  top: 0px;
-  left: 0px;
+  border-right: 2px solid black; /* línea derecha siempre visible */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 35px;
-  width: 70px;
-  height: 64px;
-  padding: 10px;
+  z-index: 10;
+  transition: height 0.4s ease;
+  overflow: hidden;
+  padding: 11px;
+  gap: 24px;
 }
 
+/* Cuando se expande */
+aside.active {
+  height: auto;
+  min-height: 100vh; /* ocupa toda la altura al abrir */
+}
+
+.configuracion {
+  background-color: white;
+  border: none;
+  border-bottom: 2px solid black; /* línea entre config y menú */
+  border-bottom: 2px solid black;
+  height: 84px;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.icon-menu.active + .configuracion,
+aside.active .configuracion {
+  border-right: none;
+}
+
+/* MENÚ DESPLEGABLE */
 .icon-menu {
   display: none;
   flex-direction: column;
+  align-items: center;
   gap: 35px;
-  width: 70px;
-  margin-top: 5px;
+  width: 100%;
   background-color: white;
+  box-sizing: border-box;
+  padding: 10px 0;
 }
 
 .icon-menu.active {
   display: flex;
 }
 
+
+/* Botones del menú */
 .icon-menu button {
+  width: 100%;
+  background-color: white;
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 0.2s;
-  background-color: white;
 }
 
 .fotomenu{
@@ -183,14 +221,28 @@ aside {
   margin-left: 20px;
 }
 
+.greeting{
+  display: flex;
+  gap: 50px;
+}
+
+.saluuut{
+  color: black;
+  font-family: "Inter", sans-serif;
+  font-size: 46px;
+  font-weight: 800;
+}
+
 .ready {
   margin-top: 10px;
   background: #ffffff;
   color: black;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 800;
+  font-stretch: expanded;
+  font-size: 20px;
   border: none;
   padding: 10px 20px;
+  height: fit-content;
   width: fit-content;
 }
 
@@ -208,7 +260,7 @@ aside {
 }
 
 .textotab2 {
-  color: rgb(0, 0, 0);
+  color: black;
 }
 
 /* Persiana */
