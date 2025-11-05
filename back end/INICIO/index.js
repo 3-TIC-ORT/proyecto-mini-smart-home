@@ -69,7 +69,7 @@ subscribeGETEvent ("obtenerModos", () => {
 
 //Para mostrar el nombre de usuario:
 subscribePOSTEvent ("obtenerUsuario",  (data) => {
-  
+
   return (`Respondió el front end con el usuario`);
 });
 

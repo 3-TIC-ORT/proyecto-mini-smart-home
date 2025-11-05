@@ -6,5 +6,19 @@
       "desde": "06:30",
       "hasta": "09:40"
     }
+  },
+  {
+    "nombre": "ok mañana",
+    "condiciones": {
+      "tipo": "dia",
+      "dia": "1"
+    }
+  },
+  {
+    "nombre": "me aburro",
+    "condiciones": {
+      "tipo": "luz",
+      "nivel": "oscuro"
+    }
   }
 ]
