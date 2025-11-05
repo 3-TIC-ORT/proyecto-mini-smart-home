@@ -14,8 +14,8 @@ if (usuarioLogueado) {
  console.log("Sesión activa para:", usuarioLogueado);
 
   // Pedir los datos al backend
-  postEvent("obtenerUsuario", { nombre: usuarioLogueado }, (data) => {
-    console.log("Datos recibidos del backend:", data);
+  postEvent("obtenerUsuario", {nombre: usuarioLogueado}, (data) => {
+    console.log ("El backend respondió con: ", data);
 
     let saludo = document.getElementById("saludo");
     let nombreUsuario = document.getElementById("nombreusuario");

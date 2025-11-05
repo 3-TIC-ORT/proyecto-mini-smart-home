@@ -68,9 +68,9 @@ subscribeGETEvent ("obtenerModos", () => {
 });
 
 //Para mostrar el nombre de usuario:
-subscribeGETEvent ("obtenerUsuario",  () => {
-  let usuario = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
-  return (usuario.nombre);
+subscribePOSTEvent ("obtenerUsuario",  (data) => {
+  
+  return (`Respondió el front end con el usuario`);
 });
 
 
