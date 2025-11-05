@@ -1,0 +1,334 @@
+body{
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  ), url("../imagenes/fondo.jpg");
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-repeat: no-repeat; /* que no se repita */
+  height: 100vh;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  background-size: cover;
+  padding: 10px 20px;
+  height: 84px;
+  width: calc(100% - 74px); /* ocupa todo menos el ancho del aside */
+  margin-left: 74px; /* pegado al aside */
+  box-sizing: border-box; /* que padding no rompa el ancho */
+  margin-top: 0;
+}
+
+.logo{
+  position: relative;
+  width: 70px;
+  height: 70px;
+  top: 2px;
+  margin-left: 5px
+}
+
+
+.tab {
+  flex: 1;
+  text-align: center;
+  align-items: center;
+  padding: 10px 0;
+  background: #ffffff;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 21px;
+  height: 21px;
+  font-weight: bold;
+}
+
+/* Colores fijos para cada tab */
+.tab[data-tab="tab1"] {
+  background-color: #706D74; /* rosado */
+}
+
+.tab[data-tab="tab2"] {
+  background-color: #98979D; /* celeste */
+}
+
+.tab[data-tab="tab3"] {
+  background-color: #D7D5DE; /* verde */
+}
+
+.tab.active {
+  height: 42px;
+  top: 11px;
+}
+
+.settings {
+  margin-left: auto;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-color: solid 2px black;
+}
+
+.tab-content {
+  display: none;
+  padding: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Aside */
+aside {
+  position: fixed;
+  top: 0; /* empieza desde el borde superior de la pantalla */
+  left: 0;
+  width: 70px;
+  background-color: white;
+  border-right: 2px solid black; /* línea derecha siempre visible */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  transition: height 0.4s ease;
+  overflow: hidden;
+  padding: 11px;
+  gap: 24px;
+}
+
+/* Cuando se expande */
+aside.active {
+  height: auto;
+  min-height: 100vh; /* ocupa toda la altura al abrir */
+}
+
+.configuracion {
+  background-color: white;
+  border: none;
+  border-bottom: 2px solid black; /* línea entre config y menú */
+  border-bottom: 2px solid black;
+  height: 84px;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.icon-menu.active + .configuracion,
+aside.active .configuracion {
+  border-right: none;
+}
+
+/* MENÚ DESPLEGABLE */
+.icon-menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  width: 100%;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.icon-menu.active {
+  display: flex;
+}
+
+
+/* Botones del menú */
+.icon-menu button {
+  width: 100%;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fotomenu{
+  height: 55px;
+  height: 55px;
+}
+
+.contenedor {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.perfil {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+}
+
+.modos {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+}
+
+.musiquita {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+}
+
+.funciones {
+  flex: 1;
+  min-height: 150px;
+  background: #f8d7da;
+  color: #721c24; 
+  border-radius: 12px;
+  padding: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reloj {
+  font-size: 18px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.greeting{
+  display: flex;
+  gap: 50px;
+}
+
+.saluuut{
+  color: black;
+  font-family: "Inter", sans-serif;
+  font-size: 46px;
+  font-weight: 800;
+}
+
+.ready {
+  margin-top: 10px;
+  background: #ffffff;
+  color: black;
+  font-weight: 800;
+  font-stretch: expanded;
+  font-size: 20px;
+  border: none;
+  padding: 10px 20px;
+  height: fit-content;
+  width: fit-content;
+}
+
+/* Control */
+.controls {
+  display: flex;
+  justify-content: space-around;
+  margin: 40px;
+  text-align: center;
+}
+
+.control h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.textotab2 {
+  color: black;
+}
+
+/* Persiana */
+
+.cerraryapagar { 
+  background: black;
+  color: white;
+  height: 60px;
+  width: 110px;
+  border-radius: 15px;
+  border: solid 3px white;
+  font-family: Itim;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+  
+.abriryprender { 
+  background: white;
+  color: black;
+  height: 60px;
+  width: 110px;
+  border-radius: 15px;
+  border: solid 3px black;
+  font-family: Itim;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0%;
+ }
+
+.persiana {
+  width: 150px;
+  height: 150px;
+  margin: 20px auto;
+  transition: height 0.5s ease;
+}
+
+/* Ventilador */
+
+.ventilador{
+height: 160px;
+width: 170px;
+}
+
+@keyframes girar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Luces */
+.sololuces {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.luces {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 10px auto;
+  display: flex;
+}
+
+.potter{
+  width: 100%;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu msh</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
+    <script defer src="menu.js"></script>
+</head>
+<body>
+  
+  <header class="tabs">
+    <div class="tab active" data-tab="tab1">MENU</div>
+    <div class="tab" data-tab="tab2">STOPMOTION</div>
+    <div class="tab" data-tab="tab3">CONTROL DE ELECTRODOMESTICOS</div>
+    <img src="../imagenes/logo.png" alt="" class="logo">
+  </header>
+
+  <aside>
+    <button id="settings" class="settings" aria-label="Configuración"><img src="../imagenes/settings.png" alt="" class="fotomenu"></button>
+
+  <!-- desplegables -->
+  <div class="icon-menu">
+    <button id="casita"><img src="../imagenes/casita.png" alt="" class="fotomenu"></button>
+    <button id="modooscuro"><img src="../imagenes/modooscuro.png" alt="" class="fotomenu"></button>
+    <button id="logout"><img src="../imagenes/getout.png" alt="" class="fotomenu"></button>
+  </div>
+  </aside>
+
+  <div id="tab1" class="tab-content active">
+      <h2 id="saludo">¡Hola!</h2>
+      <div class="reloj" id="reloj"></div>
+   <main class="contenedor">
+      <section class="perfil">
+      <article id="perfil" class="caja">
+       <h2>Perfil</h2>
+        <p><strong>Nombre:</strong> <span id="nombreusuario"></span></p>
+        <p><strong>Fecha de nacimiento:</strong> <span id="nacimiento"></span></p>
+        <p><strong>Sobre mí:</strong> <span id="sobre"></span></p>
+      </article>
+      </section>
+      <section class="modos">
+      <h2>Modos</h2>
+      <ul id="modos"></ul>
+      
+      <form id="modoform">
+        <input id="nombre" placeholder="Nombre del modo">
+        <select id="condicion" required>
+          <option value="">elegir una opcion</option>
+          <option value="hora">Hora</option>
+          <option value="dia">Día</option>
+          <option value="luz">Luz</option>
+        </select>
+        <div id="extrastuff"></div>
+        <button>Guardar</button>
+      </form>
+    </section>
+    <section class="musiquita">
+      <div id="reproductor">
+        <h2 id="titulo">Título de la canción</h2>
+        <p id="genero">Género</p>
+        
+        <div>
+          <button id="anterior"><img src="../imagenes/anterior.png"></button>
+          <button id="botonplay"><img src="../imagenes/playicono.png"></button>
+          <button id="siguiente"><img src="../imagenes/saltear.png"></button>
+        </div>
+        
+        <div id="progresoContainer">
+          <div id="progreso"></div>
+          <div id="progresoThumb"></div>
+        </div>
+        
+        <audio id="audio"></audio>
+      </div>
+    </section>
+   </main>
+  
+  </div>
+  
+  <div id="tab2" class="tab-content">
+    <h2>Contenido Tab 2</h2>
+    <p>Este es el contenido del segundo tab.</p>
+  </div>
+  
+  <div id="tab3" class="tab-content">
+    <section class="greeting">
+      <h1 class="saluuut">¡Hola, Zoe!</h1>
+      <div class="ready">← ¿Listo/a para jugar? →</div>
+    </section>
+
+    <section class="controls">
+      <!-- Persiana -->
+      <div class="control">
+        <h2 class="textotab2">Persiana</h2>
+        <img src="../imagenes/persianacerrada.png" id="persiana" class="persiana">
+        <div class="buttons">
+          <button id="cerrar" class="cerraryapagar">Cerrar</button>
+          <button id="abrir" class="abriryprender">Abrir</button>
+        </div>
+      </div>
+
+      <!-- Ventilador -->
+      <div class="control">
+        <h2 class="textotab2">Ventilador</h2>
+        <img src="../imagenes/ventilador.png" class="ventilador" alt=""><br>
+        <button id="nogira" class="cerraryapagar">Apagar</button>
+        <button id="helicopterhelicopter" class="abriryprender">Prender</button>
+      </div>
+
+      <!-- Luces -->
+      <div class="controlluces">
+        <h2 class="textotab2">Luces</h2>
+        <section class="filasplural">
+          <div class="fila1">
+              <div class = "sololuces">
+                <img src="../imagenes/luzrojaapagada.png" class="luces">
+                <img src="../imagenes/luzrojaapagada.png" class="luces">
+                <img src="../imagenes/luzrojaapagada.png" class="luces">
+                <img src="../imagenes/luzrojaapagada.png"div class="luces">
+              </div>
+              <button id="apagar" class="cerraryapagar">Apagar</button>
+              <button id="prender" class="abriryprender">Prender</button>
+          </div>
+          <div class="fila2">
+              <div class = "sololuces">
+                <img src="../imagenes/luzazulapagada.png" class="luces">
+                <img src="../imagenes/luzazulapagada.png" class="luces">
+                <img src="../imagenes/luzazulapagada.png" class="luces">
+                <img src="../imagenes/luzazulapagada.png" class="luces">
+              </div>
+              <input class= "potter" type="range" id="intensidad2" min="0" value="0">
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -3,8 +3,8 @@
     "nombre": "watajai",
     "condiciones": {
       "tipo": "hora",
-      "desde": "23:00",
-      "hasta": "23:59"
+      "desde": "06:30",
+      "hasta": "09:40"
     }
   }
 ]

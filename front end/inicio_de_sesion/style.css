@@ -1,0 +1,112 @@
+body{
+    background: linear-gradient(180deg, #18FDF6 0%, #17DFF3 8.65%, #15C1F0 46.63%, #1285EA 72.6%, #0C0DDE 100%);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.nube{
+    position: absolute;
+    width: 150px;
+    height: auto;
+}
+
+.nubecita1{
+ top: 0; left: 265px;
+}
+
+.nubecita2{
+ top: 66px; left: 844px;
+}
+
+.nubecita3 { 
+ top: 177px; left: -11px; 
+}
+
+.nubecita4 { 
+ top: 330px; right: -37px; 
+}
+
+.nubecita5 { 
+ top: 435px; left: 135px; 
+}
+.nubecita6 { 
+ top: 520px; left: 954px; 
+}
+
+.solcito{
+  position: absolute;
+  background-color: #F6D864;
+  top: 45px;
+  left: 920px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.logo{
+  position: fixed;
+  top: 50px;
+  left: 924px;
+  width: 80px;
+  height: 80px;
+}
+
+header{
+ background-color: white;
+ width: 560px;
+ border-radius: 40px;
+ margin: 56px auto 0;
+ font-family: "Just Me Again Down Here",cursive;
+ font-size: 25px;
+ text-align: center;
+}
+
+main{
+ display: flex;
+ flex-direction: column;
+ width: 814px;
+ height: 468px;
+ background-color: #A5A4A9;
+ border-radius: 132px;
+ margin: auto;
+ margin-bottom: 20px;
+ justify-content: center;   
+ align-items: center;
+}
+
+input{
+ display: flex;
+ flex-direction: column;
+ width: 700px;
+ height: 60px;
+ margin-top: 15px;
+ margin-bottom: 15px;
+ border-bottom-left-radius: 20px;
+ border-bottom-right-radius: 20px;
+ border: none;
+}
+
+.boton{
+ background-color: white;
+ display: block;
+ width: 550px;
+ height: 65px;
+ margin: 15px auto;
+ border-radius: 20px;
+ font-size: 20px;
+ border: none;
+}
+
+.cosito{
+ width: 700px;
+ height: 20px;
+}
+
+a{
+ color: #4A4646;
+ font-size: 25px;
+}
+
+.pastito{
+ height: 60px;
+}
