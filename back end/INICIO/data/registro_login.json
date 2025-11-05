@@ -110,5 +110,12 @@
     "cumple": "2010-02-04",
     "genero": "",
     "registro": "4/11/2025"
+  },
+  {
+    "nombre": "Fran",
+    "password": "Panchi",
+    "cumple": "2010-04-09",
+    "genero": "chico",
+    "registro": "5/11/2025"
   }
 ]

@@ -67,6 +67,12 @@ subscribeGETEvent ("obtenerModos", () => {
   return modos;
 });
 
+//Para mostrar el nombre de usuario:
+subscribeGETEvent ("obtenerUsuario",  () => {
+  let usuario = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
+  return (usuario.nombre);
+});
+
 
 //Comunicación front-back-hardware: usando Node SerialPort
 
@@ -115,6 +121,30 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
   }
   else {
     return (`LEDa apagado`);
+  }
+});
+
+subscribePOSTEvent ("controlVentilador", (data) => {
+  let objeto = {estado: data.estado};
+
+  if (objeto.estado === 1) {
+    port.write ('r', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'r';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.estado === 0) {
+    port.write ('m', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'm';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 });
 
