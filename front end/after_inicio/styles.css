@@ -201,6 +201,11 @@ aside.active .configuracion {
   width: fit-content;
 }
 
+.btnmusica{
+  background-color: none;
+  border: none;
+}
+
 .funciones {
   flex: 1;
   min-height: 150px;
@@ -216,7 +221,7 @@ aside.active .configuracion {
 
 .reloj {
   font-size: 18px;
-  color: #ffffff;
+  color: #000000;
   font-weight: bold;
   margin-left: 20px;
 }
@@ -307,11 +312,6 @@ aside.active .configuracion {
 .ventilador{
 height: 160px;
 width: 170px;
-}
-
-@keyframes girar {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 /* Luces */
