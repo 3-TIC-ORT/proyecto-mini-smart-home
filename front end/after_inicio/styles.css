@@ -310,8 +310,18 @@ aside.active .configuracion {
 /* Ventilador */
 
 .ventilador{
-height: 160px;
+height: 164px;
 width: 170px;
+}
+
+
+.girando {
+  animation: rotar 1s linear infinite;
+}
+
+@keyframes rotar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Luces */
@@ -325,8 +335,15 @@ width: 170px;
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  background-color: #6F302B;
   margin: 10px auto;
   display: flex;
+}
+
+.prendidas {
+  width: 70px;
+  height: 70px;
+  gap: -140px;
 }
 
 .potter{
