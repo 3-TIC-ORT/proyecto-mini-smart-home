@@ -272,9 +272,9 @@ let ventilador = document.getElementById("ventilador");
 
 function actualizarVentilador(estado) {
   if (estado > 0) {
-    ventilador.style.backgroundImage = "url('ventilador-prendido.png')";
+    ventilador.classList.add("girando");
   } else {
-    ventilador.style.backgroundImage = "url('ventilador.png')";
+    ventilador.classList.remove("girando");
   }
 }
 
@@ -306,16 +306,20 @@ function actualizarLuces(fila, intensidad) {
   luces.forEach((luz, i) => {
     if (fila === 1 && i < 4) {
       if (intensidad > 0) {
-        luz.src = "luz-prendida.png";
+        luz.src = "../imagenes/luzrojaprendida.png";
+        luz.classList.add("prendidas");
       } else {
-        luz.src = "luz-apagada.png";
+        luz.src = "../imagenes/luzrojaapagada.png";
+        luz.classList.remove("prendidas");
       }
     }
     if (fila === 2 && i >= 4) {
       if (intensidad > 0) {
-        luz.src = "luz-prendida.png";
+        luz.src = "../imagenes/luzazulprendida.png";
+        luz.classList.add("prendidas");
       } else {
-        luz.src = "luz-apagada.png";
+        luz.src = "../imagenes/luzazulapagada.png";
+        luz.classList.remove("prendidas");
       }
     }
   });
