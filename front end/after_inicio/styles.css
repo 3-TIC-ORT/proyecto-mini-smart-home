@@ -325,6 +325,7 @@ width: 170px;
 }
 
 /* Luces */
+
 .sololuces {
   display: flex;
   gap: 10px;
@@ -335,15 +336,38 @@ width: 170px;
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background-color: #6F302B;
   margin: 10px auto;
   display: flex;
 }
 
-.prendidas {
+.bombilla {
+  width: 70%;
+  height: 70%;
+  margin: auto;
+}
+
+.rojas{
+  background-color: #6F302B;
+}
+
+.azules{
+  background-color: #444661;
+}
+
+.prendidas-rojas{
+  background-color: #FF3939;
   width: 70px;
   height: 70px;
   gap: -140px;
+  box-shadow: 8px 10px 3px rgba(200, 50, 0, 1);
+}
+
+.prendidas-azules{
+  background-color: #3978FF;
+  width: 70px;
+  height: 70px;
+  gap: -140px;
+  box-shadow: 8px 10px 5px rgba(32, 49, 202, 1);
 }
 
 .potter{

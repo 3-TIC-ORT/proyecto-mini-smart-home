@@ -304,22 +304,23 @@ let luces = document.querySelectorAll(".luces");
 
 function actualizarLuces(fila, intensidad) {
   luces.forEach((luz, i) => {
+    let bomb = luz.querySelector("img")
     if (fila === 1 && i < 4) {
       if (intensidad > 0) {
-        luz.src = "../imagenes/luzrojaprendida.png";
-        luz.classList.add("prendidas");
+        bomb.src = "../imagenes/rojoprendido.png";
+        luz.classList.add("prendidas-rojas");
       } else {
-        luz.src = "../imagenes/luzrojaapagada.png";
-        luz.classList.remove("prendidas");
+        bomb.src = "../imagenes/rojoapagado.png";
+        luz.classList.remove("prendidas-rojas");
       }
     }
     if (fila === 2 && i >= 4) {
       if (intensidad > 0) {
-        luz.src = "../imagenes/luzazulprendida.png";
-        luz.classList.add("prendidas");
+        bomb.src = "../imagenes/azulprendido.png";
+        luz.classList.add("prendidas-azules");
       } else {
-        luz.src = "../imagenes/luzazulapagada.png";
-        luz.classList.remove("prendidas");
+        bomb.src = "../imagenes/azulapagado.png";
+        luz.classList.remove("prendidas-azules");
       }
     }
   });
