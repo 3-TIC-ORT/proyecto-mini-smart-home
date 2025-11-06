@@ -90,24 +90,31 @@ parser.on('data', (line) => {
   }
 });
 
+//Control LEDs rojos (j significa prender, t significa apagar): Le escribo al puerto serie y lo recibe con serial.read
 subscribePOSTEvent ("controlLucesLEDr", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
   
   if (objeto.fila === 1 && objeto.intensidad >= 1) {
     port.write ('j', (err) => {
       if (err) {
-      console.error ('Error al escribir en el puerto ', err.message);
-      return ('Error al escribir en el puerto');
+        return console.error ('Error al escribir en el puerto ', err.message);
     }
   });
   }
-  else {
-    return (`LEDr apagado`);
+  else if (objeto.fila === 1 && objeto.intensidad === 0) {
+    port.write ('t', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 't';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
   let caracter = 'j';
   return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
 });
 
+//Control LEDs azules (o significa prenderlas, sino se apagan): 
 subscribePOSTEvent ("controlLucesLEDa", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
   if (objeto.fila === 2 && objeto.intensidad >= 1) {
@@ -119,11 +126,14 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
     let caracter = 'o';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
-  else {
+
+  else if (objeto.fila === 2 && objeto.intensidad === 0) {
     return (`LEDa apagado`);
   }
+
 });
 
+//Control ventilador (r significa prendido, m significa apagado): Le escribo al puerto serie y lo recibe con serial.read
 subscribePOSTEvent ("controlVentilador", (data) => {
   let objeto = {estado: data.estado};
 
@@ -142,10 +152,37 @@ subscribePOSTEvent ("controlVentilador", (data) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
+      let caracter = 'm';
+      return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
     });
-    let caracter = 'm';
-    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+});
+
+//Control persiana (d significa abajo, a significa arriba): Le escribo al puerto serie y lo recibe con serial.read
+subscribePOSTEvent ("controlPersiana", (data) => {
+  let objeto = {estado: data.estado};
+
+  if (objeto.estado === 1) {
+    port.write ('d', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+      let caracter = 'd';
+      return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+   });
+  }
+
+  else if (objeto.estado === 0) {
+    port.write ('a', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+      let caracter = 'a';
+      return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+    });
+  }
+
 });
 
 startServer ();
