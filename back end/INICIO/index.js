@@ -77,6 +77,21 @@ subscribeGETEvent ("obtenerUsuario",  () => {
   };
 });
 
+//Para ejecutar el modo: Recibe la info del usuario como forma de objeto y realiza ifs en base a eso.
+subscribeGETEvent ("ejecutarModo", () => {
+  let objeto = {
+    persiana: data.persiana,
+    ventilador: data.ventilador,
+    lucesrojas: data.lucesrojas,
+    lucesazules: data.lucesazules
+  };
+
+  if (objeto.persiana === 1) {
+    
+  }
+
+});
+
 
 //Comunicación front-back-hardware: usando Node SerialPort
 

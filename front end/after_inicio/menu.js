@@ -183,12 +183,7 @@ function crearModo(nombre, tipo) {
     };
   }
 
-  let acciones = {
-    persiana: document.getElementById("percy").value,
-    ventilador: document.getElementById("venti").value,
-    lucesrojas: document.getElementById("rojo").value,
-    lucesazules: parseInt(document.getElementById("azul").value)
-  };
+
 
   postEvent("crearModo", { nombre, condiciones, acciones }, (respuesta) => {
     console.log("Modo guardado:", respuesta);
@@ -244,10 +239,21 @@ function cargarModos() {
   }
 cargarModos();
 
-getEvent("ejecutarModo", (modo) => {
-  console.log("Modo activado:", modo.nombre);
+getEvent("ejecutarModo", () => {
 
-  let acc = modo.acciones;
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
+
+  let acc = {
+    persiana: acciones.persiana,
+    ventilador: acciones.ventilador,
+    lucesrojas: acciones.lucesrojas,
+    lucesazules: acciones.lucesazules
+  };
 
   if (acc.persiana === "abrir") actualizarPersiana(1);
   if (acc.persiana === "cerrar") actualizarPersiana(0);
@@ -258,7 +264,7 @@ getEvent("ejecutarModo", (modo) => {
   if (acc.lucesrojas === "prender") actualizarLuces(1, 1);
   if (acc.lucesrojas === "apagar") actualizarLuces(1, 0);
 
-  if (typeof acc.lucesazules === "number") actualizarLuces(2, acc.lucesFila2);
+  if (typeof acc.lucesazules === "number") actualizarLuces(2, acc.lucesazules);
 });
 
 function canciones(index){

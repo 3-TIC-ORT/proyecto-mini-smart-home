@@ -35,5 +35,61 @@
       "desde": "04:30",
       "hasta": "04:40"
     }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:59",
+      "hasta": "05:59"
+    }
   }
 ]
