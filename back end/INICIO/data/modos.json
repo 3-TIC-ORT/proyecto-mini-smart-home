@@ -20,5 +20,20 @@
       "tipo": "luz",
       "nivel": "oscuro"
     }
+  },
+  {
+    "nombre": "Holaaa",
+    "condiciones": {
+      "tipo": "luz",
+      "nivel": "oscuro"
+    }
+  },
+  {
+    "nombre": "Fran",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "04:30",
+      "hasta": "04:40"
+    }
   }
 ]

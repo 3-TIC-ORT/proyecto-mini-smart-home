@@ -1,6 +1,6 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
-import { SerialPort } from "serialport";
+import { ByteLengthParser, SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 
 subscribePOSTEvent ("register", (data) => {
@@ -68,9 +68,10 @@ subscribeGETEvent ("obtenerModos", () => {
 });
 
 //Para mostrar el nombre de usuario:
-subscribePOSTEvent ("obtenerUsuario",  (data) => {
-
-  return (`Respondió el front end con el usuario`);
+subscribeGETEvent ("obtenerUsuario",  () => {
+  let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
+  let ultimo = leer [leer.length - 1];
+  return (ultimo.nombre, ultimo.cumple);//resolver lo de las comas
 });
 
 
@@ -152,9 +153,9 @@ subscribePOSTEvent ("controlVentilador", (data) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
-      let caracter = 'm';
-      return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
     });
+    let caracter = 'm';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
 });
@@ -168,9 +169,9 @@ subscribePOSTEvent ("controlPersiana", (data) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
-      let caracter = 'd';
-      return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
    });
+   let caracter = 'd';
+   return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
   else if (objeto.estado === 0) {
@@ -178,9 +179,9 @@ subscribePOSTEvent ("controlPersiana", (data) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
-      let caracter = 'a';
-      return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
     });
+    let caracter = 'a';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
 });

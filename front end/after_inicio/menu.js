@@ -12,16 +12,15 @@ let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 if (usuarioLogueado) {
  console.log("Sesión activa para:", usuarioLogueado);
+  
+  let saludo = document.getElementById("saludo");
+  let nombreUsuario = document.getElementById("nombreusuario");
+  let nacimiento = document.getElementById("nacimiento");
+  let sobre = document.getElementById("sobre");
 
   // Pedir los datos al backend
-  getEvent("obtenerUsuario", (data) => {
-    console.log("Datos recibidos del backend:", data);
-
-    let saludo = document.getElementById("saludo");
-    let nombreUsuario = document.getElementById("nombreusuario");
-    let nacimiento = document.getElementById("nacimiento");
-    let sobre = document.getElementById("sobre");
-
+  getEvent("obtenerUsuario", () => {
+    
     if (!data || !data.ok) {
       console.warn("No se encontró usuario en backend, usando datos locales");
 
