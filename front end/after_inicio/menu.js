@@ -19,8 +19,10 @@ if (usuarioLogueado) {
   let sobre = document.getElementById("sobre");
 
   // Pedir los datos al backend
-  getEvent("obtenerUsuario", () => {
-    
+
+  postEvent("obtenerUsuario", { nombre: nombreUsuario, cumple: nacimiento}, (data) => {
+    console.log("Datos recibidos del backend:", data);
+
     if (!data || !data.ok) {
       console.warn("No se encontró usuario en backend, usando datos locales");
 
@@ -115,6 +117,45 @@ condicion.addEventListener("change", () => {
       </label>
     `;
   }
+  let action = document.createElement("div");
+  action.id = "acciones";
+  action.innerHTML = `
+    <h3>Acciones</h3>
+
+    <label>
+      Persiana:
+      <select id="percy">
+        <option value="nada">Ninguna</option>
+        <option value="abrir">Abrir</option>
+        <option value="cerrar">Cerrar</option>
+      </select>
+    </label>
+
+    <label>
+      Ventilador:
+      <select id="venti">
+        <option value="nada">Ninguna</option>
+        <option value="prender">Prender</option>
+        <option value="apagar">Apagar</option>
+      </select>
+    </label>
+
+    <label>
+      Luces rojas:
+      <select id="rojo">
+        <option value="nada">Ninguna</option>
+        <option value="prender">Prender</option>
+        <option value="apagar">Apagar</option>
+      </select>
+    </label>
+
+    <label>
+      Luces azules:
+      <input type="range" id="azul" min="0" max="5" step="1" value="0">
+    </label>
+  `;
+
+  condicionesExtra.appendChild(action);
 });
 
 function crearModo(nombre, tipo) {
@@ -142,7 +183,14 @@ function crearModo(nombre, tipo) {
     };
   }
 
-  postEvent("crearModo", { nombre, condiciones }, (respuesta) => {
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
+
+  postEvent("crearModo", { nombre, condiciones, acciones }, (respuesta) => {
     console.log("Modo guardado:", respuesta);
     cargarModos();
   });
@@ -159,7 +207,7 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  crearModo(nombre, tipo);
+  crearModo(nombre, tipo, acciones);
 });
 
 function cargarModos() {
@@ -195,6 +243,23 @@ function cargarModos() {
     });
   }
 cargarModos();
+
+getEvent("ejecutarModo", (modo) => {
+  console.log("Modo activado:", modo.nombre);
+
+  let acc = modo.acciones;
+
+  if (acc.persiana === "abrir") actualizarPersiana(1);
+  if (acc.persiana === "cerrar") actualizarPersiana(0);
+
+  if (acc.ventilador === "prender") actualizarVentilador(1);
+  if (acc.ventilador === "apagar") actualizarVentilador(0);
+
+  if (acc.lucesrojas === "prender") actualizarLuces(1, 1);
+  if (acc.lucesrojas === "apagar") actualizarLuces(1, 0);
+
+  if (typeof acc.lucesazules === "number") actualizarLuces(2, acc.lucesFila2);
+});
 
 function canciones(index){
   let song = songs[index];
