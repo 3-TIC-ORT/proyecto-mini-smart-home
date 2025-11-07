@@ -71,11 +71,15 @@ subscribeGETEvent ("obtenerModos", () => {
 subscribeGETEvent ("obtenerUsuario",  () => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
   let ultimo = leer [leer.length - 1];
-  return (ultimo.nombre, ultimo.cumple);//resolver lo de las comas
+  return {
+    nombre: ultimo.nombre,
+    cumple: ultimo.cumple
+  };
 });
 
 
 //Comunicación front-back-hardware: usando Node SerialPort
+
 
 let port = new SerialPort ({
   path: 'COM5',
