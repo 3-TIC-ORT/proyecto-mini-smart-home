@@ -312,9 +312,9 @@ let persiana = document.getElementById("persiana");
 
 function actualizarPersiana(estado) {
   if (estado > 0) {
-    persiana.style.backgroundImage = "url('persiana-abierta.png')";
+    persiana.src = "../imagenes/openpercy.png";
   } else {
-    persiana.style.backgroundImage = "url('persiana-cerrada.png')";
+    persiana.src = "../imagenes/persianacerrada.png";
   }
 }
 
