@@ -267,43 +267,80 @@ getEvent("ejecutarModo", () => {
   if (typeof acc.lucesazules === "number") actualizarLuces(2, acc.lucesazules);
 });
 
-function canciones(index){
+//musica
+
+let audio = document.getElementById("audio");
+let titulo = document.getElementById("titulo");
+let genero = document.getElementById("genero");
+let botonplay = document.getElementById("btnplay");
+let botonanterior = document.getElementById("btnanterior");
+let botonsaltear = document.getElementById("btnsaltear");
+let playicono = document.getElementById("playicono");
+let progreso = document.getElementById("progreso");
+let progresoThumb = document.getElementById("progresoThumb");
+
+let current = 0;
+
+let songs = [
+  { titulo: "Canción 1", genero: "Pop", file: "../musica/song1.mp3" },
+  { titulo: "Canción 2", genero: "Rock", file: "../musica/song2.mp3" },
+  { titulo: "Canción 3", genero: "Jazz", file: "../musica/song3.mp3" },
+  { titulo: "Demo", genero: "Test", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
+];
+
+function cargarCancion(index) {
   let song = songs[index];
   titulo.textContent = song.titulo;
   genero.textContent = song.genero;
   audio.src = song.file;
-};
+}
 
-function updateplay(){
-  if (audio.pausado) {
-    playicono.src= "playicono.png";
+function updatePlayIcon() {
+  if (audio.paused) {
+    playicono.src = "../imagenes/playicono.png";
   } else {
-    playicono.src = "pausa.png"
+    playicono.src = "../imagenes/pausa.png";
   }
 }
 
-botonplay.addEventListener("click",() => {
-  if (audio.pausado){
+botonplay.addEventListener("click", () => {
+  if (audio.paused) {
     audio.play();
   } else {
-   audio.pausado();
+    audio.pause();
   }
-  updateplay();
+  updatePlayIcon();
 });
 
-document.getElementById("anterior").addEventListener("click", () => {
-  actual = (current -1 + songs.length) % songs.length;
-  canciones(actual);
+botonanterior.addEventListener("click", () => {
+  current = (current - 1 + songs.length) % songs.length;
+  cargarCancion(current);
   audio.play();
-  updateplay();
+  updatePlayIcon();
 });
 
-audio.addEventListener("updatetiempo", () => {
-  let porcentaje =   (audio.tiempoactual / audio.duracion) * 100;
+botonsaltear.addEventListener("click", () => {
+  current = (current + 1) % songs.length;
+  cargarCancion(current);
+  audio.play();
+  updatePlayIcon();
+});
+
+audio.addEventListener("timeupdate", () => {
+  let porcentaje = (audio.currentTime / audio.duration) * 100;
   progreso.style.width = porcentaje + "%";
-  progresoThumb.style.left = porcentajee + "%";
+  progresoThumb.style.left = porcentaje + "%";
 });
 
+audio.addEventListener("ended", () => {
+  current = (current + 1) % songs.length;
+  cargarCancion(current);
+  audio.play();
+});
+
+cargarCancion(current);
+
+//CONTROLLLLLLLL
 // persiana
 
 let botonAbrirPersiana = document.getElementById("abrir");
