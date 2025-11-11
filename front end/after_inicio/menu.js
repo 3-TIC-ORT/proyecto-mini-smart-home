@@ -241,18 +241,33 @@ function cargarModos() {
   }
 cargarModos();
 
-postEvent("ejecutarModo", {persiana: acc.persiana, ventilador: acc.ventilador, lucesrojas: acc.lucesrojas, lucesazules: acc.lucesazules}, (data) => {
+let botonEjecutar = document.getElementById("btnEjecutar");
 
-  if (acc.persiana === "abrir") actualizarPersiana(1);
-  if (acc.persiana === "cerrar") actualizarPersiana(0);
+botonEjecutar.addEventListener("click", () => {
+  // Obtenemos los valores actuales del formulario
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
 
-  if (acc.ventilador === "prender") actualizarVentilador(1);
-  if (acc.ventilador === "apagar") actualizarVentilador(0);
+  console.log("Ejecutando modo con:", acciones);
 
-  if (acc.lucesrojas === "prender") actualizarLuces(1, 1);
-  if (acc.lucesrojas === "apagar") actualizarLuces(1, 0);
+  postEvent("ejecutarModo", acciones, (data) => {
+    console.log("Respuesta del backend:", data);
 
-  if (typeof acc.lucesazules === "number") actualizarLuces(2, acc.lucesazules);
+    if (acciones.persiana === "abrir") actualizarPersiana(1);
+    if (acciones.persiana === "cerrar") actualizarPersiana(0);
+
+    if (acciones.ventilador === "prender") actualizarVentilador(1);
+    if (acciones.ventilador === "apagar") actualizarVentilador(0);
+
+    if (acciones.lucesrojas === "prender") actualizarLuces(1, 1);
+    if (acciones.lucesrojas === "apagar") actualizarLuces(1, 0);
+
+    if (typeof acciones.lucesazules === "number") actualizarLuces(2, acciones.lucesazules);
+  });
 });
 
 //musica
