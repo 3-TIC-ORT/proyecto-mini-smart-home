@@ -1,6 +1,6 @@
 import fs from "fs";
 import { subscribeGETEvent, subscribePOSTEvent, realTimeEvent, startServer } from "soquetic";
-import { ByteLengthParser, SerialPort } from "serialport";
+import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 
 subscribePOSTEvent ("register", (data) => {
@@ -32,6 +32,10 @@ subscribePOSTEvent ("login", (data) => {
   let encontrar = leer.find (leer => data.email === leer.nombre && data.password === leer.password);
  
   if (encontrar) {
+    let objeto = {email: data.email, password: data.password};
+    leer.push (objeto);
+
+    fs.writeFileSync ("data/registro_login.json", JSON.stringify (leer, null, 2), {encoding: "utf-8"});
     return {ok: true};
   }
   else {
@@ -78,7 +82,7 @@ subscribeGETEvent ("obtenerUsuario",  () => {
 });
 
 //Para ejecutar el modo: Recibe la info del usuario como forma de objeto y realiza ifs en base a eso.
-subscribeGETEvent ("ejecutarModo", () => {
+subscribePOSTEvent ("ejecutarModo", (data) => {
   let objeto = {
     persiana: data.persiana,
     ventilador: data.ventilador,
@@ -87,7 +91,67 @@ subscribeGETEvent ("ejecutarModo", () => {
   };
 
   if (objeto.persiana === 1) {
-    
+    port.write ('d', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'd';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.persiana === 0) {
+    port.write ('a', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err,message);
+      }
+    });
+    let caracter = 'a';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.ventilador === 1) {
+    port.write ('r', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'r';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.ventilador === 0) {
+    port.write ('m', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'm';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.lucesrojas === 1) {
+    port.write ('j', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'j';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.lucesrojas === 0) {
+    port.write ('t', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 't';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.lucesazules === 1) {
+    port.write ('')
   }
 
 });
@@ -137,18 +201,9 @@ subscribePOSTEvent ("controlLucesLEDr", (data) => {
 //Control LEDs azules (o significa prenderlas, sino se apagan): 
 subscribePOSTEvent ("controlLucesLEDa", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
-  if (objeto.fila === 2 && objeto.intensidad >= 1) {
-    port.write ('o', (err) => {
-      if (err) {
-        return console.error ('Error al escribir por el puerto: ', err.message);
-      }
-    });
-    let caracter = 'o';
-    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
-  }
-
-  else if (objeto.fila === 2 && objeto.intensidad === 0) {
-    return (`LEDa apagado`);
+  
+  if (objeto.intensidad === 1) {
+    port.write ('')
   }
 
 });
