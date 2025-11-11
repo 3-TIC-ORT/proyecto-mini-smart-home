@@ -11,37 +11,28 @@ let estado = document.getElementById("estado"); // Asegúrate de que este elemen
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 if (usuarioLogueado) {
- console.log("Sesión activa para:", usuarioLogueado);
-  
+  console.log("Sesión activa para:", usuarioLogueado);
+
+  // Si el localStorage guarda un objeto JSON, lo parseamos
+  let usuario = JSON.parse(usuarioLogueado);
+
   let saludo = document.getElementById("saludo");
   let nombreUsuario = document.getElementById("nombreusuario");
   let nacimiento = document.getElementById("nacimiento");
   let sobre = document.getElementById("sobre");
 
-  // Pedir los datos al backend
-
-  postEvent("obtenerUsuario", { nombre: nombreUsuario, cumple: nacimiento}, (data) => {
+  // Escuchamos el evento del backend
+  getEvent("obtenerUsuario", (data) => {
     console.log("Datos recibidos del backend:", data);
 
-    if (!data || !data.ok) {
-      console.warn("No se encontró usuario en backend, usando datos locales");
+    // Si el backend manda dentro de data.usuario, usamos eso
+    let usuarioFinal = data.usuario || data;
 
-      if (saludo) saludo.textContent = `¡Hola, ${usuarioLogueado}!`;
-      if (nombreUsuario) nombreUsuario.textContent = usuarioLogueado;
-      if (nacimiento) nacimiento.textContent = "No disponible";
-      if (sobre) sobre.textContent = "Sin descripción";
-      return;
-    }
-
-    // Si el backend sí devolvió los datos del usuario:
-    let usuario = data.usuario || data; // depende cómo lo devuelva el back
-
-    if (saludo) saludo.textContent = `¡Hola, ${usuario.nombre || usuarioLogueado}!`;
-    if (nombreUsuario) nombreUsuario.textContent = usuario.nombre || usuarioLogueado;
-    if (nacimiento) nacimiento.textContent = usuario.cumple || "No disponible";
-    if (sobre) sobre.textContent = usuario.sobre || usuario.genero || "Sin descripción";
+    if (saludo) saludo.textContent = `¡Hola, ${usuarioFinal.nombre || usuario.nombre}!`;
+    if (nombreUsuario) nombreUsuario.textContent = usuarioFinal.nombre || usuario.nombre;
+    if (nacimiento) nacimiento.textContent = usuarioFinal.cumple || "No disponible";
+    if (sobre) sobre.textContent = usuarioFinal.sobre || "Sin descripción";
   });
-}
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -53,6 +44,7 @@ tabs.forEach(tab => {
     document.getElementById(tabId).classList.add('active');
   });
 });
+}
 
 let conf = document.querySelector(".settings");
 let iconMenu = document.querySelector(".icon-menu");
@@ -162,14 +154,10 @@ function crearModo(nombre, tipo) {
   let condiciones = {};
 
   if (tipo === "hora") {
-    
-    let desdeHora = document.getElementById("desdeHora").value;
-    let hastaHora = document.getElementById("hastaHora").value;
-    
     condiciones = {
       tipo: "hora",
-      desde: desdeHora,
-      hasta: hastaHora
+      desde: document.getElementById("desdeHora").value,
+      hasta: document.getElementById("hastaHora").value
     };
   } else if (tipo === "dia") {
     condiciones = {
@@ -183,7 +171,14 @@ function crearModo(nombre, tipo) {
     };
   }
 
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
 
+  console.log("Se envía al backend:", { nombre, condiciones, acciones });
 
   postEvent("crearModo", { nombre, condiciones, acciones }, (respuesta) => {
     console.log("Modo guardado:", respuesta);
@@ -201,6 +196,13 @@ form.addEventListener("submit", (e) => {
     alert("Por favor, completa todos los campos.");
     return;
   }
+
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
 
   crearModo(nombre, tipo, acciones);
 });
@@ -239,21 +241,7 @@ function cargarModos() {
   }
 cargarModos();
 
-getEvent("ejecutarModo", () => {
-
-  let acciones = {
-    persiana: document.getElementById("percy").value,
-    ventilador: document.getElementById("venti").value,
-    lucesrojas: document.getElementById("rojo").value,
-    lucesazules: parseInt(document.getElementById("azul").value)
-  };
-
-  let acc = {
-    persiana: acciones.persiana,
-    ventilador: acciones.ventilador,
-    lucesrojas: acciones.lucesrojas,
-    lucesazules: acciones.lucesazules
-  };
+postEvent("ejecutarModo", {persiana: acc.persiana, ventilador: acc.ventilador, lucesrojas: acc.lucesrojas, lucesazules: acc.lucesazules}, (data) => {
 
   if (acc.persiana === "abrir") actualizarPersiana(1);
   if (acc.persiana === "cerrar") actualizarPersiana(0);
@@ -282,9 +270,9 @@ let progresoThumb = document.getElementById("progresoThumb");
 let current = 0;
 
 let songs = [
-  { titulo: "Canción 1", genero: "Pop", file: "../musica/song1.mp3" },
-  { titulo: "Canción 2", genero: "Rock", file: "../musica/song2.mp3" },
-  { titulo: "Canción 3", genero: "Jazz", file: "../musica/song3.mp3" },
+  { titulo: "Canción 1", genero: "Pop", file: "../musica/track1.mp3" },
+  { titulo: "Canción 2", genero: "Rock", file: "../musica/track2.mp3" },
+  { titulo: "Canción 3", genero: "Jazz", file: "../musica/track3.mp3" },
   { titulo: "Demo", genero: "Test", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
 ];
 

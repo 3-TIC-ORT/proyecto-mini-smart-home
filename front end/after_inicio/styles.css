@@ -56,10 +56,6 @@ header {
   background-color: #706D74; /* rosado */
 }
 
-.tab[data-tab="tab2"] {
-  background-color: #98979D; /* celeste */
-}
-
 .tab[data-tab="tab3"] {
   background-color: #D7D5DE; /* verde */
 }
