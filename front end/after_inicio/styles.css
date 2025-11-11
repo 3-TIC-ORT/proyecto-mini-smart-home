@@ -201,6 +201,11 @@ aside.active .configuracion {
   width: fit-content;
 }
 
+.btnmusica{
+  background-color: none;
+  border: none;
+}
+
 .funciones {
   flex: 1;
   min-height: 150px;
@@ -216,7 +221,7 @@ aside.active .configuracion {
 
 .reloj {
   font-size: 18px;
-  color: #ffffff;
+  color: #000000;
   font-weight: bold;
   margin-left: 20px;
 }
@@ -305,16 +310,22 @@ aside.active .configuracion {
 /* Ventilador */
 
 .ventilador{
-height: 160px;
+height: 164px;
 width: 170px;
 }
 
-@keyframes girar {
+
+.girando {
+  animation: rotar 1s linear infinite;
+}
+
+@keyframes rotar {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
 /* Luces */
+
 .sololuces {
   display: flex;
   gap: 10px;
@@ -327,6 +338,36 @@ width: 170px;
   border-radius: 50%;
   margin: 10px auto;
   display: flex;
+}
+
+.bombilla {
+  width: 70%;
+  height: 70%;
+  margin: auto;
+}
+
+.rojas{
+  background-color: #6F302B;
+}
+
+.azules{
+  background-color: #444661;
+}
+
+.prendidas-rojas{
+  background-color: #FF3939;
+  width: 70px;
+  height: 70px;
+  gap: -140px;
+  box-shadow: 8px 10px 3px rgba(200, 50, 0, 1);
+}
+
+.prendidas-azules{
+  background-color: #3978FF;
+  width: 70px;
+  height: 70px;
+  gap: -140px;
+  box-shadow: 8px 10px 5px rgba(32, 49, 202, 1);
 }
 
 .potter{

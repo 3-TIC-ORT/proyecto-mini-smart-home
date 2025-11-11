@@ -1,0 +1,243 @@
+html, body{
+    background: linear-gradient(
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.65)),
+    url("../imagenes/pantallaprinci.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100%
+}
+
+header{
+    position: relative;
+    display: flex;
+    background-color: black;
+    border-bottom: 8px solid white;
+    height: 125px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 33px;
+    padding-left: 4%;
+    padding-right: 2%;
+}
+
+.logo{
+    width: 85px;
+    height: 85px;
+}
+
+.cs{
+    background-color: #F9FC0D;
+    border: 2px solid #F9FC0D;
+    height: 70px;
+    width: 150px;
+    border-radius: 30px;
+    font-size: large;
+    border: none;
+    cursor: pointer;
+    font-family: "Inter", "Arial", sans-serif;
+}
+
+.cs:hover{
+    background-color: #d2d525;
+}
+
+.titulo{
+    background-color: black;
+    color: white;
+    width: 560px;
+    height: 90px;
+    line-height: 90px; /* centra verticalmente el texto */
+    border-radius: 50px;
+    margin: 0;
+    font-family: "Just Me Again Down Here", cursive;
+    font-size: 25px;
+    font-weight: 400;
+    text-align: center;
+    border: 5px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.casatitle{
+    width: 83px;
+    height: 83px;
+}
+
+.casatitle2{
+    width: 70px;
+    height: 70px;
+}
+
+.is{
+    background-color: #E800F4;
+    height: 70px;
+    width: 140px;
+    border-radius: 30px;
+    font-size: large;
+    border: none;
+    cursor: pointer;
+}
+
+.is:hover{
+    background-color: #c300ce;
+}
+
+
+.reggie{
+    background-color: #E20002;
+    height: 70px;
+    width: 140px;
+    border-radius: 30px;
+    font-size: large;
+    border: none;
+    cursor: pointer;
+}
+
+.reggie:hover{
+    background-color: #b50e11;
+}
+
+
+.lavddquenose{
+    background-color: #828675;
+    border: 9px solid black;
+    color: white;
+    border-radius: 30px;
+    width: 1100px;
+    height:60px;
+    line-height: 15px;
+    margin: 25px auto;
+    align-items: center;
+    font-family: "Lexend Zetta";
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.4em;
+    text-align: center;
+}
+
+main{
+    display: flex;
+    width: 1118px;
+    margin: auto;
+    justify-content: center;
+    gap: 15px;
+}
+
+.casita{
+    background-color: #828675;
+    border: 5px solid black;
+    border-radius: 30px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gif{
+    width: 95%;
+    border-radius: 30px;
+}
+
+.aboutus{
+    background-color: #828675;
+    border: 5px solid black;
+    color: white;
+    border-radius: 30px;
+    width: 60%;
+    height: 250px;
+    font-family: "Lexend Exa", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 1.5%;
+}
+
+footer{
+    display: flex;
+    background-color: black;
+    border: 5px solid white;
+    border-radius: 35px;
+    margin: 20px auto;
+    width: 1108px;
+    height: 135px;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.creds{
+    font-family: "Lexend Exa", sans-serif;
+    font-size: large;
+    color: white;
+}
+  
+.lalinea{
+    background-color: white;
+    width: 6px;
+    height: 105px;
+    align-self: center;
+}
+  
+footer img {
+    width: 110px;
+    height: 110px;
+    border-radius: 30px;
+    background-color: white;
+    align-self: center;
+}
+
+.overlay {
+    display: none; /* oculto al inicio */
+    position: fixed;
+    inset: 0; /* equivale a top:0, right:0, bottom:0, left:0 */
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* encima de todo */
+}
+  
+.wholeahhthing {
+    background-color: #262121;
+    border-radius: 25px;
+    padding: 18px;
+    width: 400px;
+    height: 345px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    color: black;
+}
+
+.texto{
+    background-color: #D9CBCB;
+    color: rgb(0, 0, 0);
+    font-family: "Inter";
+    font-size: 25px;
+    border: 5px solid white;
+    border-radius: 15px;
+}
+  
+.fotos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 5px;
+}
+
+.estop{
+    width: 140px;
+    height: 140px;
+}
+
+.casitacool {
+    width: 260px;
+    height: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}

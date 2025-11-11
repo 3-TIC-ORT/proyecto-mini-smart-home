@@ -12,15 +12,16 @@ let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 if (usuarioLogueado) {
  console.log("Sesión activa para:", usuarioLogueado);
+  
+  let saludo = document.getElementById("saludo");
+  let nombreUsuario = document.getElementById("nombreusuario");
+  let nacimiento = document.getElementById("nacimiento");
+  let sobre = document.getElementById("sobre");
 
   // Pedir los datos al backend
-  postEvent("obtenerUsuario", { nombre: usuarioLogueado }, (data) => {
-    console.log("Datos recibidos del backend:", data);
 
-    let saludo = document.getElementById("saludo");
-    let nombreUsuario = document.getElementById("nombreusuario");
-    let nacimiento = document.getElementById("nacimiento");
-    let sobre = document.getElementById("sobre");
+  postEvent("obtenerUsuario", { nombre: nombreUsuario, cumple: nacimiento}, (data) => {
+    console.log("Datos recibidos del backend:", data);
 
     if (!data || !data.ok) {
       console.warn("No se encontró usuario en backend, usando datos locales");
@@ -116,6 +117,45 @@ condicion.addEventListener("change", () => {
       </label>
     `;
   }
+  let action = document.createElement("div");
+  action.id = "acciones";
+  action.innerHTML = `
+    <h3>Acciones</h3>
+
+    <label>
+      Persiana:
+      <select id="percy">
+        <option value="nada">Ninguna</option>
+        <option value="abrir">Abrir</option>
+        <option value="cerrar">Cerrar</option>
+      </select>
+    </label>
+
+    <label>
+      Ventilador:
+      <select id="venti">
+        <option value="nada">Ninguna</option>
+        <option value="prender">Prender</option>
+        <option value="apagar">Apagar</option>
+      </select>
+    </label>
+
+    <label>
+      Luces rojas:
+      <select id="rojo">
+        <option value="nada">Ninguna</option>
+        <option value="prender">Prender</option>
+        <option value="apagar">Apagar</option>
+      </select>
+    </label>
+
+    <label>
+      Luces azules:
+      <input type="range" id="azul" min="0" max="5" step="1" value="0">
+    </label>
+  `;
+
+  condicionesExtra.appendChild(action);
 });
 
 function crearModo(nombre, tipo) {
@@ -143,7 +183,9 @@ function crearModo(nombre, tipo) {
     };
   }
 
-  postEvent("crearModo", { nombre, condiciones }, (respuesta) => {
+
+
+  postEvent("crearModo", { nombre, condiciones, acciones }, (respuesta) => {
     console.log("Modo guardado:", respuesta);
     cargarModos();
   });
@@ -160,7 +202,7 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  crearModo(nombre, tipo);
+  crearModo(nombre, tipo, acciones);
 });
 
 function cargarModos() {
@@ -197,43 +239,108 @@ function cargarModos() {
   }
 cargarModos();
 
-function canciones(index){
+getEvent("ejecutarModo", () => {
+
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
+
+  let acc = {
+    persiana: acciones.persiana,
+    ventilador: acciones.ventilador,
+    lucesrojas: acciones.lucesrojas,
+    lucesazules: acciones.lucesazules
+  };
+
+  if (acc.persiana === "abrir") actualizarPersiana(1);
+  if (acc.persiana === "cerrar") actualizarPersiana(0);
+
+  if (acc.ventilador === "prender") actualizarVentilador(1);
+  if (acc.ventilador === "apagar") actualizarVentilador(0);
+
+  if (acc.lucesrojas === "prender") actualizarLuces(1, 1);
+  if (acc.lucesrojas === "apagar") actualizarLuces(1, 0);
+
+  if (typeof acc.lucesazules === "number") actualizarLuces(2, acc.lucesazules);
+});
+
+//musica
+
+let audio = document.getElementById("audio");
+let titulo = document.getElementById("titulo");
+let genero = document.getElementById("genero");
+let botonplay = document.getElementById("btnplay");
+let botonanterior = document.getElementById("btnanterior");
+let botonsaltear = document.getElementById("btnsaltear");
+let playicono = document.getElementById("playicono");
+let progreso = document.getElementById("progreso");
+let progresoThumb = document.getElementById("progresoThumb");
+
+let current = 0;
+
+let songs = [
+  { titulo: "Canción 1", genero: "Pop", file: "../musica/song1.mp3" },
+  { titulo: "Canción 2", genero: "Rock", file: "../musica/song2.mp3" },
+  { titulo: "Canción 3", genero: "Jazz", file: "../musica/song3.mp3" },
+  { titulo: "Demo", genero: "Test", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
+];
+
+function cargarCancion(index) {
   let song = songs[index];
   titulo.textContent = song.titulo;
   genero.textContent = song.genero;
   audio.src = song.file;
-};
+}
 
-function updateplay(){
-  if (audio.pausado) {
-    playicono.src= "playicono.png";
+function updatePlayIcon() {
+  if (audio.paused) {
+    playicono.src = "../imagenes/playicono.png";
   } else {
-    playicono.src = "pausa.png"
+    playicono.src = "../imagenes/pausa.png";
   }
 }
 
-botonplay.addEventListener("click",() => {
-  if (audio.pausado){
+botonplay.addEventListener("click", () => {
+  if (audio.paused) {
     audio.play();
   } else {
-   audio.pausado();
+    audio.pause();
   }
-  updateplay();
+  updatePlayIcon();
 });
 
-document.getElementById("anterior").addEventListener("click", () => {
-  actual = (current -1 + songs.length) % songs.length;
-  canciones(actual);
+botonanterior.addEventListener("click", () => {
+  current = (current - 1 + songs.length) % songs.length;
+  cargarCancion(current);
   audio.play();
-  updateplay();
+  updatePlayIcon();
 });
 
-audio.addEventListener("updatetiempo", () => {
-  let porcentaje =   (audio.tiempoactual / audio.duracion) * 100;
+botonsaltear.addEventListener("click", () => {
+  current = (current + 1) % songs.length;
+  cargarCancion(current);
+  audio.play();
+  updatePlayIcon();
+});
+
+audio.addEventListener("timeupdate", () => {
+  let porcentaje = (audio.currentTime / audio.duration) * 100;
   progreso.style.width = porcentaje + "%";
-  progresoThumb.style.left = porcentajee + "%";
+  progresoThumb.style.left = porcentaje + "%";
 });
 
+audio.addEventListener("ended", () => {
+  current = (current + 1) % songs.length;
+  cargarCancion(current);
+  audio.play();
+});
+
+cargarCancion(current);
+
+//CONTROLLLLLLLL
 // persiana
 
 let botonAbrirPersiana = document.getElementById("abrir");
@@ -242,9 +349,9 @@ let persiana = document.getElementById("persiana");
 
 function actualizarPersiana(estado) {
   if (estado > 0) {
-    persiana.style.backgroundImage = "url('persiana-abierta.png')";
+    persiana.src = "../imagenes/openpercy.png";
   } else {
-    persiana.style.backgroundImage = "url('persiana-cerrada.png')";
+    persiana.src = "../imagenes/persianacerrada.png";
   }
 }
 
@@ -272,9 +379,9 @@ let ventilador = document.getElementById("ventilador");
 
 function actualizarVentilador(estado) {
   if (estado > 0) {
-    ventilador.style.backgroundImage = "url('ventilador-prendido.png')";
+    ventilador.classList.add("girando");
   } else {
-    ventilador.style.backgroundImage = "url('ventilador.png')";
+    ventilador.classList.remove("girando");
   }
 }
 
@@ -304,18 +411,23 @@ let luces = document.querySelectorAll(".luces");
 
 function actualizarLuces(fila, intensidad) {
   luces.forEach((luz, i) => {
+    let bomb = luz.querySelector("img")
     if (fila === 1 && i < 4) {
       if (intensidad > 0) {
-        luz.src = "luz-prendida.png";
+        bomb.src = "../imagenes/rojoprendido.png";
+        luz.classList.add("prendidas-rojas");
       } else {
-        luz.src = "luz-apagada.png";
+        bomb.src = "../imagenes/rojoapagado.png";
+        luz.classList.remove("prendidas-rojas");
       }
     }
     if (fila === 2 && i >= 4) {
       if (intensidad > 0) {
-        luz.src = "luz-prendida.png";
+        bomb.src = "../imagenes/azulprendido.png";
+        luz.classList.add("prendidas-azules");
       } else {
-        luz.src = "luz-apagada.png";
+        bomb.src = "../imagenes/azulapagado.png";
+        luz.classList.remove("prendidas-azules");
       }
     }
   });

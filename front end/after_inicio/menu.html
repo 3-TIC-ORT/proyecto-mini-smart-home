@@ -54,25 +54,27 @@
           <option value="luz">Luz</option>
         </select>
         <div id="extrastuff"></div>
+          
         <button>Guardar</button>
       </form>
     </section>
+
     <section class="musiquita">
       <div id="reproductor">
         <h2 id="titulo">Título de la canción</h2>
         <p id="genero">Género</p>
         
+        <div id="progresoContainer" style="position: relative; width: 100%; height: 6px; background: #ccc; border-radius: 3px; margin-top: 10px;">
+          <div id="progreso" style="position: absolute; top: 0; left: 0; height: 100%; width: 0; background: #007bff; border-radius: 3px;"></div>
+          <div id="progresoThumb" style="position: absolute; top: -4px; left: 0; width: 10px; height: 10px; background: #007bff; border-radius: 50%;"></div>
+        </div>
+
         <div>
-          <button id="anterior"><img src="../imagenes/anterior.png"></button>
-          <button id="botonplay"><img src="../imagenes/playicono.png"></button>
-          <button id="siguiente"><img src="../imagenes/saltear.png"></button>
+          <button id="anterior" class="btnmusica"><img src="../imagenes/anterior.png" id="btnanterior"></button>
+          <button id="botonplay" class="btnmusica"><img src="../imagenes/playicono.png" id="btnplay"></button>
+          <button id="siguiente" class="btnmusica"><img src="../imagenes/saltear.png" id=btnsaltear></button>
         </div>
-        
-        <div id="progresoContainer">
-          <div id="progreso"></div>
-          <div id="progresoThumb"></div>
-        </div>
-        
+
         <audio id="audio"></audio>
       </div>
     </section>
@@ -105,7 +107,7 @@
       <!-- Ventilador -->
       <div class="control">
         <h2 class="textotab2">Ventilador</h2>
-        <img src="../imagenes/ventilador.png" class="ventilador" alt=""><br>
+        <img src="../imagenes/ventilador.png" id= "ventilador" class="ventilador" alt=""><br>
         <button id="nogira" class="cerraryapagar">Apagar</button>
         <button id="helicopterhelicopter" class="abriryprender">Prender</button>
       </div>
@@ -116,22 +118,38 @@
         <section class="filasplural">
           <div class="fila1">
               <div class = "sololuces">
-                <img src="../imagenes/luzrojaapagada.png" class="luces">
-                <img src="../imagenes/luzrojaapagada.png" class="luces">
-                <img src="../imagenes/luzrojaapagada.png" class="luces">
-                <img src="../imagenes/luzrojaapagada.png"div class="luces">
+                <div class="luces rojas">
+                  <img src="../imagenes/rojoapagado.png" alt="" class="bombilla">
+                </div>
+                <div class="luces rojas">
+                  <img src="../imagenes/rojoapagado.png" alt="" class="bombilla">
+                </div>
+                <div class="luces rojas">
+                  <img src="../imagenes/rojoapagado.png" alt="" class="bombilla">
+                </div>
+                <div class="luces rojas">
+                  <img src="../imagenes/rojoapagado.png" alt="" class="bombilla">
+                </div>
               </div>
               <button id="apagar" class="cerraryapagar">Apagar</button>
               <button id="prender" class="abriryprender">Prender</button>
           </div>
           <div class="fila2">
               <div class = "sololuces">
-                <img src="../imagenes/luzazulapagada.png" class="luces">
-                <img src="../imagenes/luzazulapagada.png" class="luces">
-                <img src="../imagenes/luzazulapagada.png" class="luces">
-                <img src="../imagenes/luzazulapagada.png" class="luces">
+                <div class="luces azules">
+                  <img src="../imagenes/azulapagado.png" alt="" class="bombilla">
+                </div>
+                <div class="luces azules">
+                  <img src="../imagenes/azulapagado.png" alt="" class="bombilla">
+                </div>
+                <div class="luces azules">
+                  <img src="../imagenes/azulapagado.png" alt="" class="bombilla">
+                </div>
+                <div class="luces azules">
+                  <img src="../imagenes/azulapagado.png" alt="" class="bombilla">
+                </div>
               </div>
-              <input class= "potter" type="range" id="intensidad2" min="0" value="0">
+              <input class= "potter" type="range" id="intensidad2" min="0" max="5" value="0">
           </div>
         </section>
       </div>
