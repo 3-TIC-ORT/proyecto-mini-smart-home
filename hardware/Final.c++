@@ -8,12 +8,14 @@ const int H3=11;  //enable
 const int relayPin1=3;
 //Leds potenciometro y boton
 int L1a4 = 4; //Rojos
-int L5a8 = 5; //Azzules
+int L5a8 = 5; //Azules
 int BT = 6;  
 int ultBT = 1;  
 int elr = 0;
 int PT = A1;      
 int VPT;
+int br = 0;
+int ledAzulEncendido = 0; //nuevo: guarda si el led azul está prendido
 //sensor
 #include "DHT.h"
 #define DHTPIN 8
@@ -23,7 +25,6 @@ int humedad = 0;
 int temperatura = 0;
 unsigned long tiempoAnterior = 0;
 unsigned long intervalo = 900000; //15 minutos
-
 
 void setup() {
   //Leds potenciometro y boton
@@ -42,18 +43,14 @@ void setup() {
   dht.begin();
 }
 
-
 void loop() {
   //leo si llega algo por consola
   if (Serial.available() > 0) {
     HB = Serial.read();
   }
 
-
   //Leds rojos
   int bt = digitalRead(BT);
-
-
   if (bt == LOW && ultBT == HIGH) {
     if (elr == 0) {
       elr = 1;
@@ -65,7 +62,6 @@ void loop() {
   }
   ultBT = bt;
 
-
   if (HB == 'j') {
     elr = 1;
     Serial.println("Leds rojos prendidos por consola");
@@ -75,36 +71,64 @@ void loop() {
     Serial.println("Leds rojos apagados por consola");
   }
 
-
   if (elr == 1) {
     digitalWrite(L1a4, HIGH);
   } else {
     digitalWrite(L1a4, LOW);
   }
 
-
-  //Leds azules
+  //Leds azules (control por potenciometro)
   VPT = analogRead(PT);
-  int br = VPT / 4;
-  analogWrite(L5a8, br);
+  int brPot = VPT / 4;
+  analogWrite(L5a8, brPot);
 
-
+  //Leds azules controlados por backend (con intensidad fija)
+  if (HB == 'q') {  
+    br = 0;
+    ledAzulEncendido = 1;
+    Serial.println("Brillo nivel 1 (bajo)");
+  }
+  if (HB == 'w') {  
+    br = 50;
+    ledAzulEncendido = 1;
+    Serial.println("Brillo nivel 2 (medio-bajo)");
+  }
+  if (HB == 'e') {  
+    br = 100;
+    ledAzulEncendido = 1;
+    Serial.println("Brillo nivel 3 (medio)");
+  }
+  if (HB == 'y') {  
+    br = 150;
+    ledAzulEncendido = 1;
+    Serial.println("Brillo nivel 4 (medio-alto)");
+  }
+  if (HB == 'p') {  
+    br = 255;
+    ledAzulEncendido = 1;
+    Serial.println("Brillo nivel 5 (alto)");
+  }
   if (HB == 'o') {
-    Serial.println("Leds azules prendidos");
-    analogWrite(L5a8, br);
+    ledAzulEncendido = 0;
+    Serial.println("Leds azules apagados");
   }
 
+  //Aplicar estado actual del LED azul
+  if (ledAzulEncendido == 1) {
+    analogWrite(L5a8, br);
+  } else {
+    analogWrite(L5a8, 0);
+  }
 
   //Motor DC
-  if (HB == 'r'){
-    Serial.println("ventilador prendida");
+  if (HB == 'y'){
+    Serial.println("Ventilador prendido");
     digitalWrite(relayPin1, HIGH);
   }
-  if (HB == 'm'){
-    Serial.println("ventilador apagado");
+  if (HB == 'u'){
+    Serial.println("Ventilador apagado");
     digitalWrite(relayPin1,LOW);
   }
-
 
   //Motorreductor
   if (HB == 'd'){
@@ -128,21 +152,17 @@ void loop() {
     analogWrite(H3,0);
   }
 
-
   //Sensor cada 15 minutos
   unsigned long tiempoActual = millis();
   if (tiempoActual - tiempoAnterior >= intervalo) {
     tiempoAnterior = tiempoActual;
 
-
     humedad = (int)dht.readHumidity();
     temperatura = (int)dht.readTemperature();
-
 
     Serial.print("Humedad: ");
     Serial.print(humedad);
     Serial.println(" %");
-
 
     Serial.print("Temperatura: ");
     Serial.print(temperatura);
