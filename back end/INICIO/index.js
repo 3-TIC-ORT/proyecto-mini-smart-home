@@ -228,7 +228,6 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-<<<<<<< HEAD
   else if (objeto.lucesazules === 2) {
     port.write ('w', (err) => {
       if (err) {
@@ -237,32 +236,6 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     });
     let caracter = 'w';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
-=======
-
-});
-
-
-
-
-//Comunicación front-back-hardware: usando Node SerialPort
-
-
-
-
-let port = new SerialPort ({
-  path: 'COM3',
-  baudRate: 9600
-});
-
-
-let parser = port.pipe (new ReadlineParser ({delimiter: "\n"}));
-
-
-//Código que hace que reciba los datos que manda el arduino, y hace que no se muestre un loop infinito de mensajes:
-parser.on('data', (line) => {
-  if (line.trim() !== "Distancia detectada: 0 cm") {
-    console.log('Arduino respondió con:', line);
->>>>>>> 2058f22945cf312eeb30949b697ca30d847569e1
   }
 
   else if (objeto.lucesazules === 3) {
