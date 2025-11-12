@@ -1,0 +1,16 @@
+holiii estoy copiando mi codigoooo
+7/8/25: comienzo con la investigación de hardware, termine corriente alterna y comencé corriente continua
+8/8/25: Continuó con la investigación de hardware, termine corriente continua y motorreductores, puse la info en IA.
+13/8/25 empecé a investigar puente h y la parte de porque lo investigo me da ganas de matarme 😀. Tengo que buscar sensores de humedad que me dan mas ganas de matarme btw. 
+21/8/25 hable con daro nos mandó a hacer más investigación
+22/8/25 definí los motores y el sensor que voy a usar y tengo que hablar con daro pero no está 😥.
+29/8/25 hice una simulacion de 4 leds con botón y como no tenía resistencias (gracias juani por darme info falsa) no funcionó
+4/9/25 hace una banda q no actualizar, bueno daro AL FIN volvió ayer asi q me dio tareas y cnd termine de investigar un par de cosas logre definir los materiales, para ese punto quedaban 15 minutos de clase y quería ir a buscar los materiales pero no había mep (lpm)
+5/9/25 bueno eeee no tengo el celu asi q no se q materiales tenia q buscar (lpqtp mama) bueno tengo que investigar chau. volviii estoy en el segundo bloque del proyecto de viernes. máximo me explico como conectar un puente h con un motor dc (maxi capo te re banco sos la persona más útil del universo) y voy a conectar a un motorreductor con un puente h sola haber si sale.
+10/9/25 PERO LRPM NO HAY PUENTE H bld cada vez q hago un poco de progreso me cagan primero falta dario y ahora no hay puente h LRCDTH HDMP🤬.
+12/9/25 bueno no hay puente entonces voy a hacer el dc con un relay para controlarlo. te juro que estoy re atrasada me quiero matar
+30/9/25 prendiuuoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo prendio mi motor es un dia para festejar
+3/10/25 prende el motor dc y estoy haciendo prender el motorreductor
+22/10/25 hoy hice código mayormente y termine con el potenciómetro y el botón, la sem pasada prendi los leds y me olvide de avisar, ademas me di cuenta de un error que culpo 99,999999% a darío por, xq me dijo el que use un módulo de relé para el ventilador a que necesitaba controlar la velocidad. PD: un modulo rele no controla la velocidad
+12/11/25 Durante estas ultimas semanas que no updatie esto estuve comprobando que mi codigo funcione en su totalidad, funciona pero estoy teniendo que volver a soldar todo el tiempo y me cuesta muuucho tiempo y es una cagada. En otras noticias logre terminar y tengo q volver a enchufar todo todos los bloqeus cosa q es una cagada masive pero bueno
+😜😜
