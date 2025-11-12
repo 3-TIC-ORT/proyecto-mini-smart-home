@@ -351,7 +351,7 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
-    });
+    }); 
     let caracter = 'y';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
