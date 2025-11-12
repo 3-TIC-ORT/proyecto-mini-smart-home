@@ -7,6 +7,7 @@
     }
   },
   {
+<<<<<<< HEAD
     "nombre": "Fran",
     "condiciones": {
       "tipo": "dia",
@@ -22,6 +23,16 @@
   },
   {
     "nombre": "Fran",
+=======
+    "nombre": "tu mama",
+    "condiciones": {
+      "tipo": "luz",
+      "nivel": "oscuro"
+    }
+  },
+  {
+    "nombre": "no se bro",
+>>>>>>> 2058f22945cf312eeb30949b697ca30d847569e1
     "condiciones": {
       "tipo": "dia",
       "dia": "1"
