@@ -15,7 +15,7 @@ if (usuarioLogueado) {
 
   let usuario = JSON.parse(usuarioLogueado);
 
-  getEvent("obtenerUsuario", function() {
+  postEvent("obtenerUsuario", usuario, function(data) {
 
     //me perdi, me estrese, ya no se que hacer con mi vida.
 
@@ -193,19 +193,7 @@ function cargarModos() {
     let modosArray = typeof data === "string" ? JSON.parse(data) : data;
     modosGuardados = modosArray;
 
-    // Lista simple
-    lista.innerHTML = "";
-    if (modosArray.length === 0) lista.innerHTML = "<li>No hay modos guardados.</li>";
-    else {
-      modosArray.forEach(modo => {
-        let li = document.createElement("li");
-        li.textContent = `${modo.nombre || "sin nombre"} (${modo.condiciones?.tipo || "sin condiciones"})`;
-        lista.appendChild(li);
-      });
-    }
-
-    // Carrusel
-    mostrarModoCarrusel();
+    mostrarModos();
   });
 }
 
@@ -216,7 +204,7 @@ let modoActualDiv = document.getElementById("modoActual");
 let prevBtn = document.getElementById("prevModo");
 let nextBtn = document.getElementById("nextModo");
 
-function mostrarModoCarrusel() {
+function mostrarModos() {
   if (modosGuardados.length === 0) {
     modoActualDiv.textContent = "No hay modos";
     return;
@@ -227,13 +215,13 @@ function mostrarModoCarrusel() {
 prevBtn.addEventListener("click", () => {
   if (modosGuardados.length === 0) return;
   modoActualIndex = (modoActualIndex - 1 + modosGuardados.length) % modosGuardados.length;
-  mostrarModoCarrusel();
+  mostrarModos();
 });
 
 nextBtn.addEventListener("click", () => {
   if (modosGuardados.length === 0) return;
   modoActualIndex = (modoActualIndex + 1) % modosGuardados.length;
-  mostrarModoCarrusel();
+  mostrarModos();
 });
 
 // Botón seleccionar modo
