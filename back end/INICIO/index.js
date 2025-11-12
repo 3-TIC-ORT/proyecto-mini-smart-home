@@ -75,7 +75,8 @@ subscribePOSTEvent ("crearModo", (data, respuesta) => {
   let modos = JSON.parse (fs.readFileSync ("data/modos.json", "utf-8"));
   let objeto = {
     nombre: data.nombre,
-    condiciones: data.condiciones
+    condiciones: data.condiciones,
+    acciones: data.acciones
   }
 
 
@@ -203,7 +204,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
 let port = new SerialPort ({
-  path: 'COM5',
+  path: 'COM3',
   baudRate: 9600
 });
 

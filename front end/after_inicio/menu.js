@@ -254,23 +254,24 @@ botonEjecutar.addEventListener("click", () => {
 
   // Enviamos las acciones al backend
 postEvent("ejecutarModo", {
-  persiana: acc.persiana,
-  ventilador: acc.ventilador,
-  lucesrojas: acc.lucesrojas,
-  lucesazules: acc.lucesazules
+  persiana: acciones.persiana,
+  ventilador: acciones.ventilador,
+  lucesrojas: acciones.lucesrojas,
+  lucesazules: acciones.lucesazules
 }, (data) => {
 
-  if (acc.persiana === "abrir") actualizarPersiana(1);
-  if (acc.persiana === "cerrar") actualizarPersiana(0);
+  if (acciones.persiana === 1) actualizarPersiana(1);
+  if (acciones.persiana === 0) actualizarPersiana(0);
 
-  if (acc.ventilador === "encender") actualizarVentilador(true);
-  if (acc.ventilador === "apagar") actualizarVentilador(false);
+  if (acciones.ventilador === 1) actualizarVentilador(true);
+  if (acciones.ventilador === 0) actualizarVentilador(false);
 
-  if (acc.lucesrojas === "encender") actualizarLucesRojas(true);
-  if (acc.lucesrojas === "apagar") actualizarLucesRojas(false);
+  if (acciones.lucesrojas === 1) actualizarLucesRojas(true);
+  if (acciones.lucesrojas === 0) actualizarLucesRojas(false);
 
-  if (acc.lucesazules === "encender") actualizarLucesAzules(true);
-  if (acc.lucesazules === "apagar") actualizarLucesAzules(false);
+  if (acciones.lucesazules >=0 && acciones.lucesazules >=5) {
+    actualizarLucesAzules(acciones.lucesazules);
+  }
 
   if (data && data.ok) {
     console.log("Modo ejecutado correctamente");

@@ -5,5 +5,19 @@
       "tipo": "dia",
       "dia": "1"
     }
+  },
+  {
+    "nombre": "tu mama",
+    "condiciones": {
+      "tipo": "luz",
+      "nivel": "oscuro"
+    }
+  },
+  {
+    "nombre": "no se bro",
+    "condiciones": {
+      "tipo": "dia",
+      "dia": "1"
+    }
   }
 ]

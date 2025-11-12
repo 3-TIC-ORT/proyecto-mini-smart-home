@@ -43,7 +43,15 @@
       <section class="modos">
       <h2>Modos</h2>
       <ul id="modos"></ul>
+      <div id="carruselModos" style="display:flex; align-items:center; gap:10px;">
+        <button id="prevModo">&lt;</button>
+        <div id="modoActual" style="min-width:200px; text-align:center; border:1px solid #ccc; padding:10px; border-radius:5px;">
+          <!-- Aquí se muestra el modo actual -->
+        </div>
+        <button id="nextModo">&gt;</button>
+      </div>
       
+      <button id="btnSeleccionar">Seleccionar</button>
       <form id="modoform">
         <input id="nombre" placeholder="Nombre del modo">
         <select id="condicion" required>
@@ -56,7 +64,6 @@
           
         <button>Guardar</button>
       </form>
-      <button id="btnEjecutar">Seleccionar</button>
     </section>
 
     <section class="musiquita">
