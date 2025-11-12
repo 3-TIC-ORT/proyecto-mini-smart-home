@@ -48,7 +48,7 @@ let casita = document.getElementById("casita");
 let modooscuro = document.getElementById("modooscuro");
 let logout = document.getElementById("logout");
 
-// Toggle desplegable
+// el coso este desplegable
 conf.addEventListener("click", () => {
   iconMenu.classList.toggle("active");
 });
@@ -73,15 +73,17 @@ actualizarReloj();
 
 //los modosssss
 
+let modosGuardados = [];
+let modoActualIndex = 0;
+
+// Mostrar campos extra según tipo
 condicion.addEventListener("change", () => {
   condicionesExtra.innerHTML = "";
   if (condicion.value === "hora") {
-    let desde = document.createElement("label");
-    desde.innerHTML = `Desde: <input type="time" id="desdeHora">`;
-    let hasta = document.createElement("label");
-    hasta.innerHTML = `Hasta: <input type="time" id="hastaHora">`;
-    condicionesExtra.appendChild(desde);
-    condicionesExtra.appendChild(hasta);
+    condicionesExtra.innerHTML = `
+      <label>Desde: <input type="time" id="desdeHora"></label>
+      <label>Hasta: <input type="time" id="hastaHora"></label>
+    `;
   } else if (condicion.value === "dia") {
     condicionesExtra.innerHTML = `
       <label>Día:
@@ -98,8 +100,7 @@ condicion.addEventListener("change", () => {
     `;
   } else if (condicion.value === "luz") {
     condicionesExtra.innerHTML = `
-      <label>
-        Nivel de luz:
+      <label>Nivel de luz:
         <select id="nivelLuz">
           <option value="oscuro">Oscuro</option>
           <option value="claro">Claro</option>
@@ -107,50 +108,43 @@ condicion.addEventListener("change", () => {
       </label>
     `;
   }
-  let action = document.createElement("div");
-  action.id = "acciones";
-  action.innerHTML = `
-    <h3>Acciones</h3>
 
-    <label>
-      Persiana:
+  let accionesHTML = `
+    <h3>Acciones</h3>
+    <label>Persiana:
       <select id="percy">
         <option value="nada">Ninguna</option>
         <option value="abrir">Abrir</option>
         <option value="cerrar">Cerrar</option>
       </select>
     </label>
-
-    <label>
-      Ventilador:
+    <label>Ventilador:
       <select id="venti">
         <option value="nada">Ninguna</option>
         <option value="prender">Prender</option>
         <option value="apagar">Apagar</option>
       </select>
     </label>
-
-    <label>
-      Luces rojas:
+    <label>Luces rojas:
       <select id="rojo">
         <option value="nada">Ninguna</option>
         <option value="prender">Prender</option>
         <option value="apagar">Apagar</option>
       </select>
     </label>
-
-    <label>
-      Luces azules:
+    <label>Luces azules:
       <input type="range" id="azul" min="0" max="5" step="1" value="0">
     </label>
   `;
-
-  condicionesExtra.appendChild(action);
+  let actionDiv = document.createElement("div");
+  actionDiv.id = "acciones";
+  actionDiv.innerHTML = accionesHTML;
+  condicionesExtra.appendChild(actionDiv);
 });
 
+// Crear modo
 function crearModo(nombre, tipo) {
   let condiciones = {};
-
   if (tipo === "hora") {
     condiciones = {
       tipo: "hora",
@@ -176,8 +170,6 @@ function crearModo(nombre, tipo) {
     lucesazules: parseInt(document.getElementById("azul").value)
   };
 
-  console.log("Se envía al backend:", { nombre, condiciones, acciones });
-
   postEvent("crearModo", { nombre, condiciones, acciones }, (respuesta) => {
     console.log("Modo guardado:", respuesta);
     cargarModos();
@@ -186,135 +178,145 @@ function crearModo(nombre, tipo) {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
   let nombre = document.getElementById("nombre").value;
   let tipo = condicion.value;
-
   if (!nombre || !tipo) {
     alert("Por favor, completa todos los campos.");
     return;
   }
-
-  let acciones = {
-    persiana: document.getElementById("percy").value,
-    ventilador: document.getElementById("venti").value,
-    lucesrojas: document.getElementById("rojo").value,
-    lucesazules: parseInt(document.getElementById("azul").value)
-  };
-
-  crearModo(nombre, tipo, acciones);
+  crearModo(nombre, tipo);
 });
 
+// Cargar modos
 function cargarModos() {
-    getEvent("obtenerModos", (data) => {
-      console.log("Modos recibidos:", data);
-  
-      if (!lista) return;
-  
-      lista.innerHTML = "";
-  
-      // parsear si viene como string
-      let modosArray = data;
-      if (typeof data === "string") {
-        try {
-          modosArray = JSON.parse(data);
-        } catch (err) {
-          console.error("Error parseando data de obtenerModos:", err);
-          modosArray = [];
-        }
-      }
-  
-      if (!Array.isArray(modosArray) || modosArray.length === 0) {
-        lista.innerHTML = "<li>No hay modos guardados.</li>";
-        return;
-      }
-  
-      modosArray.forEach((modo) => {
+  getEvent("obtenerModos", (data) => {
+    let modosArray = typeof data === "string" ? JSON.parse(data) : data;
+    modosGuardados = modosArray;
+
+    // Lista simple
+    lista.innerHTML = "";
+    if (modosArray.length === 0) lista.innerHTML = "<li>No hay modos guardados.</li>";
+    else {
+      modosArray.forEach(modo => {
         let li = document.createElement("li");
-        let tipoCond = modo.condiciones ? modo.condiciones.tipo : "sin condiciones";
-        li.textContent = `${modo.nombre || "sin nombre"} (${tipoCond})`;
+        li.textContent = `${modo.nombre || "sin nombre"} (${modo.condiciones?.tipo || "sin condiciones"})`;
         lista.appendChild(li);
       });
-    });
-  }
+    }
+
+    // Carrusel
+    mostrarModoCarrusel();
+  });
+}
+
 cargarModos();
 
-let botonEjecutar = document.getElementById("btnEjecutar");
+// Carrusel
+let modoActualDiv = document.getElementById("modoActual");
+let prevBtn = document.getElementById("prevModo");
+let nextBtn = document.getElementById("nextModo");
 
-botonEjecutar.addEventListener("click", () => {
-  // Obtenemos los valores actuales del formulario
+function mostrarModoCarrusel() {
+  if (modosGuardados.length === 0) {
+    modoActualDiv.textContent = "No hay modos";
+    return;
+  }
+  modoActualDiv.textContent = modosGuardados[modoActualIndex].nombre;
+}
+
+prevBtn.addEventListener("click", () => {
+  if (modosGuardados.length === 0) return;
+  modoActualIndex = (modoActualIndex - 1 + modosGuardados.length) % modosGuardados.length;
+  mostrarModoCarrusel();
+});
+
+nextBtn.addEventListener("click", () => {
+  if (modosGuardados.length === 0) return;
+  modoActualIndex = (modoActualIndex + 1) % modosGuardados.length;
+  mostrarModoCarrusel();
+});
+
+// Botón seleccionar modo
+document.getElementById("btnSeleccionar").addEventListener("click", () => {
+  if (modosGuardados.length === 0) return;
+  activarModo(modosGuardados[modoActualIndex]);
+});
+
+// Obtener nivel de luz
+function obtenerNivelLuz() {
+  let elemento = document.getElementById("nivelLuz");
+  return elemento ? elemento.value : "claro";
+}
+
+// Activar modo
+function activarModo(modo) {
+  if (!modo || !modo.acciones) return;
+  let a = modo.acciones;
+
+  // Actualizar frontend
+  if (a.persiana === "abrir") actualizarPersiana(1);
+  else if (a.persiana === "cerrar") actualizarPersiana(0);
+
+  if (a.ventilador === "prender") actualizarVentilador(1);
+  else if (a.ventilador === "apagar") actualizarVentilador(0);
+
+  if (a.lucesrojas === "prender") actualizarLuces(1,1);
+  else if (a.lucesrojas === "apagar") actualizarLuces(1,0);
+
+  if (typeof a.lucesazules === "number") actualizarLuces(2, a.lucesazules);
+
+  // Preparar datos backend
+  let accionesBackend = {
+    persiana: a.persiana === "abrir" ? 1 : a.persiana === "cerrar" ? 0 : null,
+    ventilador: a.ventilador === "prender" ? 1 : a.ventilador === "apagar" ? 0 : null,
+    lucesrojas: a.lucesrojas === "prender" ? 1 : a.lucesrojas === "apagar" ? 0 : null,
+    lucesazules: a.lucesazules
+  };
+
+  postEvent("ejecutarModo", accionesBackend, (data) => {
+    console.log("Modo activado:", modo.nombre, accionesBackend);
+  });
+}
+
+// Verificación automática
+function verificarModos() {
+  getEvent("obtenerModos", (modos) => {
+    if (typeof modos === "string") {
+      try { modos = JSON.parse(modos); } catch { modos = []; }
+    }
+    if (!Array.isArray(modos)) return;
+
+    let ahora = new Date();
+    let horaActual = ahora.getHours().toString().padStart(2,"0")+":"+ahora.getMinutes().toString().padStart(2,"0");
+    let diaHoy = ahora.getDay() === 0 ? 7 : ahora.getDay();
+
+    modos.forEach(modo => {
+      let c = modo.condiciones;
+      if (!c) return;
+
+      let activar = false;
+      if (c.tipo === "hora" && horaActual >= c.desde && horaActual <= c.hasta) activar = true;
+      if (c.tipo === "dia" && parseInt(c.dia) === diaHoy) activar = true;
+      if (c.tipo === "luz" && obtenerNivelLuz() === c.nivel) activar = true;
+
+      if (activar) activarModo(modo);
+    });
+  });
+}
+setInterval(verificarModos, 60000);
+verificarModos();
+
+// Botón manual
+document.getElementById("btnEjecutar")?.addEventListener("click", () => {
   let acciones = {
     persiana: document.getElementById("percy").value,
     ventilador: document.getElementById("venti").value,
     lucesrojas: document.getElementById("rojo").value,
     lucesazules: parseInt(document.getElementById("azul").value)
   };
-
-  console.log("Ejecutando modo con:", acciones);
-
-  // Enviamos las acciones al backend
-postEvent("ejecutarModo", {
-  persiana: acciones.persiana,
-  ventilador: acciones.ventilador,
-  lucesrojas: acciones.lucesrojas,
-  lucesazules: acciones.lucesazules
-}, (data) => {
-
-  if (acciones.persiana === 1) actualizarPersiana(1);
-  if (acciones.persiana === 0) actualizarPersiana(0);
-
-  if (acciones.ventilador === 1) actualizarVentilador(true);
-  if (acciones.ventilador === 0) actualizarVentilador(false);
-
-  if (acciones.lucesrojas === 1) actualizarLucesRojas(true);
-  if (acciones.lucesrojas === 0) actualizarLucesRojas(false);
-
-  if (acciones.lucesazules >=0 && acciones.lucesazules >=5) {
-    actualizarLucesAzules(acciones.lucesazules);
-  }
-
-  if (data && data.ok) {
-    console.log("Modo ejecutado correctamente");
-  } else if (data && data.error) {
-    console.error("Error al ejecutar modo:", data.error);
-  }
+  activarModo({ acciones: acciones, nombre: "Manual" });
 });
 
-});
-
-function activarModo(modo) {
-  let a = modo.acciones;
-  if (!a) return;
-
-  if (a.persiana === "abrir") {
-    actualizarPersiana(1);
-  } 
-  if (a.persiana === "cerrar") {
-    actualizarPersiana(0);
-  } 
-
-  if (a.ventilador === "prender") {
-    actualizarVentilador(true);
-  } 
-  if (a.ventilador === "apagar") {
-    actualizarVentilador(false);
-  } 
-
-  if (a.lucesrojas === "prender") {
-    actualizarLucesRojas(true);
-  } 
-  if (a.lucesrojas === "apagar") {
-    actualizarLucesRojas(false);
-  } 
-
-  if (typeof a.lucesazules === "number") {
-    actualizarLucesAzules(a.lucesazules);
-  }
-
-  postEvent("ejecutarModo", a, function(data){
-    console.log("Modo activado:", modo.nombre);
-  });
-}
 
 //musica
 

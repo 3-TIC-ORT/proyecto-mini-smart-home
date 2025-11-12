@@ -7,7 +7,6 @@
     }
   },
   {
-<<<<<<< HEAD
     "nombre": "Fran",
     "condiciones": {
       "tipo": "dia",
@@ -23,19 +22,79 @@
   },
   {
     "nombre": "Fran",
-=======
-    "nombre": "tu mama",
-    "condiciones": {
-      "tipo": "luz",
-      "nivel": "oscuro"
-    }
-  },
-  {
-    "nombre": "no se bro",
->>>>>>> 2058f22945cf312eeb30949b697ca30d847569e1
     "condiciones": {
       "tipo": "dia",
       "dia": "1"
+    }
+  },
+  {
+    "nombre": "jegulus",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "11:17",
+      "hasta": "11:20"
+    },
+    "acciones": {
+      "persiana": "nada",
+      "ventilador": "prender",
+      "lucesrojas": "nada",
+      "lucesazules": 3
+    }
+  },
+  {
+    "nombre": "ok, mañana",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "11:28",
+      "hasta": "01:30"
+    },
+    "acciones": {
+      "persiana": "nada",
+      "ventilador": "prender",
+      "lucesrojas": "prender",
+      "lucesazules": 2
+    }
+  },
+  {
+    "nombre": "life is shit",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "11:34",
+      "hasta": "11:35"
+    },
+    "acciones": {
+      "persiana": "nada",
+      "ventilador": "nada",
+      "lucesrojas": "prender",
+      "lucesazules": 5
+    }
+  },
+  {
+    "nombre": "ayudaaa",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "11:42",
+      "hasta": "11:45"
+    },
+    "acciones": {
+      "persiana": "nada",
+      "ventilador": "nada",
+      "lucesrojas": "prender",
+      "lucesazules": 5
+    }
+  },
+  {
+    "nombre": "nmvvjvmn",
+    "condiciones": {
+      "tipo": "hora",
+      "desde": "03:06",
+      "hasta": "04:05"
+    },
+    "acciones": {
+      "persiana": "abrir",
+      "ventilador": "apagar",
+      "lucesrojas": "apagar",
+      "lucesazules": 4
     }
   }
 ]
