@@ -13,26 +13,23 @@ let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 if (usuarioLogueado) {
   console.log("Sesión activa para:", usuarioLogueado);
 
-  // Si el localStorage guarda un objeto JSON, lo parseamos
   let usuario = JSON.parse(usuarioLogueado);
 
-  let saludo = document.getElementById("saludo");
-  let nombreUsuario = document.getElementById("nombreusuario");
-  let nacimiento = document.getElementById("nacimiento");
-  let sobre = document.getElementById("sobre");
+  getEvent("obtenerUsuario", function() {
 
-  // Escuchamos el evento del backend
-  getEvent("obtenerUsuario", (data) => {
-    console.log("Datos recibidos del backend:", data);
+    //me perdi, me estrese, ya no se que hacer con mi vida.
 
-    // Si el backend manda dentro de data.usuario, usamos eso
-    let usuarioFinal = data.usuario || data;
+    let saludo = document.getElementById("saludo");
+    let nombreUsuario = document.getElementById("nombreusuario");
+    let nacimiento = document.getElementById("nacimiento");
+    let sobre = document.getElementById("sobre");
 
-    if (saludo) saludo.textContent = `¡Hola, ${usuarioFinal.nombre || usuario.nombre}!`;
-    if (nombreUsuario) nombreUsuario.textContent = usuarioFinal.nombre || usuario.nombre;
-    if (nacimiento) nacimiento.textContent = usuarioFinal.cumple || "No disponible";
-    if (sobre) sobre.textContent = usuarioFinal.sobre || "Sin descripción";
+    saludo.textContent = `¡Hola, ${usuario.nombre || "Usuario"}!`;
+    nombreUsuario.textContent = usuario.nombre || "Sin nombre";
+    nacimiento.textContent = usuario.cumple || "No disponible";
+    sobre.textContent = usuario.sobre || "Sin descripción";
   });
+}
 
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -44,7 +41,6 @@ tabs.forEach(tab => {
     document.getElementById(tabId).classList.add('active');
   });
 });
-}
 
 let conf = document.querySelector(".settings");
 let iconMenu = document.querySelector(".icon-menu");
@@ -74,6 +70,8 @@ function actualizarReloj() {
 
 setInterval(actualizarReloj, 10000);
 actualizarReloj();
+
+//los modosssss
 
 condicion.addEventListener("change", () => {
   condicionesExtra.innerHTML = "";
@@ -254,21 +252,68 @@ botonEjecutar.addEventListener("click", () => {
 
   console.log("Ejecutando modo con:", acciones);
 
-  postEvent("ejecutarModo", acciones, (data) => {
-    console.log("Respuesta del backend:", data);
+  // Enviamos las acciones al backend
+postEvent("ejecutarModo", {
+  persiana: acc.persiana,
+  ventilador: acc.ventilador,
+  lucesrojas: acc.lucesrojas,
+  lucesazules: acc.lucesazules
+}, (data) => {
 
-    if (acciones.persiana === "abrir") actualizarPersiana(1);
-    if (acciones.persiana === "cerrar") actualizarPersiana(0);
+  if (acc.persiana === "abrir") actualizarPersiana(1);
+  if (acc.persiana === "cerrar") actualizarPersiana(0);
 
-    if (acciones.ventilador === "prender") actualizarVentilador(1);
-    if (acciones.ventilador === "apagar") actualizarVentilador(0);
+  if (acc.ventilador === "encender") actualizarVentilador(true);
+  if (acc.ventilador === "apagar") actualizarVentilador(false);
 
-    if (acciones.lucesrojas === "prender") actualizarLuces(1, 1);
-    if (acciones.lucesrojas === "apagar") actualizarLuces(1, 0);
+  if (acc.lucesrojas === "encender") actualizarLucesRojas(true);
+  if (acc.lucesrojas === "apagar") actualizarLucesRojas(false);
 
-    if (typeof acciones.lucesazules === "number") actualizarLuces(2, acciones.lucesazules);
-  });
+  if (acc.lucesazules === "encender") actualizarLucesAzules(true);
+  if (acc.lucesazules === "apagar") actualizarLucesAzules(false);
+
+  if (data && data.ok) {
+    console.log("Modo ejecutado correctamente");
+  } else if (data && data.error) {
+    console.error("Error al ejecutar modo:", data.error);
+  }
 });
+
+});
+
+function activarModo(modo) {
+  let a = modo.acciones;
+  if (!a) return;
+
+  if (a.persiana === "abrir") {
+    actualizarPersiana(1);
+  } 
+  if (a.persiana === "cerrar") {
+    actualizarPersiana(0);
+  } 
+
+  if (a.ventilador === "prender") {
+    actualizarVentilador(true);
+  } 
+  if (a.ventilador === "apagar") {
+    actualizarVentilador(false);
+  } 
+
+  if (a.lucesrojas === "prender") {
+    actualizarLucesRojas(true);
+  } 
+  if (a.lucesrojas === "apagar") {
+    actualizarLucesRojas(false);
+  } 
+
+  if (typeof a.lucesazules === "number") {
+    actualizarLucesAzules(a.lucesazules);
+  }
+
+  postEvent("ejecutarModo", a, function(data){
+    console.log("Modo activado:", modo.nombre);
+  });
+}
 
 //musica
 
