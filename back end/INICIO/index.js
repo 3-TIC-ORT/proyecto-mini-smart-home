@@ -25,12 +25,6 @@ subscribePOSTEvent ("register", (data) => {
 });
 
 
-
-
-
-
-
-
 subscribePOSTEvent ("login", (data) => {
 
 
@@ -56,19 +50,7 @@ subscribePOSTEvent ("login", (data) => {
 });
 
 
-
-
-
-
-
-
 //Para los modos:
-
-
-
-
-
-
 
 
 subscribePOSTEvent ("crearModo", (data, respuesta) => {
@@ -96,15 +78,14 @@ subscribeGETEvent ("obtenerModos", () => {
 
 
 //Para mostrar el nombre de usuario:
-subscribeGETEvent("obtenerUsuario", () => {
-  const leer = JSON.parse(fs.readFileSync("data/registro_login.json", "utf-8"));
+subscribePOSTEvent("obtenerUsuario", (data) => {
+  let leer = JSON.parse (fs.readFileSync ("registro_login.json", "utf-8"));
 
 
   // Tomar el último usuario con nombre y cumple definidos
   for (let i = leer.length - 1; i >= 0; i--) {
-    const u = leer[i];
-    if (u.nombre && u.cumple) {
-      return { nombre: u.nombre, cumple: u.cumple };
+    if (leer.nombre && leer.cumple) {
+      return { nombre: leer.nombre, cumple: leer.cumple };
     }
   }
 
@@ -117,7 +98,7 @@ subscribeGETEvent("obtenerUsuario", () => {
 
 
 let port = new SerialPort ({
-  path: 'COM3',
+  path: 'COM6',
   baudRate: 9600
 });
 
@@ -209,16 +190,6 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
   }
 
   if (objeto.lucesazules === 0) {
-    port.write ('o', (err) => {
-      if (err) {
-        return console.error ('Error al escribir por el puerto: ', err.message);
-      }
-    });
-    let caracter = 'o';
-    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
-  }
-
-  else if (objeto.lucesazules === 1) {
     port.write ('q', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -228,7 +199,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  else if (objeto.lucesazules === 2) {
+  else if (objeto.lucesazules === 1) {
     port.write ('w', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -238,7 +209,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  else if (objeto.lucesazules === 3) {
+  else if (objeto.lucesazules === 2) {
     port.write ('e', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -248,7 +219,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  else if (objeto.lucesazules === 4) {
+  else if (objeto.lucesazules === 3) {
     port.write ('y', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -258,13 +229,23 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  else if (objeto.lucesazules === 5) {
+  else if (objeto.lucesazules === 4) {
     port.write ('p', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
     });
     let caracter = 'p';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  else if (objeto.lucesazules === 5) {
+    port.write ('i', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'i';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
@@ -307,16 +288,6 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
  
   if (objeto.intensidad === 0) {
-    port.write ('o', (err) => {
-      if (err) {
-        return console.error ('Error al escribir por el puerto: ', err.message);
-      }
-    });
-    let caracter = 'o';
-    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
-  }
-
-  if (objeto.intensidad === 1) {
     port.write ('q', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -326,7 +297,7 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  if (objeto.intensidad === 2) {
+  if (objeto.intensidad === 1) {
     port.write ('w', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -336,7 +307,7 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  if (objeto.intensidad === 3) {
+  if (objeto.intensidad === 2) {
     port.write ('e', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -346,23 +317,33 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  if (objeto.intensidad === 4) {
+  if (objeto.intensidad === 3) {
     port.write ('y', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
-    }); 
+    });
     let caracter = 'y';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
-  if (objeto.intensidad === 5) {
+  if (objeto.intensidad === 4) {
     port.write ('p', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
-    });
+    }); 
     let caracter = 'p';
+    return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
+  }
+
+  if (objeto.intensidad === 5) {
+    port.write ('i', (err) => {
+      if (err) {
+        return console.error ('Error al escribir por el puerto: ', err.message);
+      }
+    });
+    let caracter = 'i';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
