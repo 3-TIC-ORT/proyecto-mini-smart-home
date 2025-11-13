@@ -98,15 +98,6 @@ condicion.addEventListener("change", () => {
         </select>
       </label>
     `;
-  } else if (condicion.value === "luz") {
-    condicionesExtra.innerHTML = `
-      <label>Nivel de luz:
-        <select id="nivelLuz">
-          <option value="oscuro">Oscuro</option>
-          <option value="claro">Claro</option>
-        </select>
-      </label>
-    `;
   }
 
   let accionesHTML = `
@@ -155,11 +146,6 @@ function crearModo(nombre, tipo) {
     condiciones = {
       tipo: "dia",
       dia: document.getElementById("diaSemana").value
-    };
-  } else if (tipo === "luz") {
-    condiciones = {
-      tipo: "luz",
-      nivel: document.getElementById("nivelLuz").value
     };
   }
 
@@ -230,12 +216,6 @@ document.getElementById("btnSeleccionar").addEventListener("click", () => {
   activarModo(modosGuardados[modoActualIndex]);
 });
 
-// Obtener nivel de luz
-function obtenerNivelLuz() {
-  let elemento = document.getElementById("nivelLuz");
-  return elemento ? elemento.value : "claro";
-}
-
 // Activar modo
 function activarModo(modo) {
   if (!modo || !modo.acciones) return;
@@ -285,7 +265,6 @@ function verificarModos() {
       let activar = false;
       if (c.tipo === "hora" && horaActual >= c.desde && horaActual <= c.hasta) activar = true;
       if (c.tipo === "dia" && parseInt(c.dia) === diaHoy) activar = true;
-      if (c.tipo === "luz" && obtenerNivelLuz() === c.nivel) activar = true;
 
       if (activar) activarModo(modo);
     });
