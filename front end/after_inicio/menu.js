@@ -475,3 +475,42 @@ potter.addEventListener('input', () => {
 
 actualizarLuces(1, 0);
 actualizarLuces(2, parseInt(potter.value));
+
+subscribeRealTimeEvent("estado", (data) => {
+  console.log("Actualización desde hardware:", data);
+
+  // Percy-anna(entienden el chiste?)
+  if (data.persiana !== undefined) {
+    actualizarPersiana(data.persiana);
+  }
+
+  // helicopter helicopter
+  if (data.ventilador !== undefined) {
+    actualizarVentilador(data.ventilador);
+  }
+
+  // RED LIGHT
+  if (data.lucesrojas !== undefined) {
+    actualizarLuces(1, data.lucesrojas);
+  }
+
+  //luces azules
+  if (data.lucesazules !== undefined) {
+    actualizarLuces(2, data.lucesazules);
+  }
+
+  // lo que me dijo Fran que haga con if status y lalala
+  if (data.status && data.status.on) {
+    estado.innerText = "apagado";
+  }
+});
+
+//el sensor de temperatura que todavia no se donde va
+
+let temp = document.getElementById("temperatura");
+
+subscribeRealTimeEvent("temperaturaActual", (data) => {
+  // Fran debería mandar algo como { valor: 23.5 }
+  console.log("Temperatura:", data);
+  temp.innerText = `${data.valor}°C`;
+});

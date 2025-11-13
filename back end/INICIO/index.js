@@ -98,7 +98,7 @@ subscribePOSTEvent("obtenerUsuario", (data) => {
 
 
 let port = new SerialPort ({
-  path: 'COM6',
+  path: 'COM5',
   baudRate: 9600
 });
 
