@@ -84,8 +84,8 @@ subscribePOSTEvent("obtenerUsuario", (data) => {
 
   // Tomar el último usuario con nombre y cumple definidos
   for (let i = leer.length - 1; i >= 0; i--) {
-    if (leer.nombre && leer.cumple) {
-      return { nombre: leer.nombre, cumple: leer.cumple };
+    if (leer[i].nombre && leer[i].cumple) {
+      return { nombre: leer[i].nombre, cumple: leer[i].cumple };
     }
   }
 
