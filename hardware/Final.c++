@@ -44,6 +44,7 @@ void setup() {
 }
 
 void loop() {
+  digitalWrite(relayPin1, HIGH);
   //leo si llega algo por consola
   if (Serial.available() > 0) {
     HB = Serial.read();
@@ -86,33 +87,28 @@ void loop() {
   if (HB == 'q') {  
     br = 0;
     ledAzulEncendido = 1;
-    Serial.println("Brillo nivel 1 (bajo)");
   }
   if (HB == 'w') {  
     br = 50;
     ledAzulEncendido = 1;
-    Serial.println("Brillo nivel 2 (medio-bajo)");
   }
   if (HB == 'e') {  
     br = 100;
     ledAzulEncendido = 1;
-    Serial.println("Brillo nivel 3 (medio)");
   }
   if (HB == 'y') {  
     br = 150;
     ledAzulEncendido = 1;
-    Serial.println("Brillo nivel 4 (medio-alto)");
   }
-  if (HB == 'p') {  
+  if(HB== 'p'){
+    br = 175;
+    ledAzulEncendido =1;
+  }
+  if (HB == 'i') {  
     br = 255;
     ledAzulEncendido = 1;
-    Serial.println("Brillo nivel 5 (alto)");
   }
-  if (HB == 'o') {
-    ledAzulEncendido = 0;
-    Serial.println("Leds azules apagados");
-  }
-
+  
   //Aplicar estado actual del LED azul
   if (ledAzulEncendido == 1) {
     analogWrite(L5a8, br);
@@ -121,13 +117,13 @@ void loop() {
   }
 
   //Motor DC
-  if (HB == 'y'){
+  if (HB == 'b'){
     Serial.println("Ventilador prendido");
-    digitalWrite(relayPin1, HIGH);
+    digitalWrite(relayPin1, LOW);
   }
   if (HB == 'u'){
     Serial.println("Ventilador apagado");
-    digitalWrite(relayPin1,LOW);
+    digitalWrite(relayPin1,HIGH);
   }
 
   //Motorreductor
