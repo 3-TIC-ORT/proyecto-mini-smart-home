@@ -6,7 +6,6 @@ let form = document.getElementById("modoform");
 let lista = document.getElementById("modos");
 let condicion = document.getElementById("condicion");
 let condicionesExtra = document.getElementById("extrastuff");
-let estado = document.getElementById("estado"); // Asegúrate de que este elemento exista
 
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
@@ -24,10 +23,10 @@ if (usuarioLogueado) {
     let nacimiento = document.getElementById("nacimiento");
     let sobre = document.getElementById("sobre");
 
-    saludo.textContent = `¡Hola, ${usuario.nombre || "Usuario"}!`;
-    nombreUsuario.textContent = usuario.nombre || "Sin nombre";
-    nacimiento.textContent = usuario.cumple || "No disponible";
-    sobre.textContent = usuario.sobre || "Sin descripción";
+    saludo.textContent = `¡Hola, ${data.nombre || "Usuario"}!`;
+    nombreUsuario.textContent = data.nombre || "Sin nombre";
+    nacimiento.textContent = data.cumple || "No disponible";
+    sobre.textContent = data.sobre || "Sin descripción";
   });
 }
 
@@ -476,6 +475,8 @@ potter.addEventListener('input', () => {
 actualizarLuces(1, 0);
 actualizarLuces(2, parseInt(potter.value));
 
+let estado = document.getElementById("estado"); 
+
 subscribeRealTimeEvent("estado", (data) => {
   console.log("Actualización desde hardware:", data);
 
@@ -501,7 +502,7 @@ subscribeRealTimeEvent("estado", (data) => {
 
   // lo que me dijo Fran que haga con if status y lalala
   if (data.status && data.status.on) {
-    estado.innerText = "apagado";
+    estado.innerText = "prendido";
   }
 });
 
@@ -509,8 +510,8 @@ subscribeRealTimeEvent("estado", (data) => {
 
 let temp = document.getElementById("temperatura");
 
-subscribeRealTimeEvent("temperaturaActual", (data) => {
-  // Fran debería mandar algo como { valor: 23.5 }
+subscribeRealTimeEvent("temperatura", (data) => {
+  // Fran debería mandar algo como { value: 23.5 }
   console.log("Temperatura:", data);
-  temp.innerText = `${data.valor}°C`;
+  temp.innerText = `${data.value}°C`;
 });
