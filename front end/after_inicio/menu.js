@@ -7,26 +7,163 @@ let lista = document.getElementById("modos");
 let condicion = document.getElementById("condicion");
 let condicionesExtra = document.getElementById("extrastuff");
 
+// perfil
+
+let containerPerfilView = document.getElementById("perfilView");
+let containerPerfilEdit = document.getElementById("perfilEdit");
+
+let botonEditar = document.getElementById("btnEditar");
+let botonGuardar = document.getElementById("guardarPerfil");
+let botonCancelar = document.getElementById("cancelarEditar");
+
+let inputNombre = document.getElementById("inputNombre");
+let inputCumple = document.getElementById("inputCumple");
+let inputSobre = document.getElementById("inputSobre");
+
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 if (usuarioLogueado) {
-  console.log("Sesión activa para:", usuarioLogueado);
-
   let usuario = JSON.parse(usuarioLogueado);
 
   postEvent("obtenerUsuario", usuario, function(data) {
 
-    //me perdi, me estrese, ya no se que hacer con mi vida.
-
+    // --- rellenar vista inicial ---
     let saludo = document.getElementById("saludo");
+    let userID = document.getElementById("userid");
     let nombreUsuario = document.getElementById("nombreusuario");
     let nacimiento = document.getElementById("nacimiento");
     let sobre = document.getElementById("sobre");
 
-    saludo.textContent = `¡Hola, ${data.nombre || "Usuario"}!`;
-    nombreUsuario.textContent = data.nombre || "Sin nombre";
-    nacimiento.textContent = data.cumple || "No disponible";
-    sobre.textContent = data.sobre || "Sin descripción";
+    // nombre / saludo
+    if (data.nombre) {
+      saludo.textContent = "¡Hola, " + data.nombre + "!";
+      nombreUsuario.textContent = data.nombre;
+    } else {
+      saludo.textContent = "¡Hola!";
+      nombreUsuario.textContent = "Sin nombre";
+    }
+
+    // cumple
+    if (data.cumple) {
+      nacimiento.textContent = data.cumple;
+    } else {
+      nacimiento.textContent = "No disponible";
+    }
+
+    // sobre
+    if (data.sobre) {
+      sobre.textContent = data.sobre;
+    } else {
+      sobre.textContent = "Sin descripción";
+    }
+
+    // id
+    if (data.id) {
+      userID.textContent = data.id;
+    } else {
+      userID.textContent = "sin id";
+    }
+
+    // --- click editar: mostrar editor en el mismo recuadro ---
+    botonEditar.addEventListener("click", function () {
+      // rellenar inputs con los valores actuales
+      if (data.nombre) {
+        inputNombre.value = data.nombre;
+      } else {
+        inputNombre.value = "";
+      }
+
+      if (data.cumple) {
+        inputCumple.value = data.cumple;
+      } else {
+        inputCumple.value = "";
+      }
+
+      if (data.sobre) {
+        inputSobre.value = data.sobre;
+      } else {
+        inputSobre.value = "";
+      }
+
+      // mostrar editor y ocultar vista
+      if (containerPerfilView) {
+        containerPerfilView.style.display = "none";
+      }
+      if (containerPerfilEdit) {
+        containerPerfilEdit.style.display = "block";
+      }
+    });
+
+    // --- cancelar: volver a la vista ---
+    botonCancelar.addEventListener("click", function () {
+      if (containerPerfilEdit) {
+        containerPerfilEdit.style.display = "none";
+      }
+      if (containerPerfilView) {
+        containerPerfilView.style.display = "flex";
+      }
+    });
+
+    // --- guardar ---
+    botonGuardar.addEventListener("click", function () {
+      let nuevoNombre = inputNombre.value.trim();
+      let nuevoCumple = inputCumple.value;
+      let nuevoSobre = inputSobre.value.trim();
+
+      // armar payload mínimo para el backend
+      let datosActualizados = {
+        id: data.id,
+        nombre: nuevoNombre,
+        cumple: nuevoCumple,
+        sobre: nuevoSobre
+      };
+
+      postEvent("actualizarUsuario", datosActualizados, function (respuesta) {
+        // asumimos que backend devolvió el objeto actualizado, si no, usamos lo que mandamos
+        let actualizado = null;
+        if (respuesta && typeof respuesta === "object") {
+          actualizado = respuesta;
+        } else {
+          actualizado = datosActualizados;
+        }
+
+        // actualizar la vista con los nuevos datos (USAR ifs)
+        if (actualizado.nombre) {
+          document.getElementById("nombreusuario").textContent = actualizado.nombre;
+          document.getElementById("saludo").textContent = "¡Hola, " + actualizado.nombre + "!";
+        } else {
+          document.getElementById("nombreusuario").textContent = "Sin nombre";
+          document.getElementById("saludo").textContent = "¡Hola!";
+        }
+
+        if (actualizado.cumple) {
+          document.getElementById("nacimiento").textContent = actualizado.cumple;
+        } else {
+          document.getElementById("nacimiento").textContent = "No disponible";
+        }
+
+        if (actualizado.sobre) {
+          document.getElementById("sobre").textContent = actualizado.sobre;
+        } else {
+          document.getElementById("sobre").textContent = "Sin descripción";
+        }
+
+        // guardar en localStorage (mantener el mismo objeto usuario)
+        data.nombre = actualizado.nombre;
+        data.cumple = actualizado.cumple;
+        data.sobre = actualizado.sobre;
+        localStorage.setItem("usuarioLogueado", JSON.stringify(data));
+
+        // volver a vista
+        if (containerPerfilEdit) {
+          containerPerfilEdit.style.display = "none";
+        }
+        if (containerPerfilView) {
+          containerPerfilView.style.display = "flex";
+        }
+      });
+    });
+
   });
 }
 

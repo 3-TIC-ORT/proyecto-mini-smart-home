@@ -166,6 +166,8 @@ aside.active .configuracion {
   margin-top: 10px;
 }
 
+/* Perfil */
+
 .perfil {
   background: white;
   border-radius: 12px;
@@ -174,6 +176,103 @@ aside.active .configuracion {
   align-items: flex-start;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   width: fit-content;
+}
+
+.saludo {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.dni {
+  background: white;
+  border: 4px solid #00d1d1;
+  border-radius: 30px;
+  padding: 25px;
+  width: 400px;
+  height: 250px;
+  display: flex;
+  gap: 25px;
+  justify-content: flex-start;
+}
+
+.avatar-box {
+  text-align: center;
+  position: relative;
+}
+
+.avatar {
+  width: 170px;
+  height: 170px;
+  border-radius: 200px;
+  border: 5px solid #00d1d1;
+  object-fit: cover;
+}
+
+.btn-editar {
+  background: #00d1d1;
+  color: white;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transform: rotate(8deg);
+  font-size: 15px;
+}
+
+.btn-editar2 {
+  background:#ccc; 
+  color:#000;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transform: rotate(8deg);
+  font-size: 15px;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 35px;
+}
+
+.info-item {
+  background: #00d1d1;
+  padding: 5px 5px;
+  border-radius: 7px;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+}
+
+.value {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+.cososdelperfil{
+  width:100%; 
+  padding:8px; 
+  margin-bottom:8px;
+}
+
+.botoneseditar{
+  display:flex;
+   gap:8px;
 }
 
 .modos {
@@ -185,6 +284,8 @@ aside.active .configuracion {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   width: fit-content;
 }
+
+/* Musica*/
 
 .musiquita {
   background: white;
@@ -201,6 +302,8 @@ aside.active .configuracion {
   background-color: none;
   border: none;
 }
+
+/* Modos */
 
 .funciones {
   flex: 1;
