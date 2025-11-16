@@ -118,11 +118,10 @@ if (usuarioLogueado) {
         sobre: nuevoSobre
       };
 
-      postEvent("actualizarUsuario", datosActualizados, function (respuesta) {
-        // asumimos que backend devolvió el objeto actualizado, si no, usamos lo que mandamos
+      postEvent("actualizarUsuario", datosActualizados, function (data) {
         let actualizado = null;
-        if (respuesta && typeof respuesta === "object") {
-          actualizado = respuesta;
+        if (data && typeof data === "object") {
+          actualizado = data;
         } else {
           actualizado = datosActualizados;
         }
@@ -426,10 +425,16 @@ document.getElementById("btnEjecutar")?.addEventListener("click", () => {
 let audio = document.getElementById("audio");
 let titulo = document.getElementById("titulo");
 let genero = document.getElementById("genero");
+
 let botonplay = document.getElementById("btnplay");
 let botonanterior = document.getElementById("btnanterior");
 let botonsaltear = document.getElementById("btnsaltear");
-let playicono = document.getElementById("playicono");
+let repeatBtn = document.getElementById("repeat");
+let repeatIcon = document.getElementById("repeatIcon");
+let muteBtn = document.getElementById("mute");
+let shuffleBtn = document.getElementById("shuffle");
+let shuffleIcon = document.getElementById("shuffleIcon");
+
 let progreso = document.getElementById("progreso");
 let progresoThumb = document.getElementById("progresoThumb");
 
@@ -438,8 +443,7 @@ let current = 0;
 let songs = [
   { titulo: "Canción 1", genero: "Pop", file: "../musica/track1.mp3" },
   { titulo: "Canción 2", genero: "Rock", file: "../musica/track2.mp3" },
-  { titulo: "Canción 3", genero: "Jazz", file: "../musica/track3.mp3" },
-  { titulo: "Demo", genero: "Test", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
+  { titulo: "Canción 3", genero: "Jazz", file: "../musica/track3.mp3" }
 ];
 
 function cargarCancion(index) {
@@ -478,6 +482,54 @@ botonsaltear.addEventListener("click", () => {
   cargarCancion(current);
   audio.play();
   updatePlayIcon();
+});
+
+let repetir = false;
+
+repeatBtn.addEventListener("click", function () {
+  if (repetir === false) {
+    repetir = true;
+    repeatIcon.style.filter = "brightness(2)";
+  } else {
+    repetir = false;
+    repeatIcon.style.filter = "brightness(1)";
+  }
+});
+
+audio.addEventListener("ended", function () {
+
+  // si está en repeat
+  if (repetir === true) {
+    audio.currentTime = 0;
+    audio.play();
+    return;
+  }
+
+  // si no está en repeate
+  current = (current + 1) % songs.length;
+  cargarCancion(current);
+  audio.play();
+});
+
+muteBtn.addEventListener("click", () => {
+  audio.muted = !audio.muted;
+  if (audio.muted) {
+    muteBtn.querySelector("img").src = "../imagenes/muteado.png";
+  } else {
+    muteBtn.querySelector("img").src = "../imagenes/mute.png";
+  }
+});
+
+let shuffle = false;
+
+shuffleBtn.addEventListener("click", function () {
+  if (shuffle === false) {
+    shuffle = true;
+    shuffleIcon.style.filter = "brightness(2)";
+  } else {
+    shuffle = false;
+    shuffleIcon.style.filter = "brightness(1)";
+  }
 });
 
 audio.addEventListener("timeupdate", () => {
