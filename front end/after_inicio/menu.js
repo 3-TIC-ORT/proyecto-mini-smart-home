@@ -27,14 +27,12 @@ if (usuarioLogueado) {
 
   postEvent("obtenerUsuario", usuario, function(data) {
 
-    // --- rellenar vista inicial ---
     let saludo = document.getElementById("saludo");
     let userID = document.getElementById("userid");
     let nombreUsuario = document.getElementById("nombreusuario");
     let nacimiento = document.getElementById("nacimiento");
     let sobre = document.getElementById("sobre");
 
-    // nombre / saludo
     if (data.nombre) {
       saludo.textContent = "¡Hola, " + data.nombre + "!";
       nombreUsuario.textContent = data.nombre;
@@ -64,9 +62,9 @@ if (usuarioLogueado) {
       userID.textContent = "sin id";
     }
 
-    // --- click editar: mostrar editor en el mismo recuadro ---
+    // editar
     botonEditar.addEventListener("click", function () {
-      // rellenar inputs con los valores actuales
+      
       if (data.nombre) {
         inputNombre.value = data.nombre;
       } else {
@@ -85,7 +83,7 @@ if (usuarioLogueado) {
         inputSobre.value = "";
       }
 
-      // mostrar editor y ocultar vista
+      // mostrar editor y ocultar normal
       if (containerPerfilView) {
         containerPerfilView.style.display = "none";
       }
@@ -94,7 +92,6 @@ if (usuarioLogueado) {
       }
     });
 
-    // --- cancelar: volver a la vista ---
     botonCancelar.addEventListener("click", function () {
       if (containerPerfilEdit) {
         containerPerfilEdit.style.display = "none";
@@ -110,7 +107,7 @@ if (usuarioLogueado) {
       let nuevoCumple = inputCumple.value;
       let nuevoSobre = inputSobre.value.trim();
 
-      // armar payload mínimo para el backend
+     
       let datosActualizados = {
         id: data.id,
         nombre: nuevoNombre,
@@ -126,7 +123,6 @@ if (usuarioLogueado) {
           actualizado = datosActualizados;
         }
 
-        // actualizar la vista con los nuevos datos (USAR ifs)
         if (actualizado.nombre) {
           document.getElementById("nombreusuario").textContent = actualizado.nombre;
           document.getElementById("saludo").textContent = "¡Hola, " + actualizado.nombre + "!";
@@ -147,13 +143,12 @@ if (usuarioLogueado) {
           document.getElementById("sobre").textContent = "Sin descripción";
         }
 
-        // guardar en localStorage (mantener el mismo objeto usuario)
+        // guardar en localStorage (mantener objeto usuario)
         data.nombre = actualizado.nombre;
         data.cumple = actualizado.cumple;
         data.sobre = actualizado.sobre;
         localStorage.setItem("usuarioLogueado", JSON.stringify(data));
 
-        // volver a vista
         if (containerPerfilEdit) {
           containerPerfilEdit.style.display = "none";
         }
@@ -451,6 +446,7 @@ function cargarCancion(index) {
   titulo.textContent = song.titulo;
   genero.textContent = song.genero;
   audio.src = song.file;
+  audio.currentTime = 0;
 }
 
 function updatePlayIcon() {
@@ -477,13 +473,6 @@ botonanterior.addEventListener("click", () => {
   updatePlayIcon();
 });
 
-botonsaltear.addEventListener("click", () => {
-  current = (current + 1) % songs.length;
-  cargarCancion(current);
-  audio.play();
-  updatePlayIcon();
-});
-
 let repetir = false;
 
 repeatBtn.addEventListener("click", function () {
@@ -496,20 +485,6 @@ repeatBtn.addEventListener("click", function () {
   }
 });
 
-audio.addEventListener("ended", function () {
-
-  // si está en repeat
-  if (repetir === true) {
-    audio.currentTime = 0;
-    audio.play();
-    return;
-  }
-
-  // si no está en repeate
-  current = (current + 1) % songs.length;
-  cargarCancion(current);
-  audio.play();
-});
 
 muteBtn.addEventListener("click", () => {
   audio.muted = !audio.muted;
@@ -538,11 +513,41 @@ audio.addEventListener("timeupdate", () => {
   progresoThumb.style.left = porcentaje + "%";
 });
 
-audio.addEventListener("ended", () => {
-  current = (current + 1) % songs.length;
+function nextSong() {
+  if (shuffle) {
+    // canción aleatoria distinta a la actual
+    let newIndex;
+
+    // evitar repetir la misma canción
+    if (songs.length > 1) {
+      do {
+        newIndex = Math.floor(Math.random() * songs.length);
+      } while (newIndex === current);
+      current = newIndex;
+    }
+  } else {
+    current = (current + 1) % songs.length;
+  }
+
   cargarCancion(current);
   audio.play();
+}
+
+botonsaltear.addEventListener("click", () => {
+  nextSong();
+  updatePlayIcon();
 });
+
+audio.addEventListener("ended", () => {
+  if (repetir) {
+    audio.currentTime = 0;
+    audio.play();
+    return;
+  }
+
+  nextSong();
+});
+
 
 cargarCancion(current);
 
