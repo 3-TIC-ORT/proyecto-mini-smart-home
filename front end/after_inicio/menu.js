@@ -353,7 +353,10 @@ function activarModo(modo) {
   if (a.lucesrojas === "prender") actualizarLuces(1,1);
   else if (a.lucesrojas === "apagar") actualizarLuces(1,0);
 
-  if (typeof a.lucesazules === "number") actualizarLuces(2, a.lucesazules);
+  if (typeof a.lucesazules === "number") {
+    actualizarLuces(2, a.lucesazules);
+    potter.value = a.lucesazules;
+  }
 
   // Preparar datos backend
   let accionesBackend = {
@@ -539,7 +542,8 @@ audio.addEventListener("ended", () => {
 cargarCancion(current);
 
 //CONTROLLLLLLLL
-// persiana
+
+// percy-anna(entienden el chiste?)
 
 let botonAbrirPersiana = document.getElementById("abrir");
 let botonCerrarPersiana = document.getElementById("cerrar");
@@ -632,7 +636,7 @@ function actualizarLuces(fila, intensidad) {
 }
 
 botonPrender.addEventListener('click', () => {
-  actualizarLuces(1, 1); // mostrar como encendidas
+  actualizarLuces(1, 1); // mostrar como prendidas
   postEvent('controlLucesLEDr', { fila: 1, intensidad: 1 }, (res) => {
     console.log('Backend respondió fila1 (prender):', res);
   });
@@ -661,25 +665,22 @@ let estado = document.getElementById("estado");
 subscribeRealTimeEvent("estado", (data) => {
   console.log("Actualización desde hardware:", data);
 
-  // Percy-anna(entienden el chiste?)
   if (data.persiana !== undefined) {
     actualizarPersiana(data.persiana);
   }
 
-  // helicopter helicopter
   if (data.ventilador !== undefined) {
     actualizarVentilador(data.ventilador);
   }
 
-  // RED LIGHT
   if (data.lucesrojas !== undefined) {
     actualizarLuces(1, data.lucesrojas);
   }
 
-  //luces azules
   if (data.lucesazules !== undefined) {
     actualizarLuces(2, data.lucesazules);
-  }
+    potter.value = data.lucesazules;
+}
 
   // lo que me dijo Fran que haga con if status y lalala
   if (data.status && data.status.on) {
@@ -692,7 +693,7 @@ subscribeRealTimeEvent("estado", (data) => {
 let temp = document.getElementById("temperatura");
 
 subscribeRealTimeEvent("temperatura", (data) => {
-  // Fran debería mandar algo como { value: 23.5 }
+  // Fran tenes mandar algo como { value: 23.5 }
   console.log("Temperatura:", data);
   temp.innerText = `${data.value}°C`;
 });
