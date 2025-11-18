@@ -28,7 +28,6 @@ if (usuarioLogueado) {
   postEvent("obtenerUsuario", usuario, function(data) {
 
     let saludo = document.getElementById("saludo");
-    let userID = document.getElementById("userid");
     let nombreUsuario = document.getElementById("nombreusuario");
     let nacimiento = document.getElementById("nacimiento");
     let sobre = document.getElementById("sobre");
@@ -53,13 +52,6 @@ if (usuarioLogueado) {
       sobre.textContent = data.sobre;
     } else {
       sobre.textContent = "Sin descripción";
-    }
-
-    // id
-    if (data.id) {
-      userID.textContent = data.id;
-    } else {
-      userID.textContent = "sin id";
     }
 
     // editar
@@ -101,7 +93,7 @@ if (usuarioLogueado) {
       }
     });
 
-    // --- guardar ---
+    //guardar
     botonGuardar.addEventListener("click", function () {
       let nuevoNombre = inputNombre.value.trim();
       let nuevoCumple = inputCumple.value;
@@ -473,15 +465,11 @@ botonanterior.addEventListener("click", () => {
   updatePlayIcon();
 });
 
-let repetir = false;
-
-repeatBtn.addEventListener("click", function () {
-  if (repetir === false) {
-    repetir = true;
-    repeatIcon.style.filter = "brightness(2)";
+repeatBtn.addEventListener('click', () => {
+  if (audio.loop) {
+    audio.loop = false;
   } else {
-    repetir = false;
-    repeatIcon.style.filter = "brightness(1)";
+    audio.loop = true;
   }
 });
 
@@ -489,9 +477,7 @@ repeatBtn.addEventListener("click", function () {
 muteBtn.addEventListener("click", () => {
   audio.muted = !audio.muted;
   if (audio.muted) {
-    muteBtn.querySelector("img").src = "../imagenes/muteado.png";
-  } else {
-    muteBtn.querySelector("img").src = "../imagenes/mute.png";
+    audio.volume = volumen.value;
   }
 });
 
@@ -539,13 +525,14 @@ botonsaltear.addEventListener("click", () => {
 });
 
 audio.addEventListener("ended", () => {
-  if (repetir) {
-    audio.currentTime = 0;
-    audio.play();
-    return;
+  if (repetir === true) {
+    setTimeout(() => {
+      audio.currentTime = 0;
+      audio.play();
+    }, 50);
+  } else {
+    nextSong();
   }
-
-  nextSong();
 });
 
 
