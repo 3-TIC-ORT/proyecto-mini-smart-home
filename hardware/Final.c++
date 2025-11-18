@@ -67,9 +67,11 @@ void loop() {
     if (elr == 0) {
       elr = 1;
       Serial.println("Leds rojos prendidos por boton");
+      Serial.println("r");
     } else {
       elr = 0;
       Serial.println("Leds rojos apagados por boton");
+      Serial.println("f");
     }
   }
   ultBT = bt;
@@ -77,10 +79,12 @@ void loop() {
   if (HB == 'j') {
     elr = 1;
     Serial.println("Leds rojos prendidos");
+    Serial.println("j");
   }
   if (HB == 't') {
     elr = 0;
     Serial.println("Leds rojos apagados");
+    Serial.println("t");
   }
 
   if (elr == 1) digitalWrite(L1a4, HIGH);
@@ -96,31 +100,37 @@ void loop() {
     br = 0;
     ledAzulEncendido = 1;
     Serial.println("Leds apagadas");
+    Serial.println("q");
   }
   if (HB == 'w') {  
     br = 50;
     ledAzulEncendido = 1;
     Serial.println("Leds prendidas al 50");
+    Serial.println("w");
   }
   if (HB == 'e') {  
     br = 100;
     ledAzulEncendido = 1;
     Serial.println("Leds prendidas al 100");
+    Serial.println("e");
   }
   if (HB == 'y') {  
     br = 150;
     ledAzulEncendido = 1;
     Serial.println("Leds prendidas al 150");
+    Serial.println("y");
   }
   if(HB== 'p'){
     br = 175;
     ledAzulEncendido =1;
     Serial.println("Leds prendidas al 175");
+    Serial.println("p");
   }
   if (HB == 'i') {  
     br = 255;
     ledAzulEncendido = 1;
     Serial.println("Leds prendidas al maximo");
+    Serial.println("i");
   }
   
   //Aplicar estado actual del LED azul
@@ -140,11 +150,13 @@ void loop() {
   if (HB == 'b') {
     motorEncendido = 1;
     Serial.println("Ventilador prendido");
+    Serial.println("b");
   }
 
   if (HB == 'u') {
     motorEncendido = 0;
     Serial.println("Ventilador apagado");
+    Serial.println("u");
   }
 
   //Aplicar estado del motor
@@ -157,6 +169,7 @@ void loop() {
 
   //Motorreductor
   if (HB == 'd'){
+    Serial.println("d");
     Serial.println("Persiana bajando");
     digitalWrite(H1,HIGH);
     digitalWrite(H2,LOW);
@@ -168,6 +181,7 @@ void loop() {
   }
 
   if (HB == 'a'){
+    Serial.println("a");
     Serial.println("Persiana subiendo");
     digitalWrite(H1,LOW);
     digitalWrite(H2,HIGH);
