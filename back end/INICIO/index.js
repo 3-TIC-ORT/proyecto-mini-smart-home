@@ -4,8 +4,6 @@ import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 
 
-
-
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
   let objeto = {nombre: data.nombre, password: data.password, cumple: data.cumple, genero: data.genero, registro: data.registro};
@@ -110,12 +108,26 @@ subscribeGETEvent ("obtenerModos", () => {
 
 //Para mostrar el nombre de usuario:
 subscribePOSTEvent("obtenerUsuario", (data) => {
-  let objeto = {usuariologueado: data.usuarioLogueado};
- 
-  return objeto;
+  let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
+  let usuario = data.nombre;
+  let encontrar = leer.find (u => u.nombre === usuario);
+
+  if (!encontrar) {
+    return {};
+  };
+
+  return {
+    nombre: encontrar.nombre,
+    cumple: encontrar.cumple,
+    sobre: encontrar.sobre
+  };
+
 });
 
-
+subscribePOSTEvent ("actualizarUsuario", (data) => {
+  let objeto = {nombre: data.nombre, cumple: data.cumple, sobre: data.sobre};
+  return objeto;
+});
 
 
 //Comunicación front-back-hardware: usando Node SerialPort
@@ -485,8 +497,10 @@ parser.on ('data', (data) => {
   let temperatura = parseFloat (data.toString());
 
 
-  realTimeEvent ("temperaturaActual", {valor: temperatura});
+  realTimeEvent ("temperatura", {valor: temperatura});
 });
+
+
 
 
 startServer ();

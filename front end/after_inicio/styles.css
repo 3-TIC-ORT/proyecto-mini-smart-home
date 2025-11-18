@@ -166,15 +166,155 @@ aside.active .configuracion {
   margin-top: 10px;
 }
 
+/* perfil */
+
 .perfil {
   background: white;
+  border: 2px solid #00d1d1; 
   border-radius: 12px;
   padding: 20px;
   justify-content: space-between;
   align-items: flex-start;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  width: fit-content;
+  width: 100%;
+  max-width: 450px;
 }
+
+.saludo {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.dni {
+  background: white;
+  border: 2px solid #00d1d1;
+  border-radius: 30px;
+  padding: 25px;
+  width: 400px;
+  height: 250px;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.avatar-box {
+  text-align: center;
+  position: relative;
+}
+
+.avatar {
+  width: 170px;
+  height: 170px;
+  border-radius: 200px;
+  border: 5px solid #00d1d1;
+  object-fit: cover;
+}
+
+.btn-editar {
+  background: #00d1d1;
+  color: white;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 20px;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  transform: rotate(8deg);
+  font-size: 15px;
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.info-item {
+  background: #00d1d1;
+  padding: 5px 5px;
+  border-radius: 7px;
+  width: 180px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: small;
+}
+
+.value {
+  font-size: 20px;
+  margin-top: 6px;
+}
+
+.editarcoso{
+  display:none;
+  background: white;
+  border: 2px solid #00d1d1; 
+  border-radius: 30px;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 410px;
+  min-height: 260px;
+}
+
+.cososdelperfil{
+  background: #fff;
+  padding: 5px 5px;
+  border: 1px solid #00d1d1;
+  border-radius: 7px;
+  width: 180px;
+  height: fit-content;
+  font-size: small;
+  margin-bottom: 12px;
+}
+
+.nodoymas{
+  display:flex;
+  gap: 20px;
+}
+
+.botoneseditar{
+  display:flex;
+  gap:8px;
+}
+
+.btns-editar{
+  background: #00d1d1;
+  color: white;
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  width: 45%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.btns-editar2{  
+  background:#ccc; 
+  color:#000;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  width: 45%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*modos*/
 
 .modos {
   background: white;
@@ -185,6 +325,8 @@ aside.active .configuracion {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   width: fit-content;
 }
+
+/* Musica*/
 
 .musiquita {
   background: white;
@@ -198,9 +340,11 @@ aside.active .configuracion {
 }
 
 .btnmusica{
-  background-color: none;
+  background-color: white;
   border: none;
 }
+
+/* Modos */
 
 .funciones {
   flex: 1;

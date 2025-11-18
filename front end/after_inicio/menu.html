@@ -33,22 +33,68 @@
       <div class="reloj" id="reloj"></div>
       <p>Temperatura actual: <span id="temperatura">--</span></p>
    <main class="contenedor">
-      <section class="perfil">
-      <article id="perfil" class="caja">
-       <h2>Perfil</h2>
-        <p><strong>Nombre:</strong> <span id="nombreusuario"></span></p>
-        <p><strong>Fecha de nacimiento:</strong> <span id="nacimiento"></span></p>
-        <p><strong>Sobre mí:</strong> <span id="sobre"></span></p>
-      </article>
-      </section>
+
+    <!--perfil-->
+    
+    <section class="perfil">
+      <h1 id="saludoperfil" class="saludo"></h1>
+    
+      <div id="perfilView" class="dni">
+        <div class="avatar-box">
+          <img src="../imagenes/mica.png" class="avatar">
+          <div style="margin-top:12px; width:100%; display:flex; justify-content:center;">
+            <button id="btnEditar" class="btn-editar">editar perfil</button>
+          </div>
+        </div>
+      
+        <div class="info-box">
+          <div class="info-item">
+            <span id="nombreusuario" class="value"></span>
+          </div>
+          <div class="info-item">
+            <span id="nacimiento" class="value"></span>
+          </div>
+          <div class="info-item">
+            <span id="sobre" class="value"></span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- editar -->
+      <div id="perfilEdit" class="editarcoso">
+        <div class="nodoymas">
+          <div class="avatar-box">
+            <img src="../imagenes/mica.png" class="avatar" style="opacity:0.6;">
+          </div>
+      
+          <div class="edit-item">
+            <label for="inputNombre"><strong>Nombre</strong></label>
+            <input id="inputNombre" type="text" class= "cososdelperfil"/>
+      
+            <label for="inputCumple"><strong>Fecha de nacimiento</strong></label>
+            <input id="inputCumple" type="date"  class= "cososdelperfil"/>
+      
+            <label for="inputSobre"><strong>Algo sobre mí</strong></label>
+            <textarea id="inputSobre" rows="4"  class= "cososdelperfil"></textarea>
+      
+            <div class="botoneseditar">
+              <button id="guardarPerfil" class="btns-editar">Guardar</button>
+              <button id="cancelarEditar" class="btns-editar2">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- modos -->
+
+    </section>    
       <section class="modos">
       <h2>Modos</h2>
       <ul id="modos"></ul>
       <div id="carruselModos" style="display:flex; align-items:center; gap:10px;">
         <button id="prevModo">&lt;</button>
-        <div id="modoActual" style="min-width:200px; text-align:center; border:1px solid #ccc; padding:10px; border-radius:5px;">
-          <!-- Aquí se muestra el modo actual -->
-        </div>
+        <div id="modoActual" style="min-width:200px; text-align:center; border:1px solid #ccc; padding:10px; border-radius:5px;"></div>
         <button id="nextModo">&gt;</button>
       </div>
       
@@ -66,6 +112,8 @@
       </form>
     </section>
 
+    <!--musica-->
+
     <section class="musiquita">
       <div id="reproductor">
         <h2 id="titulo">Título de la canción</h2>
@@ -80,6 +128,12 @@
           <button id="anterior" class="btnmusica"><img src="../imagenes/anterior.png" id="btnanterior"></button>
           <button id="botonplay" class="btnmusica"><img src="../imagenes/playicono.png" id="btnplay"></button>
           <button id="siguiente" class="btnmusica"><img src="../imagenes/saltear.png" id=btnsaltear></button>
+        </div>
+
+        <div>
+          <button id="repeat" class="btnmusica"><img src="../imagenes/repeat.png" id="repeatIcon"></button>
+          <button id="mute" class="btnmusica"><img src="../imagenes/mute.png"></button>
+          <button id="shuffle" class="btnmusica"><img id="shuffleIcon" src="../imagenes/shuffle.png"></button>
         </div>
 
         <audio id="audio"></audio>

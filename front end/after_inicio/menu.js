@@ -7,26 +7,149 @@ let lista = document.getElementById("modos");
 let condicion = document.getElementById("condicion");
 let condicionesExtra = document.getElementById("extrastuff");
 
+// perfil
+
+let containerPerfilView = document.getElementById("perfilView");
+let containerPerfilEdit = document.getElementById("perfilEdit");
+
+let botonEditar = document.getElementById("btnEditar");
+let botonGuardar = document.getElementById("guardarPerfil");
+let botonCancelar = document.getElementById("cancelarEditar");
+
+let inputNombre = document.getElementById("inputNombre");
+let inputCumple = document.getElementById("inputCumple");
+let inputSobre = document.getElementById("inputSobre");
+
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
 if (usuarioLogueado) {
-  console.log("Sesión activa para:", usuarioLogueado);
-
   let usuario = JSON.parse(usuarioLogueado);
 
   postEvent("obtenerUsuario", usuario, function(data) {
-
-    //me perdi, me estrese, ya no se que hacer con mi vida.
 
     let saludo = document.getElementById("saludo");
     let nombreUsuario = document.getElementById("nombreusuario");
     let nacimiento = document.getElementById("nacimiento");
     let sobre = document.getElementById("sobre");
 
-    saludo.textContent = `¡Hola, ${data.nombre || "Usuario"}!`;
-    nombreUsuario.textContent = data.nombre || "Sin nombre";
-    nacimiento.textContent = data.cumple || "No disponible";
-    sobre.textContent = data.sobre || "Sin descripción";
+    if (data.nombre) {
+      saludo.textContent = "¡Hola, " + data.nombre + "!";
+      nombreUsuario.textContent = data.nombre;
+    } else {
+      saludo.textContent = "¡Hola!";
+      nombreUsuario.textContent = "Sin nombre";
+    }
+
+    // cumple
+    if (data.cumple) {
+      nacimiento.textContent = data.cumple;
+    } else {
+      nacimiento.textContent = "No disponible";
+    }
+
+    // sobre
+    if (data.sobre) {
+      sobre.textContent = data.sobre;
+    } else {
+      sobre.textContent = "Sin descripción";
+    }
+
+    // editar
+    botonEditar.addEventListener("click", function () {
+      
+      if (data.nombre) {
+        inputNombre.value = data.nombre;
+      } else {
+        inputNombre.value = "";
+      }
+
+      if (data.cumple) {
+        inputCumple.value = data.cumple;
+      } else {
+        inputCumple.value = "";
+      }
+
+      if (data.sobre) {
+        inputSobre.value = data.sobre;
+      } else {
+        inputSobre.value = "";
+      }
+
+      // mostrar editor y ocultar normal
+      if (containerPerfilView) {
+        containerPerfilView.style.display = "none";
+      }
+      if (containerPerfilEdit) {
+        containerPerfilEdit.style.display = "block";
+      }
+    });
+
+    botonCancelar.addEventListener("click", function () {
+      if (containerPerfilEdit) {
+        containerPerfilEdit.style.display = "none";
+      }
+      if (containerPerfilView) {
+        containerPerfilView.style.display = "flex";
+      }
+    });
+
+    //guardar
+    botonGuardar.addEventListener("click", function () {
+      let nuevoNombre = inputNombre.value.trim();
+      let nuevoCumple = inputCumple.value;
+      let nuevoSobre = inputSobre.value.trim();
+
+     
+      let datosActualizados = {
+        id: data.id,
+        nombre: nuevoNombre,
+        cumple: nuevoCumple,
+        sobre: nuevoSobre
+      };
+
+      postEvent("actualizarUsuario", datosActualizados, function (data) {
+        let actualizado = null;
+        if (data && typeof data === "object") {
+          actualizado = data;
+        } else {
+          actualizado = datosActualizados;
+        }
+
+        if (actualizado.nombre) {
+          document.getElementById("nombreusuario").textContent = actualizado.nombre;
+          document.getElementById("saludo").textContent = "¡Hola, " + actualizado.nombre + "!";
+        } else {
+          document.getElementById("nombreusuario").textContent = "Sin nombre";
+          document.getElementById("saludo").textContent = "¡Hola!";
+        }
+
+        if (actualizado.cumple) {
+          document.getElementById("nacimiento").textContent = actualizado.cumple;
+        } else {
+          document.getElementById("nacimiento").textContent = "No disponible";
+        }
+
+        if (actualizado.sobre) {
+          document.getElementById("sobre").textContent = actualizado.sobre;
+        } else {
+          document.getElementById("sobre").textContent = "Sin descripción";
+        }
+
+        // guardar en localStorage (mantener objeto usuario)
+        data.nombre = actualizado.nombre;
+        data.cumple = actualizado.cumple;
+        data.sobre = actualizado.sobre;
+        localStorage.setItem("usuarioLogueado", JSON.stringify(data));
+
+        if (containerPerfilEdit) {
+          containerPerfilEdit.style.display = "none";
+        }
+        if (containerPerfilView) {
+          containerPerfilView.style.display = "flex";
+        }
+      });
+    });
+
   });
 }
 
@@ -230,7 +353,10 @@ function activarModo(modo) {
   if (a.lucesrojas === "prender") actualizarLuces(1,1);
   else if (a.lucesrojas === "apagar") actualizarLuces(1,0);
 
-  if (typeof a.lucesazules === "number") actualizarLuces(2, a.lucesazules);
+  if (typeof a.lucesazules === "number") {
+    actualizarLuces(2, a.lucesazules);
+    potter.value = a.lucesazules;
+  }
 
   // Preparar datos backend
   let accionesBackend = {
@@ -289,10 +415,16 @@ document.getElementById("btnEjecutar")?.addEventListener("click", () => {
 let audio = document.getElementById("audio");
 let titulo = document.getElementById("titulo");
 let genero = document.getElementById("genero");
+
 let botonplay = document.getElementById("btnplay");
 let botonanterior = document.getElementById("btnanterior");
 let botonsaltear = document.getElementById("btnsaltear");
-let playicono = document.getElementById("playicono");
+let repeatBtn = document.getElementById("repeat");
+let repeatIcon = document.getElementById("repeatIcon");
+let muteBtn = document.getElementById("mute");
+let shuffleBtn = document.getElementById("shuffle");
+let shuffleIcon = document.getElementById("shuffleIcon");
+
 let progreso = document.getElementById("progreso");
 let progresoThumb = document.getElementById("progresoThumb");
 
@@ -301,8 +433,7 @@ let current = 0;
 let songs = [
   { titulo: "Canción 1", genero: "Pop", file: "../musica/track1.mp3" },
   { titulo: "Canción 2", genero: "Rock", file: "../musica/track2.mp3" },
-  { titulo: "Canción 3", genero: "Jazz", file: "../musica/track3.mp3" },
-  { titulo: "Demo", genero: "Test", file: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
+  { titulo: "Canción 3", genero: "Jazz", file: "../musica/track3.mp3" }
 ];
 
 function cargarCancion(index) {
@@ -310,6 +441,7 @@ function cargarCancion(index) {
   titulo.textContent = song.titulo;
   genero.textContent = song.genero;
   audio.src = song.file;
+  audio.currentTime = 0;
 }
 
 function updatePlayIcon() {
@@ -336,11 +468,43 @@ botonanterior.addEventListener("click", () => {
   updatePlayIcon();
 });
 
-botonsaltear.addEventListener("click", () => {
-  current = (current + 1) % songs.length;
-  cargarCancion(current);
-  audio.play();
-  updatePlayIcon();
+let repeat = false;
+
+repeatBtn.addEventListener("click", () => {
+  repeat = !repeat;
+
+  if (audio.loop) {
+    audio.loop = false;
+  } else {
+    audio.loop = true;
+  }
+
+  if (repeat) {
+    repeatIcon.style.filter = "brightness(2)"; // para darme cuenta de cuando esta activado o no
+  } else {
+    repeatIcon.style.filter = "brightness(1)";
+  }
+
+  audio.currentTime = 0;
+});
+
+muteBtn.addEventListener("click", () => {
+  audio.muted = !audio.muted;
+  if (audio.muted) {
+    audio.volume = volumen.value;
+  }
+});
+
+let shuffle = false;
+
+shuffleBtn.addEventListener("click", function () {
+  if (shuffle === false) {
+    shuffle = true;
+    shuffleIcon.style.filter = "brightness(2)";
+  } else {
+    shuffle = false;
+    shuffleIcon.style.filter = "brightness(1)";
+  }
 });
 
 audio.addEventListener("timeupdate", () => {
@@ -349,16 +513,48 @@ audio.addEventListener("timeupdate", () => {
   progresoThumb.style.left = porcentaje + "%";
 });
 
-audio.addEventListener("ended", () => {
-  current = (current + 1) % songs.length;
+function nextSong() {
+  if (shuffle) {
+    // canción aleatoria distinta a la actual
+    let newIndex;
+
+    // evitar repetir la misma canción
+    if (songs.length > 1) {
+      do {
+        newIndex = Math.floor(Math.random() * songs.length);
+      } while (newIndex === current);
+      current = newIndex;
+    }
+  } else {
+    current = (current + 1) % songs.length;
+  }
+
   cargarCancion(current);
   audio.play();
+}
+
+botonsaltear.addEventListener("click", () => {
+  nextSong();
+  updatePlayIcon();
 });
+
+audio.addEventListener("ended", () => {
+  if (repetir === true) {
+    setTimeout(() => {
+      audio.currentTime = 0;
+      audio.play();
+    }, 50);
+  } else {
+    nextSong();
+  }
+});
+
 
 cargarCancion(current);
 
 //CONTROLLLLLLLL
-// persiana
+
+// percy-anna(entienden el chiste?)
 
 let botonAbrirPersiana = document.getElementById("abrir");
 let botonCerrarPersiana = document.getElementById("cerrar");
@@ -451,7 +647,7 @@ function actualizarLuces(fila, intensidad) {
 }
 
 botonPrender.addEventListener('click', () => {
-  actualizarLuces(1, 1); // mostrar como encendidas
+  actualizarLuces(1, 1); // mostrar como prendidas
   postEvent('controlLucesLEDr', { fila: 1, intensidad: 1 }, (res) => {
     console.log('Backend respondió fila1 (prender):', res);
   });
@@ -480,25 +676,22 @@ let estado = document.getElementById("estado");
 subscribeRealTimeEvent("estado", (data) => {
   console.log("Actualización desde hardware:", data);
 
-  // Percy-anna(entienden el chiste?)
   if (data.persiana !== undefined) {
     actualizarPersiana(data.persiana);
   }
 
-  // helicopter helicopter
   if (data.ventilador !== undefined) {
     actualizarVentilador(data.ventilador);
   }
 
-  // RED LIGHT
   if (data.lucesrojas !== undefined) {
     actualizarLuces(1, data.lucesrojas);
   }
 
-  //luces azules
   if (data.lucesazules !== undefined) {
     actualizarLuces(2, data.lucesazules);
-  }
+    potter.value = data.lucesazules;
+}
 
   // lo que me dijo Fran que haga con if status y lalala
   if (data.status && data.status.on) {
@@ -511,7 +704,6 @@ subscribeRealTimeEvent("estado", (data) => {
 let temp = document.getElementById("temperatura");
 
 subscribeRealTimeEvent("temperatura", (data) => {
-  // Fran debería mandar algo como { value: 23.5 }
   console.log("Temperatura:", data);
-  temp.innerText = `${data.value}°C`;
+  temp.innerText = `${data.valor}°C`;
 });
