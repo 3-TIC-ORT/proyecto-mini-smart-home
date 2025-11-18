@@ -187,7 +187,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
   else if (objeto.ventilador === 1) {
-    port.write ('r', (err) => {
+    port.write ('b', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
@@ -200,7 +200,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
   else if (objeto.ventilador === 0) {
-    port.write ('m', (err) => {
+    port.write ('u', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
@@ -428,7 +428,7 @@ subscribePOSTEvent ("controlVentilador", (data) => {
 
 
   if (objeto.estado === 1) {
-    port.write ('r', (err) => {
+    port.write ('b', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
@@ -441,7 +441,7 @@ subscribePOSTEvent ("controlVentilador", (data) => {
 
 
   else if (objeto.estado === 0) {
-    port.write ('m', (err) => {
+    port.write ('u', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
@@ -493,13 +493,20 @@ subscribePOSTEvent ("controlPersiana", (data) => {
 
 
 //realTimeEvent al front end: El arduino le envía data a la computadora y se encarga de convertirla en un número (en °C):
-parser.on ('data', (data) => {
-  let temperatura = parseFloat (data.toString());
+parser.on("data", (data) => {
+  let texto = data.toString().trim();
+  console.log("LLEGO:", JSON.stringify(texto));
 
-
-  realTimeEvent ("temperatura", {valor: temperatura});
+  realTimeEvent("temperatura", { valor: texto });
 });
 
+realTimeEvent("estado", (data) => {
+
+  let estadoPersiana = 0;
+  let estadoVentilador = 0;
+  let lucesRojas = 0;
+  let lucesAzules = 0;
+});
 
 
 
