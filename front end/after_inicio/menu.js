@@ -462,11 +462,18 @@ botonplay.addEventListener("click", () => {
 });
 
 botonanterior.addEventListener("click", () => {
+  if (repeat === true) {
+    // si está repeat, reinicia la misma canción
+    audio.currentTime = 0;
+    audio.play();
+  } else {
   current = (current - 1 + songs.length) % songs.length;
   cargarCancion(current);
   audio.play();
   updatePlayIcon();
+  }
 });
+
 
 let repeat = false;
 
@@ -478,14 +485,6 @@ repeatBtn.addEventListener("click", () => {
   } else {
     audio.loop = true;
   }
-
-  if (repeat) {
-    repeatIcon.style.filter = "brightness(2)"; // para darme cuenta de cuando esta activado o no
-  } else {
-    repeatIcon.style.filter = "brightness(1)";
-  }
-
-  audio.currentTime = 0;
 });
 
 muteBtn.addEventListener("click", () => {
@@ -534,9 +533,17 @@ function nextSong() {
 }
 
 botonsaltear.addEventListener("click", () => {
+  
+  if (repeat === true) {
+    // si está repeat, reinicia la misma
+    audio.currentTime = 0;
+    audio.play();
+  } else {
   nextSong();
   updatePlayIcon();
+  };
 });
+
 
 audio.addEventListener("ended", () => {
   if (repetir === true) {
