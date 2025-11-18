@@ -108,8 +108,24 @@ subscribeGETEvent ("obtenerModos", () => {
 
 //Para mostrar el nombre de usuario:
 subscribePOSTEvent("obtenerUsuario", (data) => {
-  let objeto = {usuariologueado: data.usuarioLogueado};
- 
+  let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
+  let usuario = data.nombre;
+  let encontrar = leer.find (u => u.nombre === usuario);
+
+  if (!encontrar) {
+    return {};
+  };
+
+  return {
+    nombre: encontrar.nombre,
+    cumple: encontrar.cumple,
+    sobre: encontrar.sobre
+  };
+
+});
+
+subscribePOSTEvent ("actualizarUsuario", (data) => {
+  let objeto = {nombre: data.nombre, cumple: data.cumple, sobre: data.sobre};
   return objeto;
 });
 
@@ -481,7 +497,7 @@ parser.on ('data', (data) => {
   let temperatura = parseFloat (data.toString());
 
 
-  realTimeEvent ("temperaturaActual", {valor: temperatura});
+  realTimeEvent ("temperatura", {valor: temperatura});
 });
 
 

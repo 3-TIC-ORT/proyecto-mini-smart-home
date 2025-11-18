@@ -473,21 +473,20 @@ let repeat = false;
 repeatBtn.addEventListener("click", () => {
   repeat = !repeat;
 
-  if (repeat) {
-    repeatIcon.style.filter = "brightness(2)"; // para darme cuenta de cuando esta activado o no
-  } else {
-    repeatIcon.style.filter = "brightness(1)";
-  }
-});
-
-repeatBtn.addEventListener('click', () => {
   if (audio.loop) {
     audio.loop = false;
   } else {
     audio.loop = true;
   }
-});
 
+  if (repeat) {
+    repeatIcon.style.filter = "brightness(2)"; // para darme cuenta de cuando esta activado o no
+  } else {
+    repeatIcon.style.filter = "brightness(1)";
+  }
+
+  audio.currentTime = 0;
+});
 
 muteBtn.addEventListener("click", () => {
   audio.muted = !audio.muted;
@@ -705,7 +704,6 @@ subscribeRealTimeEvent("estado", (data) => {
 let temp = document.getElementById("temperatura");
 
 subscribeRealTimeEvent("temperatura", (data) => {
-  // Fran tenes mandar algo como { value: 23.5 }
   console.log("Temperatura:", data);
-  temp.innerText = `${data.value}°C`;
+  temp.innerText = `${data.valor}°C`;
 });
