@@ -468,6 +468,18 @@ botonanterior.addEventListener("click", () => {
   updatePlayIcon();
 });
 
+let repeat = false;
+
+repeatBtn.addEventListener("click", () => {
+  repeat = !repeat;
+
+  if (repeat) {
+    repeatIcon.style.filter = "brightness(2)"; // para darme cuenta de cuando esta activado o no
+  } else {
+    repeatIcon.style.filter = "brightness(1)";
+  }
+});
+
 repeatBtn.addEventListener('click', () => {
   if (audio.loop) {
     audio.loop = false;
