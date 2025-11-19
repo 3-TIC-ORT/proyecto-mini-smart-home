@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>menu msh</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Just+Me+Again+Down+Here&family=Lexend+Exa:wght@100..900&family=Lexend+Zetta:wght@100..900&family=Londrina+Solid:wght@100;300;400;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script defer src="menu.js"></script>
@@ -29,13 +32,17 @@
   </aside>
 
   <div id="tab1" class="tab-content active">
-      
-    <div class="saludotab1">
-      <h2 id="saludo">¡Hola!</h2>
-      <div class="reloj" id="reloj"></div>
-      <span id="temperatura">--</span></p>
-    </div>
-
+    
+    <section class="arriba">
+      <div class="saludotab1">
+        <h2 id="saludo">¡Hola!</h2>
+      </div>
+      <div class="reloj-container">
+        <div id="fecha"></div>
+        <div id="hora"></div>
+      </div>
+      <span id="temperatura"></span></p>
+    </section>
 
    <main class="contenedor">
 
@@ -110,16 +117,56 @@
         <div id="vistaCrear" class="ayudamental">
           <form id="modoform">
             <h2>Crear Modo</h2>
+          
             <input id="nombre" placeholder="Nombre del modo">
+          
             <select id="condicion" required>
               <option value="">elegir una opcion</option>
               <option value="hora">Hora</option>
               <option value="dia">Día</option>
             </select>
+          
             <div id="extrastuff"></div>
-              
+          
+            <!-- ACCIONES SIEMPRE VISIBLES -->
+            <div id="accionesFijas">
+              <div class="accion-box">
+                <label>Persiana</label>
+                <select id="percy">
+                  <option value="nada">-</option>
+                  <option value="abrir">Abrir</option>
+                  <option value="cerrar">Cerrar</option>
+                </select>
+              </div>
+          
+              <div class="accion-box">
+                <label>Ventilador</label>
+                <select id="venti">
+                  <option value="nada">-</option>
+                  <option value="prender">Prender</option>
+                  <option value="apagar">Apagar</option>
+                </select>
+              </div>
+          
+              <div class="accion-box">
+                <label>Luces rojas</label>
+                <select id="rojo">
+                  <option value="nada">-</option>
+                  <option value="prender">Prender</option>
+                  <option value="apagar">Apagar</option>
+                </select>
+              </div>
+          
+              <div class="accion-box">
+                <label>Luces azules</label>
+                <input type="range" id="azul" min="0" max="5" step="1" value="0">
+                </select>
+              </div>
+            </div>
+          
             <button>Guardar</button>
           </form>
+          
         </div>
       </div>
       <div>
@@ -135,13 +182,13 @@
     <section class="musiquita">
       <div id="reproductor">
         <div class="estoyestresada">
-        <h2 id="titulo">Título de la canción</h2>
-        <p id="genero">Género</p>
-        
-        <div id="progresoContainer" class="manofprogress">
-          <div id="progreso" class="progreso"></div>
-          <div id="progresoThumb" class = "thumbs"></div>
-        </div>
+          <h2 id="titulo">Título de la canción</h2>
+          <p id="genero">Género</p>
+          
+          <div id="progresoContainer" class="manofprogress">
+            <div id="progreso" class="progreso"></div>
+            <div id="progresoThumb" class = "thumbs"></div>
+          </div>
         </div>
         <div>
           <button id="anterior" class="btnmusica"><img src="../imagenes/anterior.png" id="btnanterior"></button>
@@ -150,9 +197,9 @@
         </div>
 
         <div>
-          <button id="repeat" class="btnmusica"><img src="../imagenes/repeat.png" id="repeatIcon"></button>
-          <button id="mute" class="btnmusica"><img src="../imagenes/mute.png"></button>
           <button id="shuffle" class="btnmusica"><img id="shuffleIcon" src="../imagenes/shuffle.png"></button>
+          <button id="mute" class="btnmusica"><img src="../imagenes/mute.png"></button>
+          <button id="repeat" class="btnmusica"><img src="../imagenes/repeat.png" id="repeatIcon"></button>
         </div>
 
         <div class="cajitarara"></div>
@@ -160,7 +207,9 @@
       </div>
     </section>
    </main>
-  
+   <div class="funfact">
+     <p>Los que hicieron esta casa se estresaron mucho</p>
+   </div>
   </div>
   
   <div id="tab3" class="tab-content">

@@ -75,5 +75,44 @@
       "lucesrojas": "apagar",
       "lucesazules": 4
     }
+  },
+  {
+    "nombre": "hola",
+    "condiciones": {
+      "tipo": "dia",
+      "dia": "lunes"
+    },
+    "acciones": {
+      "persiana": "abrir",
+      "ventilador": "prender",
+      "lucesrojas": "apagar",
+      "lucesazules": null
+    }
+  },
+  {
+    "nombre": "no se  bro",
+    "condiciones": {
+      "tipo": "dia",
+      "dia": "lunes"
+    },
+    "acciones": {
+      "persiana": "abrir",
+      "ventilador": "nada",
+      "lucesrojas": "prender",
+      "lucesazules": 3
+    }
+  },
+  {
+    "nombre": "mani",
+    "condiciones": {
+      "tipo": "dia",
+      "dia": "jueves"
+    },
+    "acciones": {
+      "persiana": "abrir",
+      "ventilador": "nada",
+      "lucesrojas": "prender",
+      "lucesazules": 2
+    }
   }
 ]

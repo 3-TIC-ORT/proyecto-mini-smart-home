@@ -171,9 +171,85 @@ aside.active .configuracion {
   margin-top: 10px;
 }
 
-.saludotab1{
+/* CONTENEDOR PRINCIPAL */
+.saludotab1 {
   position: relative;
-  right: -7%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  background: white;
+  border: 3px solid black;
+  height: 75px;
+
+  padding-left: 20px;
+  font-family: "Lexend Exa", sans-serif;
+
+  /* BORDE ESCALONADO */
+  clip-path: polygon(
+    0 0,
+    65% 0,
+    65% 25px,
+    78% 25px,
+    78% 50px,
+    100% 50px,
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Borde escalonado con pseudo-elemento */
+.saludotab1::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* ocupa todo el contenedor */
+  border: 3px solid black;
+  clip-path: polygon(
+    0 0,
+    65% 0,
+    65% 25px,
+    78% 25px,
+    78% 50px,
+    100% 50px,
+    100% 100%,
+    0 100%
+  );
+  pointer-events: none; /* no bloquea clicks */
+}
+
+/* TEXTO "HOLA USUARIO" */
+.saludotab1 h2#saludo {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 5px 10px;
+}
+
+/* FECHA/HORA */
+#reloj {
+  font-size: 20px;
+  font-weight: 700;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 5px 10px;
+  margin-top: 25px;
+}
+
+/* CÍRCULO DE TEMPERATURA */
+#temperatura {
+  position: absolute;
+  right: 20px;
+  top: 13%;
+  width: 80px;
+  height: 80px;
+  background: #ffef39;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
 }
 
 /* perfil */
@@ -345,9 +421,28 @@ aside.active .configuracion {
   border-radius: 15px;
   width: 230px;
   height: 260px;
-  align-items: center;
   justify-content: center;
   margin-top: -15px;
+  padding: 10px;
+}
+
+.ayudamental h2{
+  font-family: "Londrina Solid";
+  font-size: 40px;
+  margin-top: 5px;
+  justify-self: center;
+}
+
+.modos h2::after {
+  content: "";
+  position: absolute;
+  left: 58%;
+  bottom: 55%;
+  transform: translateX(-50%);
+  width: 18%; /* largo de la línea */
+  height: 3px; /* grosor */
+  background: #fff; /* color */
+  border-radius: 10px;
 }
 
 /* Botones dentro de los modos */
@@ -371,60 +466,93 @@ aside.active .configuracion {
   background: white;
   border: 3px solid #16FF06;
   border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  padding: 15px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  width: fit-content;
+  width: 100%;
+  max-width: 260px;
+
+  /* FIX: que el contenido vaya para abajo, NO al costado */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.btnmusica{
-  background-color: white;
-  border: none;
+#reproductor {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
 }
 
-.estoyestresada{
+/* Caja del título + género + barra */
+.estoyestresada {
   border: 3px solid #16FF06;
   padding: 10px;
+  border-radius: 8px;
 }
 
-.manofprogress{
-  position: relative; 
-  width: 100%; 
-  height: 6px; 
-  background: #ccc; 
-  border-radius: 3px; 
+/* Botones de música */
+.musiquita > #reproductor > div:nth-child(2),
+.musiquita > #reproductor > div:nth-child(3) {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btnmusica {
+  background-color: white;
+  border: none;
+  width: 65px;
+  height: 65px;
+}
+
+.btnmusica img {
+  width: 100%;
+}
+
+#shuffle{
+  width: 72px;
+  height: 72px;
+  margin-top: -4px;
+}
+
+/* Barra de progreso */
+.manofprogress {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background: #ccc;
+  border-radius: 3px;
   margin-top: 10px;
 }
 
-.progreso{
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  height: 100%; 
-  width: 0; 
-  background: #15D308; 
+.progreso {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: #15D308;
   border-radius: 3px;
 }
 
-.thumbs{
-  position: absolute; 
-  top: -4px; 
-  left: 0; 
-  width: 10px; 
-  height: 10px; 
-  background: #16FF06; 
+.thumbs {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: #16FF06;
   border-radius: 50%;
 }
 
-.cajitarara{
-  margin-top: 10px;
+/* Caja verde */
+.cajitarara {
+  margin-top: 5px;
   background-color: #0CC200;
-  width: 250px;
+  width: 100%;
   height: 45px;
 }
-
 /* Modos */
 
 .funciones {
@@ -470,6 +598,17 @@ aside.active .configuracion {
   padding: 10px 20px;
   height: fit-content;
   width: fit-content;
+}
+
+.funfact{
+  background-color: white;
+  background-image: url(../imagenes/no\ se.png);
+  border:2px solid black;
+  border-radius: 30px;
+  height: 50px;
+  margin-top: 20px;
+  width: 87%;
+  justify-self: center;
 }
 
 /* Control */
