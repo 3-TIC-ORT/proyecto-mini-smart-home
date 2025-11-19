@@ -196,5 +196,62 @@
   {
     "email": "Fran",
     "password": "Panchi"
+  },
+  {
+    "nombre": "Frannn",
+    "password": "Hola",
+    "cumple": "2010-02-04",
+    "genero": "chico",
+    "registro": "19/11/2025",
+    "sobre": "Hola"
+  },
+  {
+    "email": "Frannn",
+    "password": "Hola"
+  },
+  {
+    "email": "Frannn",
+    "password": "Hola"
+  },
+  {
+    "nombre": "Frannn",
+    "cumple": "2010-02-04",
+    "sobre": "Frannn"
+  },
+  {
+    "email": "Frannn",
+    "password": "Hola"
+  },
+  {
+    "nombre": "Frann",
+    "password": "Pacorrote",
+    "cumple": "2010-04-09",
+    "genero": "chico",
+    "registro": "19/11/2025",
+    "sobre": "hola"
+  },
+  {
+    "email": "Frann",
+    "password": "Pacorrote"
+  },
+  {
+    "email": "Frann",
+    "password": "Pacorrote"
+  },
+  {
+    "nombre": "Paco",
+    "password": "Roto",
+    "cumple": "2003-03-08",
+    "genero": "chico",
+    "registro": "19/11/2025",
+    "sobre": "soy mega crack"
+  },
+  {
+    "email": "Paco",
+    "password": "Roto"
+  },
+  {
+    "email": "Frannn",
+    "password": "Hola"
   }
 ]

@@ -109,8 +109,7 @@ subscribeGETEvent ("obtenerModos", () => {
 //Para mostrar el nombre de usuario:
 subscribePOSTEvent("obtenerUsuario", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
-  let usuario = data.nombre;
-  let encontrar = leer.find (u => u.nombre === usuario);
+  let encontrar = leer.find (u => u.nombre === data.nombre);
 
   if (!encontrar) {
     return {};
@@ -124,9 +123,18 @@ subscribePOSTEvent("obtenerUsuario", (data) => {
 
 });
 
-subscribePOSTEvent ("actualizarUsuario", (data) => {
-  let objeto = {nombre: data.nombre, cumple: data.cumple, sobre: data.sobre};
-  return objeto;
+subscribePOSTEvent("actualizarUsuario", (data) => {
+  let leer = JSON.parse(fs.readFileSync("data/registro_login.json", "utf-8"));
+  let usuario = leer.find(u => u.nombre === data.nombre);
+
+  if (!usuario) return {};
+
+  usuario.cumple = data.cumple;
+  usuario.sobre = data.sobre;
+
+  fs.writeFileSync("data/registro_login.json", JSON.stringify(leer, null, 2));
+
+  return usuario;
 });
 
 
