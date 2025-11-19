@@ -22,6 +22,10 @@ let inputSobre = document.getElementById("inputSobre");
 
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
+if (!usuarioLogueado) {
+  location.href = "../inicio_de_sesion/main.html";
+}
+
 if (usuarioLogueado) {
   let usuario = JSON.parse(usuarioLogueado);
 
@@ -177,7 +181,12 @@ conf.addEventListener("click", () => {
 
 casita.addEventListener("click", () => {
   location.href = "../pantalla_principal/princi.html"
-})
+});
+
+logout.addEventListener("click", () => {
+  localStorage.removeItem("usuarioLogueado");
+  location.href = "../inicio_de_sesion/main.html";
+});
 
 function actualizarReloj() {
   let ahora = new Date();
@@ -193,78 +202,91 @@ function actualizarReloj() {
 setInterval(actualizarReloj, 10000);
 actualizarReloj();
 
-//los modosssss
+// los modosssss
 
 let modosGuardados = [];
 let modoActualIndex = 0;
 
 // Mostrar campos extra según tipo
 condicion.addEventListener("change", () => {
+  // PRIMERO borramos todo
   condicionesExtra.innerHTML = "";
+
+  // --- CONDICIONES ---
   if (condicion.value === "hora") {
-    condicionesExtra.innerHTML = `
-      <label>Desde: <input type="time" id="desdeHora"></label>
-      <label>Hasta: <input type="time" id="hastaHora"></label>
+    condicionesExtra.innerHTML += `
+      <div class="condicion-dinamica">
+        <label>Desde: <input type="time" id="desdeHora"></label>
+        <label>Hasta: <input type="time" id="hastaHora"></label>
+      </div>
     `;
-  } else if (condicion.value === "dia") {
-    condicionesExtra.innerHTML = `
-      <label>Día:
-        <select id="diaSemana">
-          <option value="1">Lunes</option>
-          <option value="2">Martes</option>
-          <option value="3">Miércoles</option>
-          <option value="4">Jueves</option>
-          <option value="5">Viernes</option>
-          <option value="6">Sábado</option>
-          <option value="7">Domingo</option>
-        </select>
-      </label>
+  } 
+  else if (condicion.value === "dia") {
+    condicionesExtra.innerHTML += `
+      <div class="condicion-dinamica">
+        <label>Día:
+          <select id="diaSemana">
+            <option value="1">Lunes</option>
+            <option value="2">Martes</option>
+            <option value="3">Miércoles</option>
+            <option value="4">Jueves</option>
+            <option value="5">Viernes</option>
+            <option value="6">Sábado</option>
+            <option value="7">Domingo</option>
+          </select>
+        </label>
+      </div>
     `;
   }
 
-  let accionesHTML = `
-    <h3>Acciones</h3>
-    <label>Persiana:
-      <select id="percy">
-        <option value="nada">Ninguna</option>
-        <option value="abrir">Abrir</option>
-        <option value="cerrar">Cerrar</option>
-      </select>
-    </label>
-    <label>Ventilador:
-      <select id="venti">
-        <option value="nada">Ninguna</option>
-        <option value="prender">Prender</option>
-        <option value="apagar">Apagar</option>
-      </select>
-    </label>
-    <label>Luces rojas:
-      <select id="rojo">
-        <option value="nada">Ninguna</option>
-        <option value="prender">Prender</option>
-        <option value="apagar">Apagar</option>
-      </select>
-    </label>
-    <label>Luces azules:
-      <input type="range" id="azul" min="0" max="5" step="1" value="0">
-    </label>
+  // --- ACCIONES (SIEMPRE ABAJO) ---
+  condicionesExtra.innerHTML += `
+    <div id="acciones">
+      <h3>Acciones</h3>
+
+      <label>Persiana:
+        <select id="percy">
+          <option value="nada">Ninguna</option>
+          <option value="abrir">Abrir</option>
+          <option value="cerrar">Cerrar</option>
+        </select>
+      </label>
+
+      <label>Ventilador:
+        <select id="venti">
+          <option value="nada">Ninguna</option>
+          <option value="prender">Prender</option>
+          <option value="apagar">Apagar</option>
+        </select>
+      </label>
+
+      <label>Luces rojas:
+        <select id="rojo">
+          <option value="nada">Ninguna</option>
+          <option value="prender">Prender</option>
+          <option value="apagar">Apagar</option>
+        </select>
+      </label>
+
+      <label>Luces azules:
+        <input type="range" id="azul" min="0" max="5" step="1" value="0">
+      </label>
+    </div>
   `;
-  let actionDiv = document.createElement("div");
-  actionDiv.id = "acciones";
-  actionDiv.innerHTML = accionesHTML;
-  condicionesExtra.appendChild(actionDiv);
 });
 
 // Crear modo
 function crearModo(nombre, tipo) {
   let condiciones = {};
+
   if (tipo === "hora") {
     condiciones = {
       tipo: "hora",
       desde: document.getElementById("desdeHora").value,
       hasta: document.getElementById("hastaHora").value
     };
-  } else if (tipo === "dia") {
+  } 
+  else if (tipo === "dia") {
     condiciones = {
       tipo: "dia",
       dia: document.getElementById("diaSemana").value
@@ -288,12 +310,15 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   let nombre = document.getElementById("nombre").value;
   let tipo = condicion.value;
+
   if (!nombre || !tipo) {
     alert("Por favor, completa todos los campos.");
     return;
   }
+
   crearModo(nombre, tipo);
 });
+
 
 // Cargar modos
 function cargarModos() {
@@ -311,13 +336,59 @@ cargarModos();
 let modoActualDiv = document.getElementById("modoActual");
 let prevBtn = document.getElementById("prevModo");
 let nextBtn = document.getElementById("nextModo");
+let carrusel = document.getElementById("carruselModos");
 
 function mostrarModos() {
-  if (modosGuardados.length === 0) {
-    modoActualDiv.textContent = "No hay modos";
+  if (!modosGuardados || modosGuardados.length === 0) {
+    document.getElementById("modoNombre").textContent = "No hay modos";
+
+    document.getElementById("accPersiana").textContent = "-";
+    document.getElementById("accVentilador").textContent = "-";
+    document.getElementById("accRojas").textContent = "-";
+    document.getElementById("accAzules").textContent = "-";
     return;
   }
-  modoActualDiv.textContent = modosGuardados[modoActualIndex].nombre;
+
+  if (modoActualIndex < 0) modoActualIndex = 0;
+  if (modoActualIndex >= modosGuardados.length) modoActualIndex = modosGuardados.length - 1;
+
+  const modo = modosGuardados[modoActualIndex];
+
+  if (!modo) return;
+
+  const a = modo.acciones;
+
+  // NOMBRE DEL MODO
+  if (modo.nombre) {
+    document.getElementById("modoNombre").textContent = modo.nombre;
+  } else {
+    document.getElementById("modoNombre").textContent = "Modo sin nombre";
+  }
+
+  // ACCIONES
+  if (a && a.persiana !== undefined && a.persiana !== null && a.persiana !== "") {
+    document.getElementById("accPersiana").textContent = a.persiana;
+  } else {
+    document.getElementById("accPersiana").textContent = "nada";
+  }
+
+  if (a && a.ventilador !== undefined && a.ventilador !== null && a.ventilador !== "") {
+    document.getElementById("accVentilador").textContent = a.ventilador;
+  } else {
+    document.getElementById("accVentilador").textContent = "nada";
+  }
+
+  if (a && a.lucesrojas !== undefined && a.lucesrojas !== null && a.lucesrojas !== "") {
+    document.getElementById("accRojas").textContent = a.lucesrojas;
+  } else {
+    document.getElementById("accRojas").textContent = "nada";
+  }
+
+  if (a && (typeof a.lucesazules === "number" || (typeof a.lucesazules === "string" && a.lucesazules !== ""))) {
+    document.getElementById("accAzules").textContent = a.lucesazules;
+  } else {
+    document.getElementById("accAzules").textContent = "nada";
+  }
 }
 
 prevBtn.addEventListener("click", () => {
@@ -337,6 +408,123 @@ document.getElementById("btnSeleccionar").addEventListener("click", () => {
   if (modosGuardados.length === 0) return;
   activarModo(modosGuardados[modoActualIndex]);
 });
+
+let vistaCrear = document.getElementById("vistaCrear");
+const formExistente = document.getElementById("modoform");
+
+if (!vistaCrear) {
+  // crear la slide si no existe
+  vistaCrear = document.createElement("div");
+  vistaCrear.id = "vistaCrear";
+  vistaCrear.className = "itemCarrusel";
+  // estilo básico para que no rompa layout (puedes ajustar en CSS)
+  vistaCrear.style.display = "none";
+  vistaCrear.style.width = "100%";
+  vistaCrear.style.boxSizing = "border-box";
+  // si el formulario existe en el DOM, lo movemos adentro
+  if (formExistente) {
+    vistaCrear.appendChild(formExistente);
+  } else {
+    // si no existe form, ponemos un placeholder
+    let p = document.createElement("p");
+    p.textContent = "Formulario no encontrado";
+    vistaCrear.appendChild(p);
+  }
+  // añadir la slide al carrusel (al final)
+  if (carrusel) carrusel.appendChild(vistaCrear);
+} else {
+  // si ya existe, asegurarse que contiene el form (si existe fuera, lo movemos)
+  if (formExistente && !vistaCrear.contains(formExistente)) {
+    vistaCrear.appendChild(formExistente);
+  }
+  vistaCrear.style.display = "none";
+}
+
+// 3) Asegurar que la vista del modo (modoActual) exista (id "modoActual" en tu HTML)
+const vistaModo = document.getElementById("modoActual");
+if (!vistaModo) {
+  console.error("No se encontró #modoActual. Agregá el bloque del modo en el HTML.");
+}
+
+// 4) slideIndex: 0 = ver modos, 1 = crear modo
+let slideIndex = 0;
+
+// 5) función que muestra la slide correcta (show/hide simple, robusto)
+function showSlideIndex() {
+  // si no hay carrusel o vistas, no hacemos nada
+  if (!carrusel) return;
+  // mostrar vistaModo o vistaCrear según slideIndex
+  if (slideIndex === 0) {
+    if (vistaModo) vistaModo.style.display = "block";
+    if (vistaCrear) vistaCrear.style.display = "none";
+    // mostrás el modo actual (usa tu función)
+    mostrarModos();
+  } else {
+    if (vistaModo) vistaModo.style.display = "none";
+    if (vistaCrear) vistaCrear.style.display = "block";
+    // opcional: focus al primer input del formulario
+    const primerInput = vistaCrear.querySelector("input, select, textarea, button");
+    if (primerInput) primerInput.focus();
+  }
+}
+
+// 6) Lógica nueva para prev/next (reemplazá tus listeners actuales por estos)
+if (prevBtn) {
+  // quitamos listeners anteriores por si existían (salvo que uses removeEventListener)
+  prevBtn.addEventListener("click", () => {
+    // si estamos en la vista crear, volvemos a ver modos
+    if (slideIndex === 1) {
+      slideIndex = 0;
+      showSlideIndex();
+      return;
+    }
+
+    // si estamos en vista modos, navegar modos hacia atrás
+    if (!modosGuardados || modosGuardados.length === 0) return;
+
+    modoActualIndex = modoActualIndex - 1;
+    if (modoActualIndex < 0) modoActualIndex = modosGuardados.length - 1;
+    mostrarModos();
+  });
+} else {
+  console.warn("prevBtn no encontrado");
+}
+
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    // si estamos en vista modos...
+    if (slideIndex === 0) {
+      // si hay modos y no es el último, avanzo al siguiente modo
+      if (modosGuardados && modosGuardados.length > 0) {
+        if (modoActualIndex < modosGuardados.length - 1) {
+          modoActualIndex = modoActualIndex + 1;
+          mostrarModos();
+          return;
+        }
+        // si estaba en el último modo, ir a la slide crear
+        slideIndex = 1;
+        showSlideIndex();
+        return;
+      } else {
+        // no hay modos: directamente vamos a crear
+        slideIndex = 1;
+        showSlideIndex();
+        return;
+      }
+    }
+
+    // si estamos en vistaCrear y apretamos next, volvemos a modos (opcional)
+    if (slideIndex === 1) {
+      slideIndex = 0;
+      showSlideIndex();
+    }
+  });
+} else {
+  console.warn("nextBtn no encontrado");
+}
+
+showSlideIndex();
+
 
 // Activar modo
 function activarModo(modo) {
@@ -560,6 +748,24 @@ audio.addEventListener("ended", () => {
 cargarCancion(current);
 
 //CONTROLLLLLLLL
+
+if (usuarioLogueado) {
+  let usuario = JSON.parse(usuarioLogueado);
+
+  postEvent("obtenerUsuario", usuario, function(data) {
+
+    let saludo = document.getElementById("salut");
+    let nombreUsuario = document.getElementById("nombreusuario");
+
+    if (data.nombre) {
+      saludo.textContent = "¡Hola, " + data.nombre + "!";
+      nombreUsuario.textContent = data.nombre;
+    } else {
+      saludo.textContent = "¡Hola!";
+      nombreUsuario.textContent = "Sin nombre";
+    }
+  })
+}
 
 // percy-anna(entienden el chiste?)
 

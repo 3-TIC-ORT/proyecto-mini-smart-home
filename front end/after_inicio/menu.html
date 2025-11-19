@@ -29,9 +29,14 @@
   </aside>
 
   <div id="tab1" class="tab-content active">
+      
+    <div class="saludotab1">
       <h2 id="saludo">¡Hola!</h2>
       <div class="reloj" id="reloj"></div>
       <span id="temperatura">--</span></p>
+    </div>
+
+
    <main class="contenedor">
 
     <!--perfil-->
@@ -87,43 +92,57 @@
     </section>
     
     <!-- modos -->
-
-    </section>    
-      <section class="modos">
-      <h2>Modos</h2>
+   
+    <section class="modos">
       <ul id="modos"></ul>
-      <div id="carruselModos" style="display:flex; align-items:center; gap:10px;">
-        <button id="prevModo">&lt;</button>
-        <div id="modoActual" style="min-width:200px; text-align:center; border:1px solid #ccc; padding:10px; border-radius:5px;"></div>
-        <button id="nextModo">&gt;</button>
+      <div id="carruselModos" class="carrusel-modos">
+        <div id="modoActual" class="ayudamental">
+          <div>
+          <h2 id="modoNombre" class="modo-title"></h2>
+          <div class="acciones-list">
+            <p class="acc-line"><strong>Persiana:</strong> <span id="accPersiana">-</span></p>
+            <p class="acc-line"><strong>Ventilador:</strong> <span id="accVentilador">-</span></p>
+            <p class="acc-line"><strong>Luces rojas:</strong> <span id="accRojas">-</span></p>
+            <p class="acc-line"><strong>Luces azules:</strong> <span id="accAzules">-</span></p>
+          </div>
+          </div>
+        </div>
+        <div id="vistaCrear" class="ayudamental">
+          <form id="modoform">
+            <h2>Crear Modo</h2>
+            <input id="nombre" placeholder="Nombre del modo">
+            <select id="condicion" required>
+              <option value="">elegir una opcion</option>
+              <option value="hora">Hora</option>
+              <option value="dia">Día</option>
+            </select>
+            <div id="extrastuff"></div>
+              
+            <button>Guardar</button>
+          </form>
+        </div>
       </div>
+      <div>
+      <button id="prevModo" class="botonmodos">&lt;</button>
+      <button id="btnSeleccionar" class="botonmodos">SELECCIONAR</button>
+      <button id="nextModo" class="botonmodos">&gt;</button>
+    </div>
       
-      <button id="btnSeleccionar">Seleccionar</button>
-      <form id="modoform">
-        <input id="nombre" placeholder="Nombre del modo">
-        <select id="condicion" required>
-          <option value="">elegir una opcion</option>
-          <option value="hora">Hora</option>
-          <option value="dia">Día</option>
-        </select>
-        <div id="extrastuff"></div>
-          
-        <button>Guardar</button>
-      </form>
     </section>
 
     <!--musica-->
 
     <section class="musiquita">
       <div id="reproductor">
+        <div class="estoyestresada">
         <h2 id="titulo">Título de la canción</h2>
         <p id="genero">Género</p>
         
-        <div id="progresoContainer" style="position: relative; width: 100%; height: 6px; background: #ccc; border-radius: 3px; margin-top: 10px;">
-          <div id="progreso" style="position: absolute; top: 0; left: 0; height: 100%; width: 0; background: #007bff; border-radius: 3px;"></div>
-          <div id="progresoThumb" style="position: absolute; top: -4px; left: 0; width: 10px; height: 10px; background: #007bff; border-radius: 50%;"></div>
+        <div id="progresoContainer" class="manofprogress">
+          <div id="progreso" class="progreso"></div>
+          <div id="progresoThumb" class = "thumbs"></div>
         </div>
-
+        </div>
         <div>
           <button id="anterior" class="btnmusica"><img src="../imagenes/anterior.png" id="btnanterior"></button>
           <button id="botonplay" class="btnmusica"><img src="../imagenes/playicono.png" id="btnplay"></button>
@@ -136,6 +155,7 @@
           <button id="shuffle" class="btnmusica"><img id="shuffleIcon" src="../imagenes/shuffle.png"></button>
         </div>
 
+        <div class="cajitarara"></div>
         <audio id="audio"></audio>
       </div>
     </section>
@@ -145,7 +165,7 @@
   
   <div id="tab3" class="tab-content">
     <section class="greeting">
-      <h1 class="saluuut">¡Hola, Zoe!</h1>
+      <h1 id="salut" class="saluuut">¡Hola!</h1>
       <div class="ready">← ¿Listo/a para jugar? →</div>
     </section>
 
