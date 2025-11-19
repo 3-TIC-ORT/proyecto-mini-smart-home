@@ -136,7 +136,7 @@ subscribePOSTEvent ("actualizarUsuario", (data) => {
 
 
 let port = new SerialPort ({
-  path: 'COM6',
+  path: 'COM5',
   baudRate: 9600
 });
 
@@ -192,7 +192,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
     });
-    let caracter = 'r';
+    let caracter = 'u';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
@@ -205,7 +205,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
     });
-    let caracter = 'm';
+    let caracter = 'u';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
@@ -301,6 +301,7 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
+  return (`Caracteres escritos exitosamente por el puerto`);
 
 });
 
@@ -433,7 +434,7 @@ subscribePOSTEvent ("controlVentilador", (data) => {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
     });
-    let caracter = 'r';
+    let caracter = 'b';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
@@ -446,7 +447,7 @@ subscribePOSTEvent ("controlVentilador", (data) => {
         return console.error ('Error al escribir por el puerto: ', err.message);
       }
     });
-    let caracter = 'm';
+    let caracter = 'u';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
 
@@ -494,18 +495,12 @@ subscribePOSTEvent ("controlPersiana", (data) => {
 
 //realTimeEvent al front end: El arduino le envía data a la computadora y se encarga de convertirla en un número (en °C):
 parser.on("data", (data) => {
-  let texto = data.toString().trim();
-  console.log("LLEGO:", JSON.stringify(texto));
 
-  realTimeEvent("temperatura", { valor: texto });
-});
+    let valor = parseFloat(data.toString().trim());
 
-realTimeEvent("estado", (data) => {
-
-  let estadoPersiana = 0;
-  let estadoVentilador = 0;
-  let lucesRojas = 0;
-  let lucesAzules = 0;
+    realTimeEvent("temperatura", {
+      valor: valor
+    });
 });
 
 
