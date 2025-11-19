@@ -38,8 +38,6 @@ if (usuarioLogueado) {
 
 
  postEvent("obtenerUsuario", usuario, function(data) {
-
-
    let saludo = document.getElementById("saludo");
    let nombreUsuario = document.getElementById("nombreusuario");
    let nacimiento = document.getElementById("nacimiento");
@@ -214,6 +212,21 @@ casita.addEventListener("click", () => {
  location.href = "../pantalla_principal/princi.html"
 });
 
+modooscuro.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+ let btnImg = modooscuro.querySelector("img");
+
+  document.querySelectorAll("img[data-dark]").forEach(img => {
+    if (!img.dataset.light) img.dataset.light = img.src; // guardamos versión clara
+
+    if (document.body.classList.contains("dark-mode")) {
+      img.src = img.dataset.dark;
+    } else {
+      img.src = img.dataset.light;
+    }
+  });
+});
 
 logout.addEventListener("click", () => {
  localStorage.removeItem("usuarioLogueado");
@@ -239,20 +252,17 @@ function actualizarReloj() {
 setInterval(actualizarReloj, 1000);
 actualizarReloj();
 
-
-
-
 // los modosssss
 
-var modosGuardados = [];
-var modoActualIndex = 0;
-var slideIndex = 0; // 0..modosGuardados.length-1 = modos, length = crear modo
+let modosGuardados = [];
+let modoActualIndex = 0;
+let slideIndex = 0; // 0..modosGuardados.length-1 = modos, length = crear modo
 
-var modoActualDiv = document.getElementById("modoActual");
-var vistaCrear = document.getElementById("vistaCrear");
-var prevBtn = document.getElementById("prevModo");
-var nextBtn = document.getElementById("nextModo");
-var formExistente = document.getElementById("modoform");
+let modoActualDiv = document.getElementById("modoActual");
+let vistaCrear = document.getElementById("vistaCrear");
+let prevBtn = document.getElementById("prevModo");
+let nextBtn = document.getElementById("nextModo");
+let formExistente = document.getElementById("modoform");
 
 // Traer modos del backend
 getEvent("obtenerModos", function(modos) {
@@ -271,13 +281,13 @@ function mostrarModos() {
     if (modoActualIndex < 0) modoActualIndex = 0;
     if (modoActualIndex >= modosGuardados.length) modoActualIndex = modosGuardados.length - 1;
 
-    var modo = modosGuardados[modoActualIndex];
+    let modo = modosGuardados[modoActualIndex];
     if (!modo) return;
 
-    var a = modo.acciones || {};
+    let a = modo.acciones || {};
 
     // Nombre
-    var nombreTexto = modo.nombre || "Modo sin nombre";
+    let nombreTexto = modo.nombre || "Modo sin nombre";
     document.getElementById("modoNombre").textContent = nombreTexto;
 
     // Acciones
@@ -301,7 +311,7 @@ function showSlideIndex() {
         // Último slide = crear modo
         vistaCrear.style.display = "block";
         if (vistaCrear) {
-            var primerElemento = vistaCrear.querySelector("input, select, textarea, button");
+            let primerElemento = vistaCrear.querySelector("input, select, textarea, button");
             if (primerElemento) primerElemento.focus();
         }
     }
@@ -334,7 +344,7 @@ document.getElementById("btnSeleccionar").addEventListener("click", function() {
 // Activar modo
 function activarModo(modo) {
     if (!modo || !modo.acciones) return;
-    var a = modo.acciones;
+    let a = modo.acciones;
 
     if (a.persiana === "abrir") actualizarPersiana(1);
     else if (a.persiana === "cerrar") actualizarPersiana(0);
@@ -350,7 +360,7 @@ function activarModo(modo) {
         potter.value = a.lucesazules;
     }
 
-    var accionesBackend = {
+    let accionesBackend = {
         persiana: a.persiana === "abrir" ? 1 : a.persiana === "cerrar" ? 0 : null,
         ventilador: a.ventilador === "prender" ? 1 : a.ventilador === "apagar" ? 0 : null,
         lucesrojas: a.lucesrojas === "prender" ? 1 : a.lucesrojas === "apagar" ? 0 : null,
@@ -367,8 +377,8 @@ condicion.addEventListener("change", function() {
     condicionesExtra.innerHTML = "";
     if (condicion.value === "hora") {
         condicionesExtra.innerHTML = `
-            <label>Desde: <input type="time" id="desdeHora"></label>
-            <label>Hasta: <input type="time" id="hastaHora"></label>
+            <input type="time" id="desdeHora"><label> - </label>
+            <input type="time" id="hastaHora">
         `;
     } else if (condicion.value === "dia") {
         condicionesExtra.innerHTML = `
@@ -385,15 +395,15 @@ formExistente.addEventListener("submit", function(e) {
 
 // Guardar modo
 function guardarModo() {
-    var nombre = document.getElementById("nombre").value.trim();
-    var acciones = {
+    let nombre = document.getElementById("nombre").value.trim();
+    let acciones = {
         persiana: document.getElementById("percy").value,
         ventilador: document.getElementById("venti").value,
         lucesrojas: document.getElementById("rojo").value,
         lucesazules: parseInt(document.getElementById("azul").value)
     };
-    var condicionValor = condicion.value;
-    var c = {};
+    let condicionValor = condicion.value;
+    let c = {};
     if (condicionValor === "hora") {
         c.tipo = "hora";
         c.desde = document.getElementById("desdeHora").value;
@@ -403,7 +413,7 @@ function guardarModo() {
         c.dia = document.getElementById("dia").value;
     }
 
-    var nuevoModo = {
+    let nuevoModo = {
         nombre: nombre,
         acciones: acciones,
         condiciones: c
@@ -417,10 +427,8 @@ function guardarModo() {
 
 //musica
 
-
 let audio = document.getElementById("audio");
 let titulo = document.getElementById("titulo");
-let genero = document.getElementById("genero");
 
 
 let botonplay = document.getElementById("btnplay");
@@ -441,9 +449,9 @@ let current = 0;
 
 
 let songs = [
- { titulo: "Track 1", file: "../musica/track1.mp3" },
- { titulo: "Track 2", file: "../musica/track2.mp3" },
- { titulo: "Track 3", file: "../musica/track3.mp3" }
+ { titulo: "Song 1", file: "../musica/track1.mp3" },
+ { titulo: "Song 2", file: "../musica/track2.mp3" },
+ { titulo: "Song 3", file: "../musica/track3.mp3" }
 ];
 
 

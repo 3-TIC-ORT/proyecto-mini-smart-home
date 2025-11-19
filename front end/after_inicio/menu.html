@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Just+Me+Again+Down+Here&family=Lexend+Exa:wght@100..900&family=Lexend+Zetta:wght@100..900&family=Londrina+Solid:wght@100;300;400;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Just+Me+Again+Down+Here&family=Kalnia:wght@100..700&family=Lexend+Exa:wght@100..900&family=Lexend+Zetta:wght@100..900&family=Londrina+Solid:wght@100;300;400;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Itim&family=Just+Me+Again+Down+Here&family=Kalnia:wght@100..700&family=Koulen&family=Lexend+Exa:wght@100..900&family=Lexend+Zetta:wght@100..900&family=Londrina+Solid:wght@100;300;400;900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/JZylber/SoqueTIC-Client@v1.4.2/soquetic-client.js"></script>
     <script defer src="menu.js"></script>
@@ -21,27 +27,30 @@
   </header>
 
   <aside>
-    <button id="settings" class="settings" aria-label="Configuración"><img src="../imagenes/settings.png" alt="" class="fotomenu"></button>
+    <button id="settings" class="settings" aria-label="Configuración"><img src="../imagenes/settings.png" alt="" class="fotomenu" data-dark="../imagenes/configuracion-exe.png"></button>
 
   <!-- desplegables -->
   <div class="icon-menu">
-    <button id="casita"><img src="../imagenes/casita.png" alt="" class="fotomenu"></button>
-    <button id="modooscuro"><img src="../imagenes/modooscuro.png" alt="" class="fotomenu"></button>
-    <button id="logout"><img src="../imagenes/getout.png" alt="" class="fotomenu"></button>
+    <button id="casita"><img src="../imagenes/casita.png" alt="" class="fotomenu" data-dark="../imagenes/casita-exe.png"></button>
+    <button id="modooscuro"><img src="../imagenes/modooscuro.png" alt="" class="fotomenu" data-dark="../imagenes/modooscuro-exe.png"></button>
+    <button id="logout"><img src="../imagenes/getout.png" alt="" class="fotomenu" data-dark="../imagenes/getout-exe.png"></button>
   </div>
   </aside>
 
   <div id="tab1" class="tab-content active">
-    
+      <div id="fecha" class="reloj fecha"></div>
+      <div id="hora" class="reloj hora"></div>
     <section class="arriba">
       <div class="saludotab1">
         <h2 id="saludo">¡Hola!</h2>
       </div>
-      <div class="reloj-container">
-        <div id="fecha"></div>
-        <div id="hora"></div>
-      </div>
       <span id="temperatura"></span></p>
+      <div class="linea1"></div>
+      <div class="linea2"></div>
+      <div class="linea3"></div>
+      <div class="linea4"></div>
+      <div class="linea5"></div>
+      <div class="linea6"></div>
     </section>
 
    <main class="contenedor">
@@ -54,7 +63,7 @@
       <div id="perfilView" class="dni">
         <div class="avatar-box">
           <img src="../imagenes/mica.png" class="avatar">
-          <div style="margin-top:12px; width:100%; display:flex; justify-content:center;">
+          <div>
             <button id="btnEditar" class="btn-editar">editar perfil</button>
           </div>
         </div>
@@ -86,7 +95,7 @@
             <label for="inputCumple"><strong>Fecha de nacimiento</strong></label>
             <input id="inputCumple" type="date"  class= "cososdelperfil"/>
       
-            <label for="inputSobre"><strong>Algo sobre mí</strong></label>
+            <label for="inputSobre"><strong>"Algo sobre mí"</strong></label>
             <textarea id="inputSobre" rows="4"  class= "cososdelperfil"></textarea>
       
             <div class="botoneseditar">
@@ -107,10 +116,11 @@
           <div>
           <h2 id="modoNombre" class="modo-title"></h2>
           <div class="acciones-list">
-            <p class="acc-line"><strong>Persiana:</strong> <span id="accPersiana">-</span></p>
-            <p class="acc-line"><strong>Ventilador:</strong> <span id="accVentilador">-</span></p>
-            <p class="acc-line"><strong>Luces rojas:</strong> <span id="accRojas">-</span></p>
-            <p class="acc-line"><strong>Luces azules:</strong> <span id="accAzules">-</span></p>
+            <p><strong>Descripción:</strong></p>
+            <p class="acc-line"><strong>Persiana</strong> <span class="ayudadios" id="accPersiana">-</span></p>
+            <p class="acc-line"><strong>Ventilador</strong> <span class="ayudadios" id="accVentilador">-</span></p>
+            <p class="acc-line"><strong>Luces rojas</strong> <span class="ayudadios" id="accRojas">-</span></p>
+            <p class="acc-line"><strong>Luces azules</strong> <span class="ayudadios" id="accAzules">-</span></p>
           </div>
           </div>
         </div>
@@ -169,10 +179,10 @@
           
         </div>
       </div>
-      <div>
-      <button id="prevModo" class="botonmodos">&lt;</button>
+      <div class="botonera">
+      <button id="prevModo" class="botonmodos"><img src="../imagenes/flechita.png" data-dark="../imagenes/flechita-exe.png"></button>
       <button id="btnSeleccionar" class="botonmodos">SELECCIONAR</button>
-      <button id="nextModo" class="botonmodos">&gt;</button>
+      <button id="nextModo" class="botonmodos"><img src="../imagenes/flechita.png" class="flechitaderecha" data-dark="../imagenes/flechita-exe.png"></button>
     </div>
       
     </section>
@@ -182,8 +192,8 @@
     <section class="musiquita">
       <div id="reproductor">
         <div class="estoyestresada">
-          <h2 id="titulo">Título de la canción</h2>
-          <p id="genero">Género</p>
+          <p>Escuchando...</p>
+          <h3 id="titulo">Título de la canción</h3>
           
           <div id="progresoContainer" class="manofprogress">
             <div id="progreso" class="progreso"></div>
@@ -191,15 +201,15 @@
           </div>
         </div>
         <div>
-          <button id="anterior" class="btnmusica"><img src="../imagenes/anterior.png" id="btnanterior"></button>
-          <button id="botonplay" class="btnmusica"><img src="../imagenes/playicono.png" id="btnplay"></button>
-          <button id="siguiente" class="btnmusica"><img src="../imagenes/saltear.png" id=btnsaltear></button>
+          <button id="anterior" class="btnmusica"><img src="../imagenes/anterior.png" id="btnanterior" data-dark="../imagenes/anterior-exe.png"></button>
+          <button id="botonplay" class="btnmusica"><img src="../imagenes/playicono.png" id="btnplay" data-dark="../imagenes/play-exe.png"></button>
+          <button id="siguiente" class="btnmusica"><img src="../imagenes/saltear.png" id=btnsaltear data-dark="../imagenes/saltear-exe.png"></button>
         </div>
 
         <div>
-          <button id="shuffle" class="btnmusica"><img id="shuffleIcon" src="../imagenes/shuffle.png"></button>
-          <button id="mute" class="btnmusica"><img src="../imagenes/mute.png"></button>
-          <button id="repeat" class="btnmusica"><img src="../imagenes/repeat.png" id="repeatIcon"></button>
+          <button id="shuffle" class="btnmusica"><img id="shuffleIcon" src="../imagenes/shuffle.png" data-dark="../imagenes/shuffle-exe.png"></button>
+          <button id="mute" class="btnmusica"><img src="../imagenes/mute.png" data-dark="../imagenes/ muteate-exe.png"></button>
+          <button id="repeat" class="btnmusica"><img src="../imagenes/repeat.png" id="repeatIcon" data-dark="../imagenes/repeat-exe.png"></button>
         </div>
 
         <div class="cajitarara"></div>
@@ -208,6 +218,8 @@
     </section>
    </main>
    <div class="funfact">
+     <h3>Fun Fact!</h3>
+     <div class="odioproyecto"></div>
      <p>Los que hicieron esta casa se estresaron mucho</p>
    </div>
   </div>
@@ -215,7 +227,9 @@
   <div id="tab3" class="tab-content">
     <section class="greeting">
       <h1 id="salut" class="saluuut">¡Hola!</h1>
-      <div class="ready">← ¿Listo/a para jugar? →</div>
+      <div class="ready">
+        <p>← ¿Listo/a para jugar? →</p>
+      </div>
     </section>
 
     <section class="controls">
@@ -229,6 +243,8 @@
         </div>
       </div>
 
+      <div class="separate1"></div>
+
       <!-- Ventilador -->
       <div class="control">
         <h2 class="textotab2">Ventilador</h2>
@@ -237,8 +253,10 @@
         <button id="helicopterhelicopter" class="abriryprender">Prender</button>
       </div>
 
+      <div class="separate2"></div>
+
       <!-- Luces -->
-      <div class="controlluces">
+      <div class="control">
         <h2 class="textotab2">Luces</h2>
         <section class="filasplural">
           <div class="fila1">
@@ -256,8 +274,8 @@
                   <img src="../imagenes/rojoapagado.png" alt="" class="bombilla">
                 </div>
               </div>
-              <button id="apagar" class="cerraryapagar">Apagar</button>
-              <button id="prender" class="abriryprender">Prender</button>
+              <button id="apagar" class="cerraryapagar">Off</button>
+              <button id="prender" class="abriryprender">On</button>
           </div>
           <div class="fila2">
               <div class = "sololuces">
@@ -274,7 +292,10 @@
                   <img src="../imagenes/azulapagado.png" alt="" class="bombilla">
                 </div>
               </div>
-              <input class= "potter" type="range" id="intensidad2" min="0" max="5" value="0">
+              <div class="range-container">
+                <input class="potter" type="range" id="intensidad2" min="0" max="5" value="0">
+                <div class="progress-bar"></div>
+              </div>
           </div>
         </section>
       </div>

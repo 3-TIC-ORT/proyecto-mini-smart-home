@@ -1,12 +1,5 @@
 [
   {
-    "nombre": "watajai",
-    "condiciones": {
-      "tipo": "dia",
-      "dia": "1"
-    }
-  },
-  {
     "nombre": "jegulus",
     "condiciones": {
       "tipo": "hora",
@@ -18,20 +11,6 @@
       "ventilador": "prender",
       "lucesrojas": "nada",
       "lucesazules": 3
-    }
-  },
-  {
-    "nombre": "ok, mañana",
-    "condiciones": {
-      "tipo": "hora",
-      "desde": "11:28",
-      "hasta": "01:30"
-    },
-    "acciones": {
-      "persiana": "nada",
-      "ventilador": "prender",
-      "lucesrojas": "prender",
-      "lucesazules": 2
     }
   },
   {
@@ -63,20 +42,6 @@
     }
   },
   {
-    "nombre": "nmvvjvmn",
-    "condiciones": {
-      "tipo": "hora",
-      "desde": "03:06",
-      "hasta": "04:05"
-    },
-    "acciones": {
-      "persiana": "abrir",
-      "ventilador": "apagar",
-      "lucesrojas": "apagar",
-      "lucesazules": 4
-    }
-  },
-  {
     "nombre": "hola",
     "condiciones": {
       "tipo": "dia",
@@ -87,19 +52,6 @@
       "ventilador": "prender",
       "lucesrojas": "apagar",
       "lucesazules": null
-    }
-  },
-  {
-    "nombre": "no se  bro",
-    "condiciones": {
-      "tipo": "dia",
-      "dia": "lunes"
-    },
-    "acciones": {
-      "persiana": "abrir",
-      "ventilador": "nada",
-      "lucesrojas": "prender",
-      "lucesazules": 3
     }
   },
   {

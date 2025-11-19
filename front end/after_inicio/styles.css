@@ -1,8 +1,88 @@
+:root{
+
+  /* body */
+  --fondo: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("../imagenes/fondo.jpg");
+
+  /* header */
+  --header-fondo-blanco: white;
+  --header-tab1: #706D74;
+  --header-tab2: #D7D5DE;
+  --header-border-negro: black;
+
+  /* temperatura */
+  --temperatura: #ffef39;
+
+  /* perfil */
+  --perfil-azul: #0CB1B0;
+  --perfil-blanco: white;
+  --perfil-azul-unavez: #2FD9D8;
+
+  /* modos */
+  --modos-fondo-rosa: #EB00F0;
+  --modos-fondo-blanco: white;
+  --modos-texto-ayuda: #000;
+
+  /* musica */
+  --musica-fondo-blanco: white;
+  --musica-verde-neon: #16FF06;
+  --musica-verde-relativamente-normal: #15D308;
+  --musica-verde-raro: #0CC200;
+
+  /* control */
+  --control-linea-separate: #FFEEE0;
+  --control-negro: black;
+  --control-blanco: white;
+  --control-rojas-apagadas: #6F302B;
+  --control-rojas-prendidas: #FF3939;
+  --control-rojas-luz: rgba(200, 50, 0, 1);
+  --control-azules-apagadas: #444661;
+  --control-azules-prendidas:#3978FF;
+  --control-azules-luz: rgba(32, 49, 202, 1);
+}
+
+body.dark-mode {
+/* body */
+  --fondo: linear-gradient(rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.54)), url("../imagenes/fondo.jpg");
+
+  /* header */
+  --header-fondo-blanco: black;
+  --header-tab1: #4D4262;
+  --header-tab2: #A2A1A6;
+  --header-border-negro: white;
+
+  /* temperatura */
+  --temperatura: #ffef39;
+
+  /* perfil */
+  --perfil-azul: #1BFFFE;
+  --perfil-blanco: black;
+  --perfil-azul-unavez: #1BFFFE;
+
+  /* modos */
+  --modos-fondo-rosa: #EB00F0;
+  --modos-fondo-blanco: black;
+  --modos-texto-ayuda: #EB00F0;
+
+  /* musica */
+  --musica-fondo-blanco: black;
+  --musica-verde-neon: #16FF06;
+  --musica-verde-relativamente-normal: #15D308;
+  --musica-verde-raro: #0CC200;
+
+  /* control */
+  --control-linea-separate: #FFEEE0;
+  --control-negro: white;
+  --control-blanco: black;
+  --control-rojas-apagadas: #6F302B;
+  --control-rojas-prendidas: #FF3939;
+  --control-rojas-luz: #FF000066;
+  --control-azules-apagadas: #444661;
+  --control-azules-prendidas:#3978FF;
+  --control-azules-luz: rgba(32, 49, 202, 1);
+}
+
 body{
-  background-image: linear-gradient(
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.6)
-  ), url("../imagenes/fondo.jpg");
+  background-image: var(--fondo);
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -16,7 +96,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: var(--header-fondo-blanco);
   background-size: cover;
   padding: 10px 20px;
   height: 84px;
@@ -44,7 +124,7 @@ main{
   text-align: center;
   align-items: center;
   padding: 10px 0;
-  background: #ffffff;
+  background: var(--header-fondo-blanco);
   border-bottom: none;
   border-radius: 8px 8px 0 0;
   cursor: pointer;
@@ -57,11 +137,11 @@ main{
 
 /* Colores fijos para cada tab */
 .tab[data-tab="tab1"] {
-  background-color: #706D74; /* rosado */
+  background-color: var(--header-tab1);
 }
 
 .tab[data-tab="tab3"] {
-  background-color: #D7D5DE; /* verde */
+  background-color: var(--header-tab2);
 }
 
 .tab.active {
@@ -75,8 +155,8 @@ main{
   background: none;
   border: none;
   cursor: pointer;
-  color: white;
-  border-color: solid 2px black;
+  color: var(--header-fondo-blanco);
+  border-color: solid 2px var(--header-border-negro);
 }
 
 .tab-content {
@@ -94,8 +174,8 @@ aside {
   top: 0; /* empieza desde el borde superior de la pantalla */
   left: 0;
   width: 70px;
-  background-color: white;
-  border-right: 2px solid black; /* línea derecha siempre visible */
+  background-color: var(--header-fondo-blanco);
+  border-right: 2px solid var(--header-border-negro); /* línea derecha siempre visible */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,10 +194,10 @@ aside.active {
 }
 
 .configuracion {
-  background-color: white;
+  background-color: var(--header-fondo-blanco);
   border: none;
-  border-bottom: 2px solid black; /* línea entre config y menú */
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--header-border-negro); /* línea entre config y menú */
+  border-bottom: 2px solid var(--header-border-negro);
   height: 84px;
   width: 100%;
   cursor: pointer;
@@ -139,7 +219,7 @@ aside.active .configuracion {
   align-items: center;
   gap: 35px;
   width: 100%;
-  background-color: white;
+  background-color: var(--header-fondo-blanco);
   box-sizing: border-box;
   padding: 10px 0;
 }
@@ -152,7 +232,7 @@ aside.active .configuracion {
 /* Botones del menú */
 .icon-menu button {
   width: 100%;
-  background-color: white;
+  background-color: var(--header-fondo-blanco);
   border: none;
   cursor: pointer;
   display: flex;
@@ -172,79 +252,132 @@ aside.active .configuracion {
 }
 
 /* CONTENEDOR PRINCIPAL */
+
 .saludotab1 {
   position: relative;
   display: flex;
   align-items: center;
   gap: 40px;
 
-  background: white;
-  border: 3px solid black;
+  background: var(--header-fondo-blanco);
+  border: 3px solid var(--header-border-negro);
   height: 75px;
 
+  margin-top: 2%;
+  margin-bottom: 2%;
   padding-left: 20px;
-  font-family: "Lexend Exa", sans-serif;
+  font-family: "Kalnia";
 
   /* BORDE ESCALONADO */
   clip-path: polygon(
-    0 0,
-    65% 0,
-    65% 25px,
-    78% 25px,
-    78% 50px,
-    100% 50px,
-    100% 100%,
-    0 100%
-  );
+  5% 0,     /* empieza un poco más a la derecha */
+  55% 0,    /* fin de la línea superior del primer escalón */
+  55% 25px,
+  70% 25px,
+  70% 50px,
+  95% 50px, /* termina un poco antes del borde derecho */
+  95% 100%, 
+  5% 100%
+);
 }
 
-/* Borde escalonado con pseudo-elemento */
-.saludotab1::before {
-  content: "";
+.linea1{
   position: absolute;
-  inset: 0; /* ocupa todo el contenedor */
-  border: 3px solid black;
-  clip-path: polygon(
-    0 0,
-    65% 0,
-    65% 25px,
-    78% 25px,
-    78% 50px,
-    100% 50px,
-    100% 100%,
-    0 100%
-  );
-  pointer-events: none; /* no bloquea clicks */
+  height: 80px;
+  width: 3px;
+  background-color: var(--header-border-negro);
+  top: 18.2%;
+  left: 6.4%;
 }
 
-/* TEXTO "HOLA USUARIO" */
-.saludotab1 h2#saludo {
+.linea2{
+  position: absolute;
+  background-color: var(--header-border-negro);
+  height: 27px;
+  width: 3px;
+  top: 18.1%;
+  right:45%;
+}
+
+.linea3{
+  position: absolute;
+  background-color: var(--header-border-negro);
+  height: 3px;
+  width: 187px;
+  top: 21.5%;
+  right: 30.6%;
+}
+
+.linea4{
+  position: absolute;
+  background-color: var(--header-border-negro);
+  height: 27px;
+  width: 3px;
+  top: 21.5%;
+  right:30.5%;
+}
+
+.linea5{
+  position: absolute;
+  background-color: var(--header-border-negro);
+  height: 3px;
+  width: 310px;
+  top: 24.9%;
+  right: 6.5%;
+}
+
+.linea6{
+  position: absolute;
+  background-color: var(--header-border-negro);
+  height: 32px;
+  width: 3px;
+  top: 24.9%;
+  right: 6.3%;
+}
+
+.saludotab1 h2{
   font-size: 28px;
   font-weight: 700;
-  margin: 0;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  margin-left: 5%;
+  border-top: 1px solid var(--header-border-negro);
+  border-bottom: 1px solid var(--header-border-negro);
   padding: 5px 10px;
+  color: var(--header-border-negro)
 }
 
 /* FECHA/HORA */
-#reloj {
-  font-size: 20px;
-  font-weight: 700;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  padding: 5px 10px;
-  margin-top: 25px;
+
+.reloj {
+  position: absolute;
+  color: var(--header-border-negro);
+  font-weight: 100;
+}
+
+/* Fecha arriba */
+.reloj.fecha {
+  top: 16%;
+  right: 35%;
+  font-family: "Koulen";
+  font-size: 25px;
+}
+
+/* Hora abajo */
+.reloj.hora {
+  top: 20%;
+  right: 18%;
+  font-family: "Koulen";
+  font-size: 25px;
 }
 
 /* CÍRCULO DE TEMPERATURA */
 #temperatura {
+  display: flex;
   position: absolute;
   right: 20px;
   top: 13%;
   width: 80px;
   height: 80px;
-  background: #ffef39;
+  background: var(--temperatura);
   border-radius: 50%;
   align-items: center;
   justify-content: center;
@@ -255,15 +388,16 @@ aside.active .configuracion {
 /* perfil */
 
 .perfil {
-  background: white;
-  border: 2px solid #00d1d1; 
+  display: flex;
+  background: var(--perfil-blanco);
+  border: 2px solid var(--perfil-azul); 
   border-radius: 12px;
   padding: 20px;
   justify-content: space-between;
-  align-items: flex-start;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  align-items: center;
   width: 100%;
   max-width: 450px;
+  max-height: 322px;
 }
 
 .saludo {
@@ -273,41 +407,50 @@ aside.active .configuracion {
 }
 
 .dni {
-  background: white;
-  border: 2px solid #00d1d1;
+  background: var(--modos-fondo-blanco);
+  border: 2px solid var(--perfil-azul);
   border-radius: 30px;
   padding: 25px;
   width: 400px;
-  height: 250px;
+  height: 275px;
   display: flex;
   gap: 20px;
   justify-content: flex-start;
+  align-self: center;
 }
 
 .avatar-box {
   text-align: center;
   position: relative;
+  top: 20px;
 }
 
 .avatar {
   width: 170px;
   height: 170px;
   border-radius: 200px;
-  border: 5px solid #00d1d1;
+  border: 2px solid var(--perfil-azul);
   object-fit: cover;
 }
 
+.edit-item{
+  color: var(--perfil-azul);
+  font-weight: 300;
+}
+
 .btn-editar {
-  background: #00d1d1;
-  color: white;
+  position: relative;
+  background: var(--perfil-azul);
+  color: var(--perfil-blanco);
   font-weight: 600;
   padding: 12px 25px;
-  border-radius: 20px;
+  border-radius: 10px;
   border: none;
-  margin-top: 15px;
+  top: -40px;
   cursor: pointer;
-  transform: rotate(8deg);
+  transform: rotate(10deg);
   font-size: 15px;
+  left: -30px;
 }
 
 .info-box {
@@ -318,7 +461,7 @@ aside.active .configuracion {
 }
 
 .info-item {
-  background: #00d1d1;
+  background: var(--perfil-azul);
   padding: 5px 5px;
   border-radius: 7px;
   width: 180px;
@@ -336,8 +479,8 @@ aside.active .configuracion {
 
 .editarcoso{
   display:none;
-  background: white;
-  border: 2px solid #00d1d1; 
+  background: var(--modos-fondo-blanco);
+  border: 2px solid var(--perfil-azul); 
   border-radius: 30px;
   padding: 20px;
   justify-content: space-between;
@@ -347,9 +490,9 @@ aside.active .configuracion {
 }
 
 .cososdelperfil{
-  background: #fff;
+  background: var(--perfil-azul);
   padding: 5px 5px;
-  border: 1px solid #00d1d1;
+  border: 1px solid var(--perfil-azul);
   border-radius: 7px;
   width: 180px;
   height: fit-content;
@@ -368,8 +511,8 @@ aside.active .configuracion {
 }
 
 .btns-editar{
-  background: #00d1d1;
-  color: white;
+  background: var(--perfil-azul-unavez);
+  color: var(--perfil-blanco);
   font-weight: 600;
   padding: 12px 25px;
   border-radius: 20px;
@@ -384,8 +527,8 @@ aside.active .configuracion {
 }
 
 .btns-editar2{  
-  background:#ccc; 
-  color:#000;
+  background:var(--perfil-azul); 
+  color: var(--perfil-blanco);
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 20px;
@@ -405,19 +548,31 @@ aside.active .configuracion {
 .modos {
   justify-content: center; /* alineados arriba */
   align-items: center;      /* alineados a la izquierda */
-  background: white;
-  border: 3px solid #EB00F0;
+  background: var(--modos-fondo-blanco);
+  border: 3px solid var(--modos-fondo-rosa);
   border-radius: 12px;
-  padding: 15px;        /* padding general */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 15px;
   width: fit-content;
+  max-height: 330px;
 }
 
 /* Cada modo individual */
+
+#modoform{
+  display: flex;
+  flex-direction: column; /* que los elementos estén uno abajo del otro */
+  gap: 5px;
+}
+
+#modoform input,select,button{
+  background-color: var(--modos-fondo-blanco);
+  border: none;
+}
+
 .ayudamental {
   display: flex;
-  background-color: #EB00F0;
-  color: white;
+  background-color: var(--modos-fondo-rosa);
+  color: var(--modos-fondo-blanco);
   border-radius: 15px;
   width: 230px;
   height: 260px;
@@ -430,7 +585,10 @@ aside.active .configuracion {
   font-family: "Londrina Solid";
   font-size: 40px;
   margin-top: 5px;
+  margin-bottom: 12px;
   justify-self: center;
+  text-transform: uppercase;
+  letter-spacing: 2%;
 }
 
 .modos h2::after {
@@ -439,16 +597,16 @@ aside.active .configuracion {
   left: 58%;
   bottom: 55%;
   transform: translateX(-50%);
-  width: 18%; /* largo de la línea */
-  height: 3px; /* grosor */
-  background: #fff; /* color */
+  width: 18%;
+  height: 3px;
+  background: var(--modos-fondo-blanco);
   border-radius: 10px;
 }
 
 /* Botones dentro de los modos */
 .botonmodos {
-  background-color: #EB00F0;
-  color: white;
+  background-color: var(--modos-fondo-rosa);
+  color: var(--modos-fondo-blanco);
   width: fit-content;
   height: 40px;
   padding: 10px;
@@ -459,19 +617,37 @@ aside.active .configuracion {
   margin-top: 10px;
 }
 
+.flechitaderecha{
+  transform: scaleX(-1);
+}
+
+.botonera {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.ayudadios{
+  color: var(--modos-texto-ayuda);
+  background-color: var(--modos-fondo-blanco);
+  width: fit-content;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 3px;
+}
 
 /* Musica*/
 
 .musiquita {
-  background: white;
-  border: 3px solid #16FF06;
+  background: var(--musica-fondo-blanco);
+  border: 3px solid var(--musica-verde-neon);
   border-radius: 12px;
   padding: 15px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 260px;
-
-  /* FIX: que el contenido vaya para abajo, NO al costado */
+  max-height: 330px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -486,9 +662,11 @@ aside.active .configuracion {
 
 /* Caja del título + género + barra */
 .estoyestresada {
-  border: 3px solid #16FF06;
+  border: 3px solid var(--musica-verde-neon);
   padding: 10px;
   border-radius: 8px;
+  color: var(--musica-verde-neon);
+  height: 120px;
 }
 
 /* Botones de música */
@@ -496,14 +674,14 @@ aside.active .configuracion {
 .musiquita > #reproductor > div:nth-child(3) {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 35px;
 }
 
 .btnmusica {
-  background-color: white;
+  background-color: var(--modos-fondo-blanco);
   border: none;
-  width: 65px;
-  height: 65px;
+  width: 55px;
+  height: 55px;
 }
 
 .btnmusica img {
@@ -511,8 +689,8 @@ aside.active .configuracion {
 }
 
 #shuffle{
-  width: 72px;
-  height: 72px;
+  width: 62px;
+  height: 62px;
   margin-top: -4px;
 }
 
@@ -521,7 +699,7 @@ aside.active .configuracion {
   position: relative;
   width: 100%;
   height: 3px;
-  background: #ccc;
+  background: var(--musica-verde-relativamente-normal);
   border-radius: 3px;
   margin-top: 10px;
 }
@@ -532,7 +710,7 @@ aside.active .configuracion {
   left: 0;
   height: 100%;
   width: 0;
-  background: #15D308;
+  background: var(--musica-verde-relativamente-normal);
   border-radius: 3px;
 }
 
@@ -542,35 +720,20 @@ aside.active .configuracion {
   left: 0;
   width: 10px;
   height: 10px;
-  background: #16FF06;
+  background: var(--musica-verde-neon);
   border-radius: 50%;
 }
 
 /* Caja verde */
 .cajitarara {
-  margin-top: 5px;
-  background-color: #0CC200;
+  background-color: var(--musica-verde-raro);
   width: 100%;
   height: 45px;
-}
-/* Modos */
-
-.funciones {
-  flex: 1;
-  min-height: 150px;
-  background: #f8d7da;
-  color: #721c24; 
-  border-radius: 12px;
-  padding: 15px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .reloj {
   font-size: 18px;
-  color: #000000;
+  color: var(--header-border-negro);
   font-weight: bold;
   margin-left: 20px;
 }
@@ -578,66 +741,106 @@ aside.active .configuracion {
 .greeting{
   display: flex;
   gap: 50px;
+  align-items: center;
+  margin-left: 10%;
+  width: 80%;
+  border-bottom: 2px solid var(--header-border-negro);
 }
 
 .saluuut{
-  color: black;
+  color: var(--header-border-negro);
   font-family: "Inter", sans-serif;
   font-size: 46px;
   font-weight: 800;
 }
 
 .ready {
-  margin-top: 10px;
-  background: #ffffff;
-  color: black;
+  margin: 10px;
+  background: var(--header-fondo-blanco);
+  color: var(--header-border-negro);
   font-weight: 800;
   font-stretch: expanded;
-  font-size: 20px;
+  font-size: 30px;
   border: none;
-  padding: 10px 20px;
-  height: fit-content;
-  width: fit-content;
+  height: 55px;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .funfact{
-  background-color: white;
-  background-image: url(../imagenes/no\ se.png);
-  border:2px solid black;
+  display: flex;
+  background-color: var(--header-fondo-blanco);
+  background-image: url("../imagenes/no\ se.png");
+  border:2px solid var(--header-border-negro);
   border-radius: 30px;
   height: 50px;
   margin-top: 20px;
   width: 87%;
+  align-items: center;
   justify-self: center;
+  color: var(--header-border-negro)
+}
+
+.funfact h3{
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.odioproyecto{
+  height: 100%;
+  width: 13px;
+  background-color: var(--header-border-negro);
+  margin-right: 15px;
+}
+
+.odioproyecto p{
+  font-size: larger;
 }
 
 /* Control */
 .controls {
   display: flex;
   justify-content: space-around;
-  margin: 40px;
+  margin-left: 5%;
+  margin-top: 3%;
   text-align: center;
 }
 
 .control h2 {
   font-size: 28px;
-  margin-bottom: 10px;
+  margin-top: -3px;
+  margin-bottom: 20px;
+  font-family: "Itim";
 }
 
 .textotab2 {
-  color: black;
+  color: var(--header-border-negro);
+}
+
+.separate1{
+  width: 2px;
+  height: 1000px;
+  background-color: var(--header-fondo-blanco);
+}
+
+.separate2{
+  width: 2px;
+  height: 1000px;
+  background-color: var(--control-linea-separate);
 }
 
 /* Persiana */
 
 .cerraryapagar { 
-  background: black;
-  color: white;
+  background: var(--control-negro);
+  color: var(--control-blanco);
   height: 60px;
   width: 110px;
   border-radius: 15px;
-  border: solid 3px white;
-  font-family: Itim;
+  border: solid 3px var(--control-blanco);
+  font-family: "Itim";
   font-weight: 400;
   font-style: Regular;
   font-size: 25px;
@@ -646,23 +849,24 @@ aside.active .configuracion {
 }
   
 .abriryprender { 
-  background: white;
-  color: black;
+  background: var(--control-blanco);
+  color: var(--control-negro);
   height: 60px;
   width: 110px;
   border-radius: 15px;
-  border: solid 3px black;
-  font-family: Itim;
+  border: solid 3px var(--control-negro);
+  font-family: "Itim";
   font-weight: 400;
   font-style: Regular;
   font-size: 25px;
   line-height: 100%;
   letter-spacing: 0%;
+  margin-bottom: 5px;
  }
 
 .persiana {
-  width: 150px;
-  height: 150px;
+  width: 260px;
+  height: 200px;
   margin: 20px auto;
   transition: height 0.5s ease;
 }
@@ -670,8 +874,10 @@ aside.active .configuracion {
 /* Ventilador */
 
 .ventilador{
-height: 164px;
-width: 170px;
+height: 205px;
+width: 213px;
+margin-top: 8px;
+margin-bottom: 25px;
 }
 
 
@@ -690,13 +896,14 @@ width: 170px;
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-bottom: 5px;
 }
 
 .luces {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  margin: 10px auto;
+  margin: 15px auto;
   display: flex;
 }
 
@@ -707,29 +914,53 @@ width: 170px;
 }
 
 .rojas{
-  background-color: #6F302B;
+  background-color: var(--control-rojas-apagadas);
 }
 
 .azules{
-  background-color: #444661;
+  background-color: var(--control-azules-apagadas);
 }
 
 .prendidas-rojas{
-  background-color: #FF3939;
-  width: 70px;
-  height: 70px;
-  gap: -140px;
-  box-shadow: 8px 10px 3px rgba(200, 50, 0, 1);
+  background-color: var(--control-rojas-prendidas);
+  width: 80px;
+  height: 80px;
+  gap: 60px;
+  box-shadow: 8px 10px 3px var(--control-rojas-luz);
+  margin: 15px auto;
 }
 
 .prendidas-azules{
-  background-color: #3978FF;
-  width: 70px;
-  height: 70px;
-  gap: -140px;
-  box-shadow: 8px 10px 5px rgba(32, 49, 202, 1);
+  background-color: var(--control-azules-prendidas);
+  width: 80px;
+  height: 80px;
+ gap: 60px;
+  box-shadow: 8px 10px 5px var(--control-azules-luz);
+  margin: 15px auto;
 }
 
-.potter{
-  width: 100%;
+.potter {
+  -webkit-appearance: none;
+  width: 80%;
+  height: 10px;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Track */
+.potter::-webkit-slider-runnable-track {
+  height: 10px;
+  background: var(--control-negro);
+  border-radius: 5px;
+}
+
+/* el thumb este (el boton) */
+.potter::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--control-blanco);
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -5px;
 }
