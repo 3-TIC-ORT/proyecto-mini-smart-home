@@ -7,34 +7,25 @@ let lista = document.getElementById("modos");
 let condicion = document.getElementById("condicion");
 let condicionesExtra = document.getElementById("extrastuff");
 
-
 // perfil
-
 
 let containerPerfilView = document.getElementById("perfilView");
 let containerPerfilEdit = document.getElementById("perfilEdit");
-
 
 let botonEditar = document.getElementById("btnEditar");
 let botonGuardar = document.getElementById("guardarPerfil");
 let botonCancelar = document.getElementById("cancelarEditar");
 
-
 let inputNombre = document.getElementById("inputNombre");
 let inputCumple = document.getElementById("inputCumple");
 let inputSobre = document.getElementById("inputSobre");
 
-
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
-
-if (!usuarioLogueado) {
- location.href = "../inicio_de_sesion/main.html";
-}
-
-
-if (usuarioLogueado) {
- let usuario = JSON.parse(usuarioLogueado);
+ if (!usuarioLogueado) {
+  location.href = "../inicio_de_sesion/main.html"; // redirigir si no hay usuario
+} else {
+  let usuario = JSON.parse(usuarioLogueado);
 
 
  postEvent("obtenerUsuario", usuario, function(data) {
@@ -52,7 +43,6 @@ if (usuarioLogueado) {
      nombreUsuario.textContent = "Sin nombre";
    }
 
-
    // cumple
    if (data.cumple) {
      nacimiento.textContent = data.cumple;
@@ -60,14 +50,12 @@ if (usuarioLogueado) {
      nacimiento.textContent = "No disponible";
    }
 
-
    // sobre
    if (data.sobre) {
      sobre.textContent = data.sobre;
    } else {
      sobre.textContent = "Sin descripción";
    }
-
 
    // editar
    botonEditar.addEventListener("click", function () {
@@ -78,20 +66,17 @@ if (usuarioLogueado) {
        inputNombre.value = "";
      }
 
-
      if (data.cumple) {
        inputCumple.value = data.cumple;
      } else {
        inputCumple.value = "";
      }
 
-
      if (data.sobre) {
        inputSobre.value = data.sobre;
      } else {
        inputSobre.value = "";
      }
-
 
      // mostrar editor y ocultar normal
      if (containerPerfilView) {
@@ -102,7 +87,6 @@ if (usuarioLogueado) {
      }
    });
 
-
    botonCancelar.addEventListener("click", function () {
      if (containerPerfilEdit) {
        containerPerfilEdit.style.display = "none";
@@ -112,22 +96,17 @@ if (usuarioLogueado) {
      }
    });
 
-
    //guardar
    botonGuardar.addEventListener("click", function () {
      let nuevoNombre = inputNombre.value.trim();
      let nuevoCumple = inputCumple.value;
      let nuevoSobre = inputSobre.value.trim();
 
-
-   
      let datosActualizados = {
-       id: data.id,
        nombre: nuevoNombre,
        cumple: nuevoCumple,
        sobre: nuevoSobre
      };
-
 
      postEvent("actualizarUsuario", datosActualizados, function (data) {
        let actualizado = null;
@@ -161,7 +140,7 @@ if (usuarioLogueado) {
        }
 
 
-       // guardar en localStorage (mantener objeto usuario)
+       // guardar en localStorage
        data.nombre = actualizado.nombre;
        data.cumple = actualizado.cumple;
        data.sobre = actualizado.sobre;
@@ -181,7 +160,6 @@ if (usuarioLogueado) {
  });
 }
 
-
 tabs.forEach(tab => {
  tab.addEventListener('click', () => {
    tabs.forEach(t => t.classList.remove('active'));
@@ -194,6 +172,7 @@ tabs.forEach(tab => {
  });
 });
 
+// el coso este desplegable
 
 let conf = document.querySelector(".settings");
 let iconMenu = document.querySelector(".icon-menu");
@@ -201,8 +180,6 @@ let casita = document.getElementById("casita");
 let modooscuro = document.getElementById("modooscuro");
 let logout = document.getElementById("logout");
 
-
-// el coso este desplegable
 conf.addEventListener("click", () => {
  iconMenu.classList.toggle("active");
 });
@@ -233,7 +210,6 @@ logout.addEventListener("click", () => {
  location.href = "../inicio_de_sesion/main.html";
 });
 
-
 function actualizarReloj() {
  let ahora = new Date();
   let opcionesHora = { hour: '2-digit', minute: '2-digit', hour12: true };
@@ -247,7 +223,6 @@ function actualizarReloj() {
  document.getElementById("fecha").innerText = fecha;
  document.getElementById("hora").innerText = hora;
 }
-
 
 setInterval(actualizarReloj, 1000);
 actualizarReloj();
