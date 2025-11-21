@@ -19,35 +19,43 @@
   <main>
     <h1>Registrate!</h1>
     <form id = "formregistro">
-      <div class = "cosos">
-        <label for = "">Fecha de nacimiento</label>
+      <div class="cosos">
+        <label>Fecha de nacimiento</label>
         <div class="linimini"></div>
-        <input type = "date" id = "cumple">
+      
+        <div class="fechaselect">
+          <select id="dia"></select>
+          <select id="mes"></select>
+          <select id="año"></select>
+        </div>
+      
       </div>
-      <div class = "cosos">
-        <label for = "">Nombre de usuario </label>
+      
+      <div class="cosos">
+        <label>Nombre de usuario</label>
         <div class="linimini"></div>
-        <input type = "text" id = "dondevaelmail" placeholder = "Usuario">
+        <input type="text" id="dondevaelmail" placeholder="Usuario">
       </div>
-      <div class = "cosos">
-        <label for = "">Contraseña </label>
+      
+      <div class="cosos">
+        <label>Contraseña</label>
         <div class="linimini"></div>
-        <input type = "texto" id = "dondevalacontra" placeholder = "Contraseña">
+        <input type="password" id="dondevalacontra" placeholder="Contraseña">
       </div>
-        <div class = "generotypeshi">
-          <label for="">Género (opcional)</label>
-            <section class = "opcion-genero"> 
-              <div class="linimini"></div>
-              <input type = "radio" class = "genero" value = "chico" name="genero">
-              <img src="../imagenes/boy.png" alt="Chico">
-              <div class="linimini"></div>
-            </section>
-            <section class = "opcion-genero">
-              <input type = "radio" class = "genero" value = "chica" name="genero">
-              <img src="../imagenes/girl.png" alt="Chica" class="girlypop">
-              <div class="linimini"></div>
-            </section>
+      
+      <div class="generotypeshi">
+        <label>Género (opcional)</label>
+        <div class="opcion-genero">
+          <div class="linimini"></div>
+          <input type="radio" id="generoChico" name="genero" value="chico">
+          <label for="generoChico"><img src="../imagenes/boy.png" alt="Chico"></label>
+          <div class="linimini"></div>
+          <input type="radio" id="generoChica" name="genero" value="chica">
+          <label for="generoChica"><img src="../imagenes/girl.png" alt="Chica"></label>
+          <div class="linimini"></div>
+        </div>
       </div>
+      
       <div class = "botones">
         <button class = "boton" type = "submit" id = "registrate">Crear cuenta</button>
         <button class = "inicio" id = "inicio" type = "button"> Ya tengo cuenta </button>

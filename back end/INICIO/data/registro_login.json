@@ -190,14 +190,14 @@
     "password": "jegulus"
   },
   {
-<<<<<<< HEAD
     "email": "tumama",
     "password": "jegulus"
   },
   {
     "email": "tumama",
     "password": "jegulus"
-=======
+  },
+  {
     "email": "Fran",
     "password": "Panchi"
   },
@@ -261,6 +261,5 @@
   {
     "email": "Frannn",
     "password": "Hola"
->>>>>>> f682dc3ec753eb1b4c32f1eb22b75a096b273a21
   }
 ]
