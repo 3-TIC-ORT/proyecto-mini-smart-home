@@ -12,6 +12,182 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.blackstar{
+  position: absolute;
+  top:0;
+  left: 0%;
+  height: 30%;
+  width: 30%;
+}
+
+.sob1{
+  position: absolute;
+  top: 1%;
+  left: 39%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob2{
+  position: absolute;
+  top: 1%;
+  left: 51%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob3{
+  position: absolute;
+  top: 1%;
+  left: 64%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob4{
+  position: absolute;
+  top: 1%;
+  left: 77%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob5{
+  position: absolute;
+  top: 1%;
+  left: 90%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob6{
+  position: absolute;
+  top: 15%;
+  right: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob7{
+  position: absolute;
+  top: 31.3%;
+  right: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob8{
+  position: absolute;
+  top: 49%;
+  right: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob9{
+  position: absolute;
+  top: 65%;
+  right: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob10{
+  position: absolute;
+  top: 82%;
+  right: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob11{
+  position: absolute;
+  bottom: 2.5%;
+  right: 10%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob12{
+  position: absolute;
+  bottom: 2.5%;
+  right: 22%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob13{
+  position: absolute;
+  bottom: 2.5%;
+  right: 34%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob14{
+  position: absolute;
+  bottom: 2.5%;
+  right: 46%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob15{
+  position: absolute;
+  bottom: 2.5%;
+  right: 58%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob16{
+  position: absolute;
+  bottom: 2.5%;
+  right: 70%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob17{
+  position: absolute;
+  bottom: 2.5%;
+  right: 82%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob18{
+  position: absolute;
+  top: 31.3%;
+  left: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob19{
+  position: absolute;
+  top: 49%;
+  left: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob20{
+  position: absolute;
+  top: 65%;
+  left: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
+.sob21{
+  position: absolute;
+  top: 82%;
+  left: 1%;
+  height: 2.7%;
+  width: 1.5%;
+}
+
 h1 {
   font-size: 50px;
   font-weight: 400;
@@ -75,7 +251,7 @@ label {
   text-align: left;
   font-size: 19px;
   margin-right: 10px;
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 .linimini{
