@@ -12,7 +12,7 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.blackstar{
+.moony{
   position: absolute;
   top:0;
   left: 0%;
@@ -20,7 +20,7 @@ body {
   width: 30%;
 }
 
-.sob1{
+.blackstar1{
   position: absolute;
   top: 1%;
   left: 39%;
@@ -28,7 +28,7 @@ body {
   width: 1.5%;
 }
 
-.sob2{
+.blackstar2{
   position: absolute;
   top: 1%;
   left: 51%;
@@ -36,7 +36,7 @@ body {
   width: 1.5%;
 }
 
-.sob3{
+.blackstar3{
   position: absolute;
   top: 1%;
   left: 64%;
@@ -44,7 +44,7 @@ body {
   width: 1.5%;
 }
 
-.sob4{
+.blackstar4{
   position: absolute;
   top: 1%;
   left: 77%;
@@ -52,7 +52,7 @@ body {
   width: 1.5%;
 }
 
-.sob5{
+.blackstar5{
   position: absolute;
   top: 1%;
   left: 90%;
@@ -60,7 +60,7 @@ body {
   width: 1.5%;
 }
 
-.sob6{
+.blackstar6{
   position: absolute;
   top: 15%;
   right: 1%;
@@ -68,7 +68,7 @@ body {
   width: 1.5%;
 }
 
-.sob7{
+.blackstar7{
   position: absolute;
   top: 31.3%;
   right: 1%;
@@ -76,7 +76,7 @@ body {
   width: 1.5%;
 }
 
-.sob8{
+.blackstar8{
   position: absolute;
   top: 49%;
   right: 1%;
@@ -84,7 +84,7 @@ body {
   width: 1.5%;
 }
 
-.sob9{
+.blackstar9{
   position: absolute;
   top: 65%;
   right: 1%;
@@ -92,7 +92,7 @@ body {
   width: 1.5%;
 }
 
-.sob10{
+.blackstar10{
   position: absolute;
   top: 82%;
   right: 1%;
@@ -100,7 +100,7 @@ body {
   width: 1.5%;
 }
 
-.sob11{
+.blackstar11{
   position: absolute;
   bottom: 2.5%;
   right: 10%;
@@ -108,55 +108,55 @@ body {
   width: 1.5%;
 }
 
-.sob12{
+.blackstar12{
   position: absolute;
   bottom: 2.5%;
-  right: 22%;
+  right: 23%;
   height: 2.7%;
   width: 1.5%;
 }
 
-.sob13{
+.blackstar13{
   position: absolute;
   bottom: 2.5%;
-  right: 34%;
+  right: 36%;
   height: 2.7%;
   width: 1.5%;
 }
 
-.sob14{
+.blackstar14{
   position: absolute;
   bottom: 2.5%;
-  right: 46%;
+  right: 49%;
   height: 2.7%;
   width: 1.5%;
 }
 
-.sob15{
+.blackstar15{
   position: absolute;
   bottom: 2.5%;
-  right: 58%;
+  right: 62%;
   height: 2.7%;
   width: 1.5%;
 }
 
-.sob16{
+.blackstar16{
   position: absolute;
   bottom: 2.5%;
-  right: 70%;
+  right: 75%;
   height: 2.7%;
   width: 1.5%;
 }
 
-.sob17{
+.blackstar17{
   position: absolute;
   bottom: 2.5%;
-  right: 82%;
+  right: 88%;
   height: 2.7%;
   width: 1.5%;
 }
 
-.sob18{
+.blackstar18{
   position: absolute;
   top: 31.3%;
   left: 1%;
@@ -164,7 +164,7 @@ body {
   width: 1.5%;
 }
 
-.sob19{
+.blackstar19{
   position: absolute;
   top: 49%;
   left: 1%;
@@ -172,7 +172,7 @@ body {
   width: 1.5%;
 }
 
-.sob20{
+.blackstar20{
   position: absolute;
   top: 65%;
   left: 1%;
@@ -180,7 +180,7 @@ body {
   width: 1.5%;
 }
 
-.sob21{
+.blackstar21{
   position: absolute;
   top: 82%;
   left: 1%;
@@ -188,10 +188,17 @@ body {
   width: 1.5%;
 }
 
+section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -1%;
+}
+
 h1 {
   font-size: 50px;
   font-weight: 400;
-  color: #F9FC0D;
+  color: #FEDA50;
   margin-bottom: 25px;
   letter-spacing: 2px;
   font-family: "Courier Prime", "Open Sans", sans-serif;
@@ -199,14 +206,31 @@ h1 {
   font-style: normal;
 }
 
+.regulus{
+  height: 65%;
+  width: 65%;
+}
+
+.logo{
+  height: 60%;
+  width: 60%;
+}
+
+.linea{
+  height: 2.5px;
+  width: 68%;
+  background-color: #C9B4C9;
+  margin-bottom: 3px;
+}
+
 main{
   display: flex;
   flex-direction: column;
-  width: 814px;
-  height: 568px;
+  width: 85%;
+  height: 75%;
   background-color: #2D0163;
   margin: 0 auto;
-  justify-content: center;   
+  justify-content: flex-start;   
   align-items: center;
 }
 
@@ -226,7 +250,14 @@ select {
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7L10 12L15 7' stroke='white' stroke-width='2'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
-  background-size: 16px;/* saca flechita fea */
+  background-size: 16px;
+}
+
+#formregistro{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .cosos select {
@@ -239,8 +270,8 @@ select {
   align-items: center;
   background-color: #C3ABC3;
   border-radius: 10px;
-  width: 650px;
-  margin-top: 12px;
+  width: 120%;
+  margin-top: 15px;
   height: 40px;
   padding: 10px;
   gap: 10px;
@@ -279,9 +310,10 @@ input{
   align-items: center;
   background-color: #C3ABC3;
   border-radius: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
-  margin-top: 12px;
-  width: 650px;
+  width: 120%;
   height: 40px;
 }
 
@@ -292,7 +324,6 @@ input{
   padding-left: 10px;
 }
 
-/* ESTE ES EL CAMBIO IMPORTANTE */
 .opcion-genero {
   flex: 2;
   display: flex;
@@ -306,15 +337,13 @@ input{
   margin: 0 10px;
 }
 
-/* Ocultamos el radio pero deja de romper el layout */
 .opcion-genero input[type="radio"] {
   position: absolute;
   opacity: 0;
-  inset: 0;  /* cubre todo el label */
+  inset: 0;
   cursor: pointer;
 }
 
-/* Los labels (con imágenes) ahora sí se centran */
 .opcion-genero label {
   width: 40px;
   height: 40px;
@@ -325,7 +354,6 @@ input{
   position: relative;
 }
 
-/* Imagen dentro del label */
 .opcion-genero label img {
   width: 35px;
   height: 35px;
@@ -333,7 +361,6 @@ input{
   transition: 0.3s;
 }
 
-/* Cuando el input está checked, aparece el efecto bonito */
 #generoChico:checked + label img,
 #generoChica:checked + label img {
   opacity: 1;
@@ -341,18 +368,17 @@ input{
   filter: drop-shadow(0 0 6px #f3e6ff);
 }
 
-
 button {
   background-color: #E4D5E4;
   color: #2D0163;
   width: fit-content;
   height: 65px;
-  margin: 15px 0;
+  margin: 0px 0;
   border-radius: 15px;
   font-size: 30px;
   border: none;
   padding: 15px;
- }
+}
 
 .botones{
   display: flex;
