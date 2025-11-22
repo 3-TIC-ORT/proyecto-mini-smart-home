@@ -87,7 +87,7 @@ body{
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  background-repeat: no-repeat; /* que no se repita */
+  background-repeat: no-repeat;
   height: 100vh;
   overflow: hidden;
 }
@@ -100,9 +100,9 @@ header {
   background-size: cover;
   padding: 10px 20px;
   height: 84px;
-  width: calc(100% - 74px); /* ocupa todo menos el ancho del aside */
-  margin-left: 74px; /* pegado al aside */
-  box-sizing: border-box; /* que padding no rompa el ancho */
+  width: calc(100% - 74px);
+  margin-left: 74px;
+  box-sizing: border-box;
   margin-top: 0;
 }
 
@@ -131,11 +131,10 @@ main{
   transition: all 0.3s ease;
   position: relative;
   top: 21px;
-  height: 21px;
+  height: 21.5px;
   font-weight: bold;
 }
 
-/* Colores fijos para cada tab */
 .tab[data-tab="tab1"] {
   background-color: var(--header-tab1);
 }
@@ -171,11 +170,11 @@ main{
 /* Aside */
 aside {
   position: fixed;
-  top: 0; /* empieza desde el borde superior de la pantalla */
+  top: 0;
   left: 0;
   width: 70px;
   background-color: var(--header-fondo-blanco);
-  border-right: 2px solid var(--header-border-negro); /* línea derecha siempre visible */
+  border-right: 2px solid var(--header-border-negro);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,13 +189,13 @@ aside {
 /* Cuando se expande */
 aside.active {
   height: auto;
-  min-height: 100vh; /* ocupa toda la altura al abrir */
+  min-height: 100vh;
 }
 
 .configuracion {
   background-color: var(--header-fondo-blanco);
   border: none;
-  border-bottom: 2px solid var(--header-border-negro); /* línea entre config y menú */
+  border-bottom: 2px solid var(--header-border-negro);
   border-bottom: 2px solid var(--header-border-negro);
   height: 84px;
   width: 100%;
@@ -212,7 +211,6 @@ aside.active .configuracion {
   border-right: none;
 }
 
-/* MENÚ DESPLEGABLE */
 .icon-menu {
   display: none;
   flex-direction: column;
@@ -268,14 +266,13 @@ aside.active .configuracion {
   padding-left: 20px;
   font-family: "Kalnia";
 
-  /* BORDE ESCALONADO */
   clip-path: polygon(
-  5% 0,     /* empieza un poco más a la derecha */
-  55% 0,    /* fin de la línea superior del primer escalón */
+  5% 0,
+  55% 0,
   55% 25px,
   70% 25px,
   70% 50px,
-  95% 50px, /* termina un poco antes del borde derecho */
+  95% 50px,
   95% 100%, 
   5% 100%
 );
@@ -345,7 +342,7 @@ aside.active .configuracion {
   color: var(--header-border-negro)
 }
 
-/* FECHA/HORA */
+/* reloj */
 
 .reloj {
   position: absolute;
@@ -353,7 +350,6 @@ aside.active .configuracion {
   font-weight: 100;
 }
 
-/* Fecha arriba */
 .reloj.fecha {
   top: 16%;
   right: 35%;
@@ -361,7 +357,6 @@ aside.active .configuracion {
   font-size: 25px;
 }
 
-/* Hora abajo */
 .reloj.hora {
   top: 20%;
   right: 18%;
@@ -369,7 +364,6 @@ aside.active .configuracion {
   font-size: 25px;
 }
 
-/* CÍRCULO DE TEMPERATURA */
 #temperatura {
   display: flex;
   position: absolute;
@@ -391,12 +385,12 @@ aside.active .configuracion {
   display: flex;
   background: var(--perfil-blanco);
   border: 2px solid var(--perfil-azul); 
-  border-radius: 12px;
+  border-radius: 40px;
   padding: 20px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 450px;
+  max-width: 435px;
   max-height: 322px;
 }
 
@@ -485,8 +479,23 @@ aside.active .configuracion {
   padding: 20px;
   justify-content: space-between;
   align-items: flex-start;
-  width: 410px;
-  min-height: 260px;
+  width: 395px;
+  min-height: 280px;
+}
+
+.puntossuspensivos{
+  position: relative;
+  background: var(--perfil-azul);
+  color: var(--perfil-blanco);
+  font-weight: 600;
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: none;
+  top: -45px;
+  width: fit-content;
+  transform: rotate(10deg);
+  font-size: 15px;
+  left: -10px;
 }
 
 .cososdelperfil{
@@ -546,8 +555,8 @@ aside.active .configuracion {
 /*modos*/
 
 .modos {
-  justify-content: center; /* alineados arriba */
-  align-items: center;      /* alineados a la izquierda */
+  justify-content: center;
+  align-items: center;
   background: var(--modos-fondo-blanco);
   border: 3px solid var(--modos-fondo-rosa);
   border-radius: 12px;
@@ -556,11 +565,9 @@ aside.active .configuracion {
   max-height: 330px;
 }
 
-/* Cada modo individual */
-
 #modoform{
   display: flex;
-  flex-direction: column; /* que los elementos estén uno abajo del otro */
+  flex-direction: column;
   gap: 5px;
 }
 
@@ -569,22 +576,34 @@ aside.active .configuracion {
   border: none;
 }
 
+.borde{
+  display: flex;
+  background-color: var(--modos-fondo-blanco);
+  padding: 2px;
+  border: 2px solid var(--modos-fondo-rosa);
+  border-radius: 16px;
+  height: 276px;
+  width: 254px;
+  align-items: center;
+  justify-content: center;
+  margin-top: -15px;
+}
+
 .ayudamental {
   display: flex;
   background-color: var(--modos-fondo-rosa);
   color: var(--modos-fondo-blanco);
   border-radius: 15px;
   width: 230px;
-  height: 260px;
+  height: 253px;
   justify-content: center;
-  margin-top: -15px;
   padding: 10px;
 }
 
 .ayudamental h2{
   font-family: "Londrina Solid";
   font-size: 40px;
-  margin-top: 5px;
+  margin-top: 2px;
   margin-bottom: 12px;
   justify-self: center;
   text-transform: uppercase;
@@ -603,7 +622,6 @@ aside.active .configuracion {
   border-radius: 10px;
 }
 
-/* Botones dentro de los modos */
 .botonmodos {
   background-color: var(--modos-fondo-rosa);
   color: var(--modos-fondo-blanco);
@@ -646,7 +664,7 @@ aside.active .configuracion {
   border-radius: 12px;
   padding: 15px;
   width: 100%;
-  max-width: 260px;
+  max-width: 245px;
   max-height: 330px;
   display: flex;
   flex-direction: column;
@@ -660,7 +678,6 @@ aside.active .configuracion {
   gap: 10px;
 }
 
-/* Caja del título + género + barra */
 .estoyestresada {
   border: 3px solid var(--musica-verde-neon);
   padding: 10px;
@@ -669,7 +686,6 @@ aside.active .configuracion {
   height: 120px;
 }
 
-/* Botones de música */
 .musiquita > #reproductor > div:nth-child(2),
 .musiquita > #reproductor > div:nth-child(3) {
   display: flex;
@@ -694,14 +710,15 @@ aside.active .configuracion {
   margin-top: -4px;
 }
 
-/* Barra de progreso */
 .manofprogress {
   position: relative;
-  width: 100%;
+  width: 110%;
   height: 3px;
   background: var(--musica-verde-relativamente-normal);
   border-radius: 3px;
-  margin-top: 10px;
+  margin: 10px auto;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .progreso {
@@ -716,15 +733,16 @@ aside.active .configuracion {
 
 .thumbs {
   position: absolute;
-  top: -4px;
+  top: 50%;
+  transform: translate(-50%, -50%);
   left: 0;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   background: var(--musica-verde-neon);
   border-radius: 50%;
 }
 
-/* Caja verde */
+
 .cajitarara {
   background-color: var(--musica-verde-raro);
   width: 100%;
@@ -773,9 +791,11 @@ aside.active .configuracion {
   display: flex;
   background-color: var(--header-fondo-blanco);
   background-image: url("../imagenes/no\ se.png");
+  background-size: cover;
+  background-position: center;
   border:2px solid var(--header-border-negro);
   border-radius: 30px;
-  height: 50px;
+  height: 45px;
   margin-top: 20px;
   width: 87%;
   align-items: center;
@@ -947,14 +967,12 @@ margin-bottom: 25px;
   outline: none;
 }
 
-/* Track */
 .potter::-webkit-slider-runnable-track {
   height: 10px;
   background: var(--control-negro);
   border-radius: 5px;
 }
 
-/* el thumb este (el boton) */
 .potter::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;

@@ -66,5 +66,12 @@
       "lucesrojas": "prender",
       "lucesazules": 2
     }
+  },
+  {
+    "nombre": "hey jude",
+    "condiciones": {
+      "tipo": "dia",
+      "dia": "1"
+    }
   }
 ]
