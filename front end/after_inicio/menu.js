@@ -752,39 +752,36 @@ let estado = document.getElementById("estado");
 
 
 subscribeRealTimeEvent("estado", (data) => {
- console.log("Actualización desde hardware:", data);
+  console.log("Actualización desde hardware:", data);
 
+  if (data.persiana !== undefined) {
+    actualizarPersiana(data.persiana);
+  }
 
- if (data.persiana !== undefined) {
-   actualizarPersiana(data.persiana);
- }
+  if (data.ventilador !== undefined) {
+    actualizarVentilador(data.ventilador);
+  }
 
+  if (data.lucesrojas !== undefined) {
+    actualizarLuces(1, data.lucesrojas);
+  }
 
- if (data.ventilador !== undefined) {
-   actualizarVentilador(data.ventilador);
- }
+  if (data.lucesazules !== undefined) {
+    actualizarLuces(2, data.lucesazules);
+    potter.value = data.lucesazules;
+  }
 
-
- if (data.lucesrojas !== undefined) {
-   actualizarLuces(1, data.lucesrojas);
- }
-
-
- if (data.lucesazules !== undefined) {
-   actualizarLuces(2, data.lucesazules);
-   potter.value = data.lucesazules;
-}
-
-
- // lo que me dijo Fran que haga con if status y lalala
- if (data.status && data.status.on) {
-   estado.innerText = "prendido";
- }
+  if (data.encendido !== undefined) {
+    if (data.encendido === true) {
+      estado.innerText = "prendido";
+    } else {
+      estado.innerText = "apagado";
+    }
+  }
 });
 
 
-//el sensor de temperatura que todavia no se donde va
-
+//el sensor de temperaturaaa
 
 let temp = document.getElementById("temperatura");
 
