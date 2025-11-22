@@ -269,5 +269,16 @@
   {
     "email": "tumama",
     "password": "jegulus"
+  },
+  {
+    "email": "tumama",
+    "password": "jegulus"
+  },
+  {
+    "nombre": "tuvieja",
+    "password": "watajai",
+    "cumple": "2025-1-1",
+    "genero": "chica",
+    "registro": "11/22/2025"
   }
 ]

@@ -23,7 +23,7 @@ let inputSobre = document.getElementById("inputSobre");
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
  if (!usuarioLogueado) {
-  location.href = "../inicio_de_sesion/main.html"; // redirigir si no hay usuario
+  location.href = "../inicio_de_sesion/main.html";
 } else {
   let usuario = JSON.parse(usuarioLogueado);
 
@@ -78,7 +78,6 @@ let usuarioLogueado = localStorage.getItem("usuarioLogueado");
        inputSobre.value = "";
      }
 
-     // mostrar editor y ocultar normal
      if (containerPerfilView) {
        containerPerfilView.style.display = "none";
      }
@@ -195,7 +194,7 @@ modooscuro.addEventListener("click", () => {
  let btnImg = modooscuro.querySelector("img");
 
   document.querySelectorAll("img[data-dark]").forEach(img => {
-    if (!img.dataset.light) img.dataset.light = img.src; // guardamos versión clara
+    if (!img.dataset.light) img.dataset.light = img.src;
 
     if (document.body.classList.contains("dark-mode")) {
       img.src = img.dataset.dark;
@@ -231,7 +230,7 @@ actualizarReloj();
 
 let modosGuardados = [];
 let modoActualIndex = 0;
-let slideIndex = 0; // 0..modosGuardados.length-1 = modos, length = crear modo
+let slideIndex = 0;
 
 let modoActualDiv = document.getElementById("modoActual");
 let vistaCrear = document.getElementById("vistaCrear");
@@ -239,17 +238,37 @@ let prevBtn = document.getElementById("prevModo");
 let nextBtn = document.getElementById("nextModo");
 let formExistente = document.getElementById("modoform");
 
-// Traer modos del backend
 getEvent("obtenerModos", function(modos) {
     if (typeof modos === "string") {
         try { modos = JSON.parse(modos); } catch(e) { modos = []; }
     }
     if (!Array.isArray(modos)) modos = [];
-    modosGuardados = modos;
+    let usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
+
+    // FILTRAR SOLO MODOS DE ESTE USUARIO
+    modosGuardados = modos.filter(m => m.owner === usuario.nombre);
     showSlideIndex();
 });
 
-// Mostrar datos del modo actual
+function cargarModos() {
+  let usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
+
+  getEvent("obtenerModos", function(modos) {
+
+      if (typeof modos === "string") {
+          modos = JSON.parse(modos);
+      }
+
+      if (!Array.isArray(modos)) {
+          modos = [];
+      }
+
+      modosGuardados = modos.filter(m => m.owner === usuario.nombre);
+
+      showSlideIndex();
+  });
+}
+
 function mostrarModos() {
     if (!modosGuardados || modosGuardados.length === 0) return;
 
@@ -261,29 +280,24 @@ function mostrarModos() {
 
     let a = modo.acciones || {};
 
-    // Nombre
     let nombreTexto = modo.nombre || "Modo sin nombre";
     document.getElementById("modoNombre").textContent = nombreTexto;
 
-    // Acciones
     document.getElementById("accPersiana").textContent = a.persiana || "nada";
     document.getElementById("accVentilador").textContent = a.ventilador || "nada";
     document.getElementById("accRojas").textContent = a.lucesrojas || "nada";
     document.getElementById("accAzules").textContent = (a.lucesazules !== undefined && a.lucesazules !== null) ? a.lucesazules : "nada";
 }
 
-// Mostrar la slide correcta
 function showSlideIndex() {
     modoActualDiv.style.display = "none";
     vistaCrear.style.display = "none";
 
     if (slideIndex < modosGuardados.length) {
-        // Mostrar modo guardado
         modoActualDiv.style.display = "block";
         modoActualIndex = slideIndex;
         mostrarModos();
     } else {
-        // Último slide = crear modo
         vistaCrear.style.display = "block";
         if (vistaCrear) {
             let primerElemento = vistaCrear.querySelector("input, select, textarea, button");
@@ -292,31 +306,27 @@ function showSlideIndex() {
     }
 }
 
-// Botón PREV
 prevBtn.addEventListener("click", function() {
     if (slideIndex > 0) {
         slideIndex--;
     } else {
-        slideIndex = modosGuardados.length; // ir a "crear modo" desde inicio
+        slideIndex = modosGuardados.length;
     }
     showSlideIndex();
 });
 
-// Botón NEXT
 nextBtn.addEventListener("click", function() {
     slideIndex++;
-    if (slideIndex > modosGuardados.length) slideIndex = 0; // vuelta al primer modo
+    if (slideIndex > modosGuardados.length) slideIndex = 0;
     showSlideIndex();
 });
 
-// Seleccionar modo
 document.getElementById("btnSeleccionar").addEventListener("click", function() {
-    if (slideIndex >= modosGuardados.length) return; // estamos en crear modo
-    var modo = modosGuardados[modoActualIndex];
+    if (slideIndex >= modosGuardados.length) return;
+    let modo = modosGuardados[modoActualIndex];
     if (modo) activarModo(modo);
 });
 
-// Activar modo
 function activarModo(modo) {
     if (!modo || !modo.acciones) return;
     let a = modo.acciones;
@@ -347,7 +357,6 @@ function activarModo(modo) {
     });
 }
 
-// Campos extra según condición
 condicion.addEventListener("change", function() {
     condicionesExtra.innerHTML = "";
     if (condicion.value === "hora") {
@@ -362,43 +371,55 @@ condicion.addEventListener("change", function() {
     }
 });
 
-// Evitar submit del form
 formExistente.addEventListener("submit", function(e) {
-    e.preventDefault();
-    guardarModo();
+  e.preventDefault();
+
+  let nombre = document.getElementById("nombre").value;
+  let tipo = condicion.value;
+
+  crearModo(nombre, tipo);
 });
 
-// Guardar modo
-function guardarModo() {
-    let nombre = document.getElementById("nombre").value.trim();
-    let acciones = {
-        persiana: document.getElementById("percy").value,
-        ventilador: document.getElementById("venti").value,
-        lucesrojas: document.getElementById("rojo").value,
-        lucesazules: parseInt(document.getElementById("azul").value)
-    };
-    let condicionValor = condicion.value;
-    let c = {};
-    if (condicionValor === "hora") {
-        c.tipo = "hora";
-        c.desde = document.getElementById("desdeHora").value;
-        c.hasta = document.getElementById("hastaHora").value;
-    } else if (condicionValor === "dia") {
-        c.tipo = "dia";
-        c.dia = document.getElementById("dia").value;
-    }
+function crearModo(nombre, tipo) {
+  let condiciones = {};
 
-    let nuevoModo = {
-        nombre: nombre,
-        acciones: acciones,
-        condiciones: c
+  if (tipo === "hora") {
+    condiciones = {
+      tipo: "hora",
+      desde: document.getElementById("desdeHora").value,
+      hasta: document.getElementById("hastaHora").value
     };
+  } else if (tipo === "dia") {
+    condiciones = {
+      tipo: "dia",
+      dia: document.getElementById("dia").value
+    };
+  }
 
-    modosGuardados.push(nuevoModo);
-    modoActualIndex = modosGuardados.length - 1;
-    slideIndex = modoActualIndex;
-    showSlideIndex();
+  let acciones = {
+    persiana: document.getElementById("percy").value,
+    ventilador: document.getElementById("venti").value,
+    lucesrojas: document.getElementById("rojo").value,
+    lucesazules: parseInt(document.getElementById("azul").value)
+  };
+
+  let usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
+
+  let nuevoModo = {
+    nombre,
+    condiciones,
+    acciones,
+    owner: usuario.nombre
+  };
+
+  console.log("Se envía al backend:", nuevoModo);
+
+  postEvent("crearModo", nuevoModo, (respuesta) => {
+    console.log("Modo guardado:", respuesta);
+    cargarModos();
+  });
 }
+
 
 //musica
 
