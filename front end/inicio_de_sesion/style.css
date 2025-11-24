@@ -65,13 +65,32 @@ main{
  display: flex;
  flex-direction: column;
  width: 814px;
- height: 468px;
+ height: 470px;
  background-color: #A5A4A9;
  border-radius: 132px;
  margin: auto;
  margin-bottom: 20px;
  justify-content: center;   
  align-items: center;
+}
+
+.no-se{
+  display: flex;
+  margin-right: auto;
+  margin-left: 60px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+p{
+  margin: 0 5px
+}
+
+.circulito{
+  background-color: #726789;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 
 input{
