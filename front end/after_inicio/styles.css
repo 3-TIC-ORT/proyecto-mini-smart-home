@@ -760,6 +760,7 @@ aside.active .configuracion {
   display: flex;
   gap: 50px;
   align-items: center;
+  margin-top: -2%;
   margin-left: 10%;
   width: 80%;
   border-bottom: 2px solid var(--header-border-negro);
