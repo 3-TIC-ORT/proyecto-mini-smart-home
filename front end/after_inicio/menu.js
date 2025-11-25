@@ -23,7 +23,7 @@ let inputSobre = document.getElementById("inputSobre");
 let usuarioLogueado = localStorage.getItem("usuarioLogueado");
 
  if (!usuarioLogueado) {
-  location.href = "../inicio_de_sesion/main.html";
+  
 } else {
   let usuario = JSON.parse(usuarioLogueado);
 

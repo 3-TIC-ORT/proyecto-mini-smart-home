@@ -261,8 +261,8 @@ aside.active .configuracion {
   border: 3px solid var(--header-border-negro);
   height: 75px;
 
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-top: 0.5%;
+  margin-bottom: 0.5%;
   padding-left: 20px;
   font-family: "Kalnia";
 
@@ -272,8 +272,8 @@ aside.active .configuracion {
   55% 25px,
   70% 25px,
   70% 50px,
-  95% 50px,
-  95% 100%, 
+  93% 50px,
+  93% 100%, 
   5% 100%
 );
 }
@@ -283,16 +283,16 @@ aside.active .configuracion {
   height: 80px;
   width: 3px;
   background-color: var(--header-border-negro);
-  top: 18.2%;
-  left: 6.4%;
+  top: 17.5%;
+  left: 6.2%;
 }
 
 .linea2{
   position: absolute;
   background-color: var(--header-border-negro);
-  height: 27px;
+  height: 25px;
   width: 3px;
-  top: 18.1%;
+  top: 17.3%;
   right:45%;
 }
 
@@ -300,17 +300,17 @@ aside.active .configuracion {
   position: absolute;
   background-color: var(--header-border-negro);
   height: 3px;
-  width: 187px;
-  top: 21.5%;
+  width: 197px;
+  top: 20.8%;
   right: 30.6%;
 }
 
 .linea4{
   position: absolute;
   background-color: var(--header-border-negro);
-  height: 27px;
+  height: 28px;
   width: 3px;
-  top: 21.5%;
+  top: 20.9%;
   right:30.5%;
 }
 
@@ -318,18 +318,18 @@ aside.active .configuracion {
   position: absolute;
   background-color: var(--header-border-negro);
   height: 3px;
-  width: 310px;
-  top: 24.9%;
-  right: 6.5%;
+  width: 308px;
+  top: 24.8%;
+  right: 8.1%;
 }
 
 .linea6{
   position: absolute;
   background-color: var(--header-border-negro);
-  height: 32px;
+  height: 33px;
   width: 3px;
-  top: 24.9%;
-  right: 6.3%;
+  top: 24.8%;
+  right: 8.1%;
 }
 
 .saludotab1 h2{
@@ -351,14 +351,14 @@ aside.active .configuracion {
 }
 
 .reloj.fecha {
-  top: 16%;
+  top: 15%;
   right: 35%;
   font-family: "Koulen";
   font-size: 25px;
 }
 
 .reloj.hora {
-  top: 20%;
+  top: 18.9%;
   right: 18%;
   font-family: "Koulen";
   font-size: 25px;
@@ -368,7 +368,7 @@ aside.active .configuracion {
   display: flex;
   position: absolute;
   right: 20px;
-  top: 13%;
+  top: 14.5%;
   width: 80px;
   height: 80px;
   background: var(--temperatura);
@@ -613,10 +613,10 @@ aside.active .configuracion {
 .modos h2::after {
   content: "";
   position: absolute;
-  left: 58%;
-  bottom: 55%;
+  left: 57%;
+  bottom: 53%;
   transform: translateX(-50%);
-  width: 18%;
+  width: 17%;
   height: 3px;
   background: var(--modos-fondo-blanco);
   border-radius: 10px;
@@ -795,7 +795,7 @@ aside.active .configuracion {
   background-position: center;
   border:2px solid var(--header-border-negro);
   border-radius: 30px;
-  height: 45px;
+  height: 35px;
   margin-top: 20px;
   width: 87%;
   align-items: center;
