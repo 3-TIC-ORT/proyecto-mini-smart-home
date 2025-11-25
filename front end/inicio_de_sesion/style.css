@@ -1,7 +1,7 @@
 body{
     background: linear-gradient(180deg, #18FDF6 0%, #17DFF3 8.65%, #15C1F0 46.63%, #1285EA 72.6%, #0C0DDE 100%);
     margin: 0;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .nube{
@@ -46,7 +46,7 @@ body{
 .logo{
   position: fixed;
   top: 50px;
-  left: 924px;
+  left: 918px;
   width: 80px;
   height: 80px;
 }
@@ -55,7 +55,7 @@ header{
  background-color: white;
  width: 560px;
  border-radius: 40px;
- margin: 56px auto 0;
+ margin: 35px auto 0;
  font-family: "Just Me Again Down Here",cursive;
  font-size: 25px;
  text-align: center;
@@ -65,7 +65,7 @@ main{
  display: flex;
  flex-direction: column;
  width: 814px;
- height: 470px;
+ height: 440px;
  background-color: #A5A4A9;
  border-radius: 132px;
  margin: auto;
