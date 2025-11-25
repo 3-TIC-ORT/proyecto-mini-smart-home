@@ -750,36 +750,40 @@ actualizarLuces(2, parseInt(potter.value));
 
 let estado = document.getElementById("estado");
 
-
 subscribeRealTimeEvent("estado", (data) => {
-  console.log("Actualización desde hardware:", data);
-
-  if (data.persiana !== undefined) {
-    actualizarPersiana(data.persiana);
+  
+  if (data.valor === 'r') {
+    actualizarLuces(1, data.lucesrojas)
   }
 
-  if (data.ventilador !== undefined) {
-    actualizarVentilador(data.ventilador);
+  if (data.valor === 'f') {
+    actualizarLuces(0, data.lucesrojas)
+  }
+  
+  if (data.valor === 'q') {
+    actualizarLuces(0,data.lucesazules)
   }
 
-  if (data.lucesrojas !== undefined) {
-    actualizarLuces(1, data.lucesrojas);
+  if (data.valor === 'w') {
+    actualizarLuces(1, data.lucesazules)
   }
 
-  if (data.lucesazules !== undefined) {
-    actualizarLuces(2, data.lucesazules);
-    potter.value = data.lucesazules;
-  }
+  if (data.valor === 'e') {
+    actualizarLuces(2, data.lucesazules)
+   }
+  
+   if (data.valor === 'y') {
+    actualizarLuces(3, data.lucesazules)
+   }
 
-  if (data.encendido !== undefined) {
-    if (data.encendido === true) {
-      estado.innerText = "prendido";
-    } else {
-      estado.innerText = "apagado";
-    }
-  }
+   if (data.valor === 'p') {
+    actualizarLuces(4, data.lucesazules)
+   }
+
+   if (data.valor === 'i') {
+    actualizarLuces(5, data.lucesazules)
+   }
 });
-
 
 //el sensor de temperaturaaa
 

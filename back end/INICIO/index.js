@@ -4,10 +4,14 @@ import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
 
 
+
+
 subscribePOSTEvent ("register", (data) => {
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
   let objeto = {nombre: data.nombre, password: data.password, cumple: data.cumple, genero: data.genero, registro: data.registro};
   let encontrar = leer.find (leer => data.nombre === leer.nombre && data.password === leer.password && data.cumple === leer.cumple && data.genero === leer.genero && data.registro === leer.registro);
+
+
 
 
   //Si el usuario ya existe, el retorno de la función es un objeto {ok:false}:
@@ -16,16 +20,10 @@ subscribePOSTEvent ("register", (data) => {
   }
 
 
-
-
   leer.push (objeto);
 
 
-
-
   fs.writeFileSync ("data/registro_login.json", JSON.stringify (leer, null, 2), {encoding: "utf-8"});
-
-
 
 
   return {ok: true};
@@ -37,11 +35,7 @@ subscribePOSTEvent ("register", (data) => {
 subscribePOSTEvent ("login", (data) => {
 
 
-
-
   let leer = JSON.parse (fs.readFileSync ("data/registro_login.json", "utf-8"));
-
-
 
 
   for (let i = 0; i < leer.length; i++ ) {
@@ -50,11 +44,11 @@ subscribePOSTEvent ("login", (data) => {
   let encontrar = leer.find (leer => data.email === leer.nombre && data.password === leer.password);
 
 
+
+
   if (encontrar) {
     let objeto = {email: data.email, password: data.password};
     leer.push (objeto);
-
-
 
 
     fs.writeFileSync ("data/registro_login.json", JSON.stringify (leer, null, 2), {encoding: "utf-8"});
@@ -65,6 +59,10 @@ subscribePOSTEvent ("login", (data) => {
   }
 }
 });
+
+
+
+
 
 
 
@@ -80,21 +78,21 @@ subscribePOSTEvent ("crearModo", (data, respuesta) => {
     nombre: data.nombre,
     condiciones: data.condiciones,
     acciones: data.acciones,
-    owner: data.owner 
+    owner: data.owner
   }
 
 
-
-
   modos.push (objeto);
-
-
 
 
   fs.writeFileSync ("data/modos.json", JSON.stringify (modos, null, 2), {encoding: "utf-8"});
  
   return (respuesta, {ok: true});
 });
+
+
+
+
 
 
 
@@ -113,9 +111,11 @@ subscribePOSTEvent("obtenerUsuario", (data) => {
   let usuario = data.nombre;
   let encontrar = leer.find (u => u.nombre === usuario);
 
+
   if (!encontrar) {
     return {};
   };
+
 
   return {
     nombre: encontrar.nombre,
@@ -123,7 +123,9 @@ subscribePOSTEvent("obtenerUsuario", (data) => {
     sobre: encontrar.sobre
   };
 
+
 });
+
 
 subscribePOSTEvent ("actualizarUsuario", (data) => {
   let objeto = {nombre: data.nombre, cumple: data.cumple, sobre: data.sobre};
@@ -131,20 +133,34 @@ subscribePOSTEvent ("actualizarUsuario", (data) => {
 });
 
 
+
+
 //Comunicación front-back-hardware: usando Node SerialPort
 
 
 
 
+
+
+
+
 let port = new SerialPort ({
-  path: 'COM6',
+  path: 'COM5',
   baudRate: 9600
 });
 
 
 
 
+
+
+
+
 let parser = port.pipe (new ReadlineParser ({delimiter: "\n"}));
+
+
+
+
 
 
 
@@ -157,6 +173,10 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     lucesrojas: data.lucesrojas,
     lucesazules: data.lucesazules
   };
+
+
+
+
 
 
 
@@ -174,6 +194,10 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
 
+
+
+
+
   else if (objeto.persiana === 0) {
     port.write ('a', (err) => {
       if (err) {
@@ -183,6 +207,10 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     let caracter = 'a';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
+
+
 
 
 
@@ -200,6 +228,10 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
 
+
+
+
+
   else if (objeto.ventilador === 0) {
     port.write ('u', (err) => {
       if (err) {
@@ -209,6 +241,10 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     let caracter = 'm';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
+
+
 
 
 
@@ -226,6 +262,10 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
 
+
+
+
+
   else if (objeto.lucesrojas === 0) {
     port.write ('t', (err) => {
       if (err) {
@@ -235,6 +275,8 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     let caracter = 't';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
 
 
   if (objeto.lucesazules === 0) {
@@ -248,6 +290,8 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
   }
 
 
+
+
   else if (objeto.lucesazules === 1) {
     port.write ('w', (err) => {
       if (err) {
@@ -257,6 +301,8 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     let caracter = 'w';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
 
 
   else if (objeto.lucesazules === 2) {
@@ -270,6 +316,8 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
   }
 
 
+
+
   else if (objeto.lucesazules === 3) {
     port.write ('y', (err) => {
       if (err) {
@@ -279,6 +327,8 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
     let caracter = 'y';
     console.log (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
 
 
   else if (objeto.lucesazules === 4) {
@@ -292,6 +342,8 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
   }
 
 
+
+
   else if (objeto.lucesazules === 5) {
     port.write ('i', (err) => {
       if (err) {
@@ -303,7 +355,13 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
   }
 
 
+
+
 });
+
+
+
+
 
 
 
@@ -313,9 +371,15 @@ subscribePOSTEvent ("ejecutarModo", (data) => {
 
 
 
+
+
+
+
 //Control LEDs rojos (j significa prender, t significa apagar): Le escribo al puerto serie y lo recibe con serial.read
 subscribePOSTEvent("controlLucesLEDr", (data) => {
   let objeto = { fila: data.fila, intensidad: data.intensidad };
+
+
 
 
   if (objeto.fila === 1 && objeto.intensidad === 1) {
@@ -346,6 +410,14 @@ subscribePOSTEvent("controlLucesLEDr", (data) => {
 
 
 
+
+
+
+
+
+
+
+
 //Control LEDs azules (o significa prenderlas, sino se apagan):
 subscribePOSTEvent ("controlLucesLEDa", (data) => {
   let objeto = {fila: data.fila, intensidad: data.intensidad};
@@ -361,6 +433,8 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
   }
 
 
+
+
   if (objeto.intensidad === 1) {
     port.write ('w', (err) => {
       if (err) {
@@ -370,6 +444,8 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
     let caracter = 'w';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
 
 
   if (objeto.intensidad === 2) {
@@ -383,6 +459,8 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
   }
 
 
+
+
   if (objeto.intensidad === 3) {
     port.write ('y', (err) => {
       if (err) {
@@ -392,6 +470,8 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
     let caracter = 'y';
     return (`Caracter escrito exitosamente por el puerto: ${caracter}`);
   }
+
+
 
 
   if (objeto.intensidad === 4) {
@@ -405,6 +485,8 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
   }
 
 
+
+
   if (objeto.intensidad === 5) {
     port.write ('i', (err) => {
       if (err) {
@@ -416,7 +498,13 @@ subscribePOSTEvent ("controlLucesLEDa", (data) => {
   }
 
 
+
+
 });
+
+
+
+
 
 
 
@@ -426,8 +514,7 @@ subscribePOSTEvent ("controlVentilador", (data) => {
   let objeto = {estado: data.estado};
 
 
-
-
+ 
   if (objeto.estado === 1) {
     port.write ('b', (err) => {
       if (err) {
@@ -441,7 +528,7 @@ subscribePOSTEvent ("controlVentilador", (data) => {
 
 
 
-  else if (objeto.estado === 0) {
+else if (objeto.estado === 0) {
     port.write ('u', (err) => {
       if (err) {
         return console.error ('Error al escribir por el puerto: ', err.message);
@@ -452,9 +539,11 @@ subscribePOSTEvent ("controlVentilador", (data) => {
   }
 
 
-
-
 });
+
+
+
+
 
 
 
@@ -464,8 +553,7 @@ subscribePOSTEvent ("controlPersiana", (data) => {
   let objeto = {estado: data.estado};
 
 
-
-
+ 
   if (objeto.estado === 1) {
     port.write ('d', (err) => {
       if (err) {
@@ -490,26 +578,65 @@ subscribePOSTEvent ("controlPersiana", (data) => {
   }
 
 
+
+
 });
+
+
 
 
 //realTimeEvent al front end: El arduino le envía data a la computadora y se encarga de convertirla en un número (en °C):
 parser.on("data", (data) => {
-  let texto = data.toString().trim();
-  console.log("LLEGO:", JSON.stringify(texto));
 
-  realTimeEvent("temperatura", { valor: texto });
+
+  let mensaje = data.toString().trim();
+
+
+  if (mensaje.startsWith("Temperatura:")) {
+    realTimeEvent ("temperatura", {valor: mensaje});
+  };
+
+
+  if (mensaje === 'r') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'f') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'q') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'w') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'e') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'y') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'p') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
+
+  if (mensaje === 'i') {
+    realTimeEvent ("estado", {valor: mensaje});
+  }
+
 });
-
-realTimeEvent("estado", (data) => {
-
-  let estadoPersiana = 0;
-  let estadoVentilador = 0;
-  let lucesRojas = 0;
-  let lucesAzules = 0;
-});
-
 
 
 startServer ();
-
