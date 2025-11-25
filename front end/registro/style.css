@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Inter", "Arial", sans-serif;
-  background-image: linear-gradient(rgba(102, 16, 242, 0.38)),
+  background-image: linear-gradient(rgba(102, 16, 242, 0.38),rgba(102, 16, 242, 0.38)),
   url("../imagenes/fondoregistro.png");
   background-size: cover;
   display: flex;
@@ -227,7 +227,7 @@ main{
   display: flex;
   flex-direction: column;
   width: 85%;
-  height: 75%;
+  height: 78%;
   background-color: #2D0163;
   margin: 0 auto;
   justify-content: flex-start;   
@@ -281,7 +281,7 @@ select {
   border-radius: 10px;
   width: 98%;
   margin-top: 15px;
-  height: 40px;
+  height: 35px;
   padding: 10px;
   gap: 10px;
 }
