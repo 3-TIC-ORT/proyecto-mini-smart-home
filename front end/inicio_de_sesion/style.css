@@ -1,7 +1,7 @@
 body{
     background: linear-gradient(180deg, #18FDF6 0%, #17DFF3 8.65%, #15C1F0 46.63%, #1285EA 72.6%, #0C0DDE 100%);
     margin: 0;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .nube{
@@ -46,7 +46,7 @@ body{
 .logo{
   position: fixed;
   top: 50px;
-  left: 924px;
+  left: 918px;
   width: 80px;
   height: 80px;
 }
